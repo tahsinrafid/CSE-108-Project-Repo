@@ -1,0 +1,30 @@
+# ========================
+# IntelliJ IDEA
+# ========================
+.idea/
+*.iml
+*.iws
+out/
+
+# ========================
+# Maven / Build
+# ========================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ========================
+# OS Files
+# ========================
+.DS_Store
+
+# ========================
+# Optional logs / temp
+# ========================
+*.log
+
+# ========================
+# VS Code (if anyone uses it)
+# ========================
+.vscode/
