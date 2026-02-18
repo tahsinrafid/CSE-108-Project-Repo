@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,28 +15,36 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class loginController {
-
+    @FXML
+    private TextField userNameField;
+    @FXML
+    private PasswordField passField;
     @FXML
     private Button loginButton;
-    private Stage stage;
-    private Parent root;
-    private Scene scene;
     @FXML
-    private TextField nameTextField;
+    private Hyperlink signupLink;
     @FXML
-    private PasswordField passfield;
-    public void login(ActionEvent event) throws IOException {
-        String username = nameTextField.getText();
-        String password = passfield.getText();
+    public void login(ActionEvent e) throws IOException {
+        String username = userNameField.getText();
+        String password = passField.getText();
+
+        // Load the dashboard
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
-        root = fxmlLoader.load();
+        Parent root = fxmlLoader.load();
 
         DashBoardController dashBoardController = fxmlLoader.getController();
         dashBoardController.displayName(username);
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    public void handleSignup(ActionEvent e) {
+
+        System.out.println("Navigate to signup page");
+    }
 }
+
