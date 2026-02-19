@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #244857;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.signupController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="250.0" layoutY="30.0" prefHeight="540.0" prefWidth="400.0" spacing="8.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 5);">
+         <padding>
+            <Insets bottom="15.0" left="35.0" right="35.0" top="15.0" />
+         </padding>
+         <children>
+            <Label alignment="CENTER" prefWidth="330.0" text="Sign Up" textAlignment="CENTER" textFill="#244857">
+               <font>
+                  <Font name="Elephant" size="38.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Name" textFill="#333333">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="newNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="330.0" prefHeight="40.0" prefWidth="330.0" promptText="Enter your name" style="-fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-padding: 8;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label text="Username" textFill="#333333">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="newUserField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="330.0" prefHeight="40.0" prefWidth="330.0" promptText="Enter your username" style="-fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-padding: 8;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label text="Password" textFill="#333333">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="newPassField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="330.0" prefHeight="40.0" prefWidth="330.0" promptText="Enter your password" style="-fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-padding: 8;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <Label text="Confirm Password" textFill="#333333">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="confirmPassField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="330.0" prefHeight="40.0" prefWidth="330.0" promptText="Confirm your password" style="-fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-padding: 8;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="signupButton" mnemonicParsing="false" onAction="#signUp" prefHeight="45.0" prefWidth="330.0" style="-fx-background-radius: 10; -fx-background-color: #244857; -fx-text-fill: white; -fx-cursor: hand; -fx-font-weight: bold; -fx-font-size: 16px;" text="Sign Up">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Button>
+            <Label alignment="CENTER" prefWidth="330.0" text="Already have an account?" textFill="#666666">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="3.0" />
+               </VBox.margin>
+            </Label>
+            <Hyperlink fx:id="loginLink" alignment="CENTER" maxWidth="330.0" minWidth="330.0" onAction="#handleLogin" prefWidth="330.0" style="-fx-text-fill: #244857; -fx-font-weight: bold; -fx-underline: true; -fx-font-size: 13px;" text="Back to Log In" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="-8.0" />
+               </VBox.margin>
+            </Hyperlink>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
