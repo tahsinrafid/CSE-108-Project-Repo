@@ -22,7 +22,7 @@
             <!-- Logo Image -->
             <ImageView layoutX="15.0" layoutY="10.0" fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                <image>
-                  <Image url="@prlogo.png" />
+                  <Image url="@../../../prlogo.png" />
                </image>
             </ImageView>
 
