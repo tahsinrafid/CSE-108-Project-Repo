@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class DashBoardController {
+    public Button logoutBtn;
     @FXML
     private Button dashboardBtn;
     @FXML
@@ -147,5 +148,20 @@ public class DashBoardController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onViewStudentClick(ActionEvent actionEvent) {
+    }
+
+    public void onTakeExamClick(ActionEvent actionEvent) {
+    }
+
+    public void OnMessegesClick(ActionEvent actionEvent) {
+    }
+
+    public void onViewSubClick(ActionEvent actionEvent) {
+    }
+
+    public void onQuestionBankViewClick(ActionEvent actionEvent) {
     }
 }
