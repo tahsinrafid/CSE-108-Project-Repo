@@ -20,6 +20,10 @@ public class LandingController {
     public void StudentClick(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent root = loader.load();
+
+        loginController controller = loader.getController();
+        controller.setRole("student");
+
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -29,6 +33,10 @@ public class LandingController {
     public void TeacherClick(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent root = loader.load();
+
+        loginController controller = loader.getController();
+        controller.setRole("teacher");
+
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
