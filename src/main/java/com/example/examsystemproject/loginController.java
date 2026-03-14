@@ -6,15 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class loginController {
+    private String role;
     @FXML
     private TextField userNameField;
     @FXML
@@ -23,16 +21,24 @@ public class loginController {
     private Button loginButton;
     @FXML
     private Hyperlink signupLink;
+
     @FXML
     public void login(ActionEvent e) throws IOException {
         String username = userNameField.getText();
         String password = passField.getText();
+        User user = UserFileManager.validateLogin(username, password);
+        if (user == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid username or password");
+            alert.showAndWait();
+            return;
+        }
 
-        // Load the dashboard
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
         Parent root = fxmlLoader.load();
-
-        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -42,11 +48,21 @@ public class loginController {
     public void handleSignup(ActionEvent e) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("signup.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+
+        signupController controller = fxmlLoader.getController();
+        controller.setRole(role);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         System.out.println("Navigate to signup page");
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
+
+
 
