@@ -36,8 +36,22 @@ public class loginController {
             return;
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
-        Parent root = fxmlLoader.load();
+        FXMLLoader fxmlLoader;
+        Parent root;
+
+        if (user.getRole().equals("student")) {
+            fxmlLoader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
+            root = fxmlLoader.load();
+
+            DashBoardController controller = fxmlLoader.getController();
+            controller.setUser(user);
+        } else {
+            fxmlLoader = new FXMLLoader(getClass().getResource("Teacher_DashBoard.fxml"));
+            root = fxmlLoader.load();
+
+            TeacherDashBoardController controller = fxmlLoader.getController();
+            controller.setUser(user);
+        }
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
