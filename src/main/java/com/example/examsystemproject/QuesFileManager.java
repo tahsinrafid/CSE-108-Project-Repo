@@ -2,7 +2,9 @@ package com.example.examsystemproject;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class QuesFileManager {
 
@@ -17,6 +19,25 @@ public class QuesFileManager {
             }
             writer.write(formatLine(ques));
         }
+    }
+
+    public static String nextSequentialQuesId() throws IOException {
+        List<Question> questions = loadAllQuestions();
+        Set<Integer> usedIds = new HashSet<>();
+
+        for (Question question : questions) {
+            int idNumber = extractSequentialId(question.getQuesID());
+            if (idNumber > 0) {
+                usedIds.add(idNumber);
+            }
+        }
+
+        int nextId = 1;
+        while (usedIds.contains(nextId)) {
+            nextId++;
+        }
+
+        return "Q" + nextId;
     }
 
     public static List<Question> loadAllQuestions() throws IOException {
@@ -68,5 +89,31 @@ public class QuesFileManager {
     private static String formatLine(Question q) {
         return q.getQuesID() + "," + q.getQuesText() + "," + q.getOption1() + ","
                 + q.getOption2() + "," + q.getOption3() + "," + q.getOption4() + "," + q.getCorrectAns();
+    }
+
+    private static int extractSequentialId(String quesID) {
+        if (quesID == null || quesID.length() < 2) {
+            return -1;
+        }
+
+        char prefix = quesID.charAt(0);
+        if (prefix != 'Q' && prefix != 'q') {
+            return -1;
+        }
+
+        String numberPart = quesID.substring(1);
+
+        for (int i = 0; i < numberPart.length(); i++) {
+            if (!Character.isDigit(numberPart.charAt(i))) {
+                return -1;
+            }
+        }
+
+        try {
+            return Integer.parseInt(numberPart);
+        } catch (NumberFormatException ex) {
+            // Ignore malformed/oversized IDs and keep sequential generation stable.
+            return -1;
+        }
     }
 }

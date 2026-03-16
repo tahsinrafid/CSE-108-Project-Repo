@@ -12,74 +12,34 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="600.0" prefWidth="900.0"
-            style="-fx-background-color: #080917;"
-            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.examsystemproject.QbankViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #080917;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.QbankViewController">
     <stylesheets>
         <URL value="@Dashboard.css" />
     </stylesheets>
-
-    <!-- ===== Top Header Bar ===== -->
     <top>
-        <AnchorPane prefHeight="70.0" prefWidth="900.0"
-                    style="-fx-background-color: #58eb34; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 3);">
-
-            <!-- Logo -->
-            <ImageView fitHeight="50.0" fitWidth="50.0"
-                       layoutX="15.0" layoutY="10.0" preserveRatio="true">
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #58eb34; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 3);">
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
                 <image>
                     <Image url="@../../../prlogo.png" />
                 </image>
             </ImageView>
-
-            <!-- Title -->
-            <Label layoutX="75.0" layoutY="20.0"
-                   style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"
-                   text="ExamAce — Question Bank" />
-
-            <!-- Right-side button group -->
-            <HBox AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="19.0" spacing="10.0">
-                <!-- Teacher-only Add Question button; hidden by default, shown in controller -->
-                <Button fx:id="addQuesBtn"
-                        mnemonicParsing="false" onAction="#openAddQuestion"
-                        prefHeight="32.0" prefWidth="140.0"
-                        style="-fx-background-color: #244857; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-size: 13;"
-                        text="+ Add Question"
-                        visible="false" managed="false" />
-
-                <!-- Back button (always visible) -->
-                <Button fx:id="backBtn"
-                        mnemonicParsing="false" onAction="#goBack"
-                        prefHeight="32.0" prefWidth="80.0"
-                        style="-fx-background-color: rgba(0,0,0,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-size: 13;"
-                        text="← Back" />
+            <Label layoutX="75.0" layoutY="20.0" style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="ExamAce — Question Bank" />
+            <HBox spacing="10.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="19.0">
+                <Button fx:id="addQuesBtn" managed="false" mnemonicParsing="false" onAction="#openAddQuestion" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #244857; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-size: 13;" text="+ Add Question" visible="false" />
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-size: 13;" text="← Back" />
             </HBox>
         </AnchorPane>
     </top>
 
-    <!-- ===== Main Content ===== -->
     <center>
         <VBox style="-fx-background-color: #080917;">
-
-            <!-- Info / Toolbar bar -->
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0"
-                  style="-fx-padding: 0 20; -fx-background-color: #0f1225; -fx-border-color: #1a1d3a; -fx-border-width: 0 0 1 0;">
-                <Label fx:id="quesCountLabel"
-                       style="-fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-font-weight: bold;"
-                       text="Loading questions..." />
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" style="-fx-padding: 0 20; -fx-background-color: #0f1225; -fx-border-color: #1a1d3a; -fx-border-width: 0 0 1 0;">
+                <Label fx:id="quesCountLabel" style="-fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-font-weight: bold;" text="Loading questions..." />
                 <Region HBox.hgrow="ALWAYS" />
-                <Label style="-fx-text-fill: #444466; -fx-font-size: 12;"
-                       text="Scroll to view all" />
+                <Label style="-fx-text-fill: #444466; -fx-font-size: 12;" text="Scroll to view all" />
             </HBox>
-
-            <!-- Questions ScrollPane -->
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
-                        style="-fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent;"
-                        VBox.vgrow="ALWAYS">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
                 <content>
                     <VBox fx:id="quesContainer" spacing="12.0">
                         <padding>

@@ -18,23 +18,23 @@ import java.util.List;
 
 public class QbankViewController {
 
-    @FXML private Button addQuesBtn;
-    @FXML private Label  quesCountLabel;
-    @FXML private VBox   quesContainer;
+    @FXML
+    private Button addQuesBtn;
+    @FXML
+    private Label quesCountLabel;
+    @FXML
+    private VBox quesContainer;
 
-    private User    user;
+    private User user;
     private boolean isTeacher;
-
-    // ── Lifecycle ──────────────────────────────────────────────────────────────
 
     @FXML
     public void initialize() {
         // UI is configured when setUser() is called by the launching controller
     }
 
-    /** Called by the parent controller right after loading this FXML. */
     public void setUser(User user) {
-        this.user      = user;
+        this.user = user;
         this.isTeacher = user != null && "teacher".equalsIgnoreCase(user.getRole());
 
         if (isTeacher) {
@@ -43,8 +43,6 @@ public class QbankViewController {
         }
         loadQuestions();
     }
-
-    // ── Question loading ───────────────────────────────────────────────────────
 
     private void loadQuestions() {
         quesContainer.getChildren().clear();
@@ -73,8 +71,6 @@ public class QbankViewController {
         }
     }
 
-    // ── Question card builder ──────────────────────────────────────────────────
-
     private VBox createQuestionCard(Question q, int index) {
         VBox card = new VBox(10);
         card.setStyle("-fx-background-color: #0f1225; -fx-background-radius: 8; "
@@ -82,7 +78,6 @@ public class QbankViewController {
                 + "-fx-border-width: 1; -fx-padding: 14 16;");
         card.setMaxWidth(Double.MAX_VALUE);
 
-        // ── Header row: Q number + question text + (teacher) Edit/Delete ──────
         HBox header = new HBox(8);
         header.setAlignment(Pos.TOP_LEFT);
 
@@ -112,7 +107,6 @@ public class QbankViewController {
             header.getChildren().addAll(editBtn, deleteBtn);
         }
 
-        // ── Options (2 × 2 grid) ──────────────────────────────────────────────
         GridPane optGrid = new GridPane();
         optGrid.setHgap(10);
         optGrid.setVgap(8);
@@ -124,7 +118,7 @@ public class QbankViewController {
         colB.setPercentWidth(50);
         optGrid.getColumnConstraints().addAll(colA, colB);
 
-        String[] letters  = {"A", "B", "C", "D"};
+        String[] letters = {"A", "B", "C", "D"};
         String[] optTexts = {q.getOption1(), q.getOption2(), q.getOption3(), q.getOption4()};
 
         for (int i = 0; i < 4; i++) {
@@ -142,10 +136,8 @@ public class QbankViewController {
             }
             optGrid.add(optLabel, i % 2, i / 2);
         }
-
         card.getChildren().addAll(header, optGrid);
 
-        // Teacher sees the correct answer label at the bottom of the card
         if (isTeacher) {
             Label correctHint = new Label("✓  Correct Answer: " + q.getCorrectAns());
             correctHint.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.75;");
@@ -155,7 +147,6 @@ public class QbankViewController {
         return card;
     }
 
-    // ── Add / Edit dialogs ─────────────────────────────────────────────────────
 
     @FXML
     public void openAddQuestion(ActionEvent e) {
@@ -174,7 +165,6 @@ public class QbankViewController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
 
-        // ── Form layout ───────────────────────────────────────────────────────
         VBox form = new VBox(10);
         form.setPadding(new Insets(24));
         form.setStyle("-fx-background-color: #0f1225;");
@@ -183,13 +173,11 @@ public class QbankViewController {
         Label titleLabel = new Label(isEdit ? "Edit Question" : "Add New Question");
         titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 17; -fx-font-weight: bold;");
 
-        // Question text
         Label qLabel = sectionLabel("Question Text");
         TextField quesField = dialogField("Type the question here…");
         quesField.setPrefWidth(472);
         if (isEdit) quesField.setText(existing.getQuesText());
 
-        // Options
         Label optLabel = sectionLabel("Answer Options");
         TextField opt1 = dialogField("Option A");
         TextField opt2 = dialogField("Option B");
@@ -213,26 +201,23 @@ public class QbankViewController {
             l.setStyle("-fx-text-fill: #58eb34; -fx-font-weight: bold; -fx-font-size: 13;");
             l.setMinWidth(22);
             fields[i].setPrefWidth(420);
-            optGrid.add(l,          0, i);
-            optGrid.add(fields[i],  1, i);
+            optGrid.add(l, 0, i);
+            optGrid.add(fields[i], 1, i);
         }
         ColumnConstraints labelCol = new ColumnConstraints(28);
         ColumnConstraints fieldCol = new ColumnConstraints();
         fieldCol.setHgrow(Priority.ALWAYS);
         optGrid.getColumnConstraints().addAll(labelCol, fieldCol);
 
-        // Correct answer
         Label correctLabel = sectionLabel("Correct Answer (A / B / C / D)");
         TextField correctField = dialogField("Enter A, B, C, or D");
         correctField.setPrefWidth(472);
         if (isEdit) correctField.setText(existing.getCorrectAns());
 
-        // Error message
         Label errLabel = new Label("");
         errLabel.setStyle("-fx-text-fill: #c44536; -fx-font-size: 12;");
         errLabel.setWrapText(true);
 
-        // Buttons
         HBox btnRow = new HBox(10);
         btnRow.setAlignment(Pos.CENTER_RIGHT);
         VBox.setMargin(btnRow, new Insets(6, 0, 0, 0));
@@ -246,11 +231,11 @@ public class QbankViewController {
         saveBtn.setStyle("-fx-background-color: #244857; -fx-text-fill: white; -fx-font-weight: bold; "
                 + "-fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 8 20; -fx-font-size: 13;");
         saveBtn.setOnAction(ev -> {
-            String qText   = quesField.getText().trim();
-            String o1      = opt1.getText().trim();
-            String o2      = opt2.getText().trim();
-            String o3      = opt3.getText().trim();
-            String o4      = opt4.getText().trim();
+            String qText = quesField.getText().trim();
+            String o1 = opt1.getText().trim();
+            String o2 = opt2.getText().trim();
+            String o3 = opt3.getText().trim();
+            String o4 = opt4.getText().trim();
             String correct = correctField.getText().trim().toUpperCase();
 
             if (qText.isEmpty() || o1.isEmpty() || o2.isEmpty() || o3.isEmpty() || o4.isEmpty() || correct.isEmpty()) {
@@ -266,7 +251,7 @@ public class QbankViewController {
                     Question updated = new Question(existing.getQuesID(), qText, o1, o2, o3, o4, correct);
                     QuesFileManager.updateQues(updated);
                 } else {
-                    String id   = "Q" + System.currentTimeMillis();
+                    String id = QuesFileManager.nextSequentialQuesId();
                     Question nq = new Question(id, qText, o1, o2, o3, o4, correct);
                     QuesFileManager.addQues(nq);
                 }
@@ -292,7 +277,6 @@ public class QbankViewController {
         dialog.showAndWait();
     }
 
-    // ── Delete ─────────────────────────────────────────────────────────────────
 
     private void deleteQuestion(Question q) {
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -315,7 +299,6 @@ public class QbankViewController {
         });
     }
 
-    // ── Navigation ─────────────────────────────────────────────────────────────
 
     @FXML
     public void goBack(ActionEvent event) throws IOException {
@@ -336,7 +319,6 @@ public class QbankViewController {
         stage.show();
     }
 
-    // ── Dialog helper styles ───────────────────────────────────────────────────
 
     private TextField dialogField(String prompt) {
         TextField tf = new TextField();
