@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class DashBoardController {
+    private User user;
     public Button logoutBtn;
     @FXML
     private Button dashboardBtn;
@@ -54,8 +55,15 @@ public class DashBoardController {
 //    }
 
     @FXML
-    public void onQuestionBankClick(ActionEvent e) {
-        System.out.println("Question Bank clicked");
+    public void onQuestionBankClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("qbankView.fxml"));
+        Parent root = loader.load();
+        QbankViewController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -144,24 +152,13 @@ public class DashBoardController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent root = fxmlLoader.load();
 
-        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void onViewStudentClick(ActionEvent actionEvent) {
-    }
-
-    public void onTakeExamClick(ActionEvent actionEvent) {
-    }
-
-    public void OnMessegesClick(ActionEvent actionEvent) {
-    }
-
-    public void onViewSubClick(ActionEvent actionEvent) {
-    }
-
-    public void onQuestionBankViewClick(ActionEvent actionEvent) {
+    public void setUser(User user) {
+        this.user = user;
     }
 }
