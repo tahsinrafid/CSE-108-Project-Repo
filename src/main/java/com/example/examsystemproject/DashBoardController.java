@@ -148,8 +148,7 @@ public class DashBoardController {
 
     @FXML
     public void logout(ActionEvent e) throws IOException {
-        // Load the login page
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LandingPage.fxml"));
         Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();

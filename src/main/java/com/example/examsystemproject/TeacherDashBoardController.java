@@ -49,8 +49,8 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void onViewStudentClick(ActionEvent e) {
-        System.out.println("View students clicked");
+    public void onViewExamsClick(ActionEvent e) {
+        System.out.println("View exams clicked");
     }
 
     @FXML
@@ -59,8 +59,13 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void onTakeExamClick(ActionEvent e) {
-        System.out.println("Take exam clicked");
+    public void onTakeExamClick(ActionEvent e) throws IOException {
+        navigateToCreateExam(e);
+    }
+
+    @FXML
+    public void onCreateExamClick(ActionEvent e) throws IOException {
+        navigateToCreateExam(e);
     }
 
     @FXML
@@ -74,8 +79,8 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void onViewSubClick(ActionEvent e) {
-        System.out.println("View subject clicked");
+    public void onViewSubClick(ActionEvent e) throws IOException {
+        navigateToCreateExam(e);
     }
 
     @FXML
@@ -87,6 +92,17 @@ public class TeacherDashBoardController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("qbankView.fxml"));
         Parent root = loader.load();
         QbankViewController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void navigateToCreateExam(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateExam.fxml"));
+        Parent root = loader.load();
+        CreateExamController controller = loader.getController();
         controller.setUser(user);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
