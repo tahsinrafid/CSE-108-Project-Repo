@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import java.net.URL?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.SpeedTestController">
+    <stylesheets>
+        <URL value="@Dashboard.css" />
+    </stylesheets>
+
+    <children>
+        <!-- Top Bar -->
+        <AnchorPane prefHeight="74.0" prefWidth="1020.0" styleClass="dash-top-bar">
+            <children>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="12.0" preserveRatio="true">
+                    <image>
+                        <Image url="@prlogo.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="80.0" layoutY="18.0" styleClass="dash-title" fx:id="titleLabel" text="Speed Test" />
+                <Button layoutX="855.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="78.0" styleClass="menu-toggle-btn" text="Back" />
+            </children>
+        </AnchorPane>
+
+        <!-- Main Content -->
+        <VBox layoutX="24.0" layoutY="92.0" spacing="20.0" prefWidth="972.0">
+            
+            <!-- Question Counter -->
+            <Label fx:id="questionCountLabel" style="-fx-text-fill: #9eb3cc; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';" text="Question 1 of 10" />
+
+            <!-- Question Card -->
+            <VBox spacing="20.0" style="-fx-background-color: rgba(15, 18, 37, 0.96); -fx-background-radius: 12; -fx-padding: 24;">
+                <fx:define>
+                    <ToggleGroup fx:id="optionGroup" />
+                </fx:define>
+                <Label fx:id="questionLabel" text="What is the answer?" style="-fx-text-fill: #f4fbff; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS'; -fx-wrap-text: true;" />
+
+                <!-- Options -->
+                <VBox spacing="12.0">
+                    <HBox spacing="10.0">
+                        <RadioButton fx:id="option1Btn" toggleGroup="$optionGroup" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';" text="Option 1" />
+                    </HBox>
+                    
+                    <HBox spacing="10.0">
+                        <RadioButton fx:id="option2Btn" toggleGroup="$optionGroup" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';" text="Option 2" />
+                    </HBox>
+                    
+                    <HBox spacing="10.0">
+                        <RadioButton fx:id="option3Btn" toggleGroup="$optionGroup" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';" text="Option 3" />
+                    </HBox>
+                    
+                    <HBox spacing="10.0">
+                        <RadioButton fx:id="option4Btn" toggleGroup="$optionGroup" style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';" text="Option 4" />
+                    </HBox>
+                </VBox>
+
+                <!-- Feedback Label -->
+                <Label fx:id="feedbackLabel" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="" />
+
+                <!-- Result Container (shows correct answer when wrong) -->
+                <VBox fx:id="resultContainer" spacing="8.0" style="-fx-background-color: rgba(255, 122, 122, 0.1); -fx-background-radius: 8; -fx-padding: 12; -fx-border-color: #ff7a7a; -fx-border-radius: 8; -fx-border-width: 1;" visible="false">
+                    <Label style="-fx-text-fill: #ff7a7a; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS'; -fx-font-weight: bold;" text="Correct Answer:" />
+                    <Label fx:id="resultLabel" style="-fx-text-fill: #5fe08e; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="" />
+                </VBox>
+
+                <!-- Submit Button -->
+                <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #58eb34; -fx-text-fill: #0b1220; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';" text="Submit Answer" />
+            </VBox>
+        </VBox>
+    </children>
+</AnchorPane>

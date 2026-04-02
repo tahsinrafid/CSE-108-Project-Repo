@@ -1,5 +1,8 @@
 package com.example.examsystemproject;
 
+import java.io.IOException;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,13 +11,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.List;
 
 public class QbankViewController {
 
@@ -122,7 +131,7 @@ public class QbankViewController {
         String[] optTexts = {q.getOption1(), q.getOption2(), q.getOption3(), q.getOption4()};
 
         for (int i = 0; i < 4; i++) {
-            boolean correct = isTeacher && letters[i].equalsIgnoreCase(q.getCorrectAns());
+            boolean correct = letters[i].equalsIgnoreCase(q.getCorrectAns());
             Label optLabel = new Label(letters[i] + ".  " + optTexts[i]);
             optLabel.setWrapText(true);
             optLabel.setMaxWidth(Double.MAX_VALUE);
@@ -142,9 +151,49 @@ public class QbankViewController {
             Label correctHint = new Label("✓  Correct Answer: " + q.getCorrectAns());
             correctHint.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.75;");
             card.getChildren().add(correctHint);
+        } else {
+            Label correctHint = new Label("Correct Answer: " + q.getCorrectAns());
+            correctHint.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.85;");
+
+            Button reportBtn = new Button("Report Doubt");
+            reportBtn.setStyle("-fx-background-color: #f59c1a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12;");
+            reportBtn.setOnAction(event -> openReportDialog(q));
+
+            HBox reportRow = new HBox(10, correctHint, reportBtn);
+            reportRow.setAlignment(Pos.CENTER_LEFT);
+            card.getChildren().add(reportRow);
         }
 
         return card;
+    }
+
+    private void openReportDialog(Question q) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Report Question");
+        dialog.setHeaderText("Report a doubt about this question");
+        dialog.setContentText("Write your issue or clarification request:");
+
+        dialog.showAndWait().ifPresent(text -> {
+            String details = text.trim();
+            if (details.isEmpty()) {
+                return;
+            }
+            String username = user != null ? user.getUsername() : "student";
+            try {
+                QuestionReportFileManager.addReport(new QuestionReport(q.getQuesID(), username, details));
+                Alert info = new Alert(Alert.AlertType.INFORMATION);
+                info.setTitle("Reported");
+                info.setHeaderText(null);
+                info.setContentText("Your report was submitted.");
+                info.showAndWait();
+            } catch (IOException ex) {
+                Alert err = new Alert(Alert.AlertType.ERROR);
+                err.setTitle("Report failed");
+                err.setHeaderText(null);
+                err.setContentText(ex.getMessage());
+                err.showAndWait();
+            }
+        });
     }
 
 
@@ -159,6 +208,7 @@ public class QbankViewController {
 
     private void showQuestionDialog(Question existing) {
         boolean isEdit = (existing != null);
+        Question editableQuestion = existing;
 
         Stage dialog = new Stage();
         dialog.setTitle(isEdit ? "Edit Question" : "Add New Question");
@@ -176,7 +226,12 @@ public class QbankViewController {
         Label qLabel = sectionLabel("Question Text");
         TextField quesField = dialogField("Type the question here…");
         quesField.setPrefWidth(472);
-        if (isEdit) quesField.setText(existing.getQuesText());
+        if (isEdit) {
+            if (editableQuestion == null) {
+                return;
+            }
+            quesField.setText(editableQuestion.getQuesText());
+        }
 
         Label optLabel = sectionLabel("Answer Options");
         TextField opt1 = dialogField("Option A");
@@ -184,10 +239,13 @@ public class QbankViewController {
         TextField opt3 = dialogField("Option C");
         TextField opt4 = dialogField("Option D");
         if (isEdit) {
-            opt1.setText(existing.getOption1());
-            opt2.setText(existing.getOption2());
-            opt3.setText(existing.getOption3());
-            opt4.setText(existing.getOption4());
+            if (editableQuestion == null) {
+                return;
+            }
+            opt1.setText(editableQuestion.getOption1());
+            opt2.setText(editableQuestion.getOption2());
+            opt3.setText(editableQuestion.getOption3());
+            opt4.setText(editableQuestion.getOption4());
         }
 
         GridPane optGrid = new GridPane();
@@ -212,7 +270,12 @@ public class QbankViewController {
         Label correctLabel = sectionLabel("Correct Answer (A / B / C / D)");
         TextField correctField = dialogField("Enter A, B, C, or D");
         correctField.setPrefWidth(472);
-        if (isEdit) correctField.setText(existing.getCorrectAns());
+        if (isEdit) {
+            if (editableQuestion == null) {
+                return;
+            }
+            correctField.setText(editableQuestion.getCorrectAns());
+        }
 
         Label errLabel = new Label("");
         errLabel.setStyle("-fx-text-fill: #c44536; -fx-font-size: 12;");
@@ -248,7 +311,11 @@ public class QbankViewController {
             }
             try {
                 if (isEdit) {
-                    Question updated = new Question(existing.getQuesID(), qText, o1, o2, o3, o4, correct);
+                    if (editableQuestion == null) {
+                        errLabel.setText("Could not load the question for editing.");
+                        return;
+                    }
+                    Question updated = new Question(editableQuestion.getQuesID(), qText, o1, o2, o3, o4, correct);
                     QuesFileManager.updateQues(updated);
                 } else {
                     String id = QuesFileManager.nextSequentialQuesId();
