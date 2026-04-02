@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.DashBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.DashBoardController">
     <stylesheets>
         <URL value="@Dashboard.css" />
     </stylesheets>
    <children>
       <!-- Header/Top Bar with Logo and Minimize Button -->
-      <AnchorPane prefHeight="70.0" prefWidth="1000.0" styleClass="dash-top-bar">
+      <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #1e3a5f; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 2);">
          <children>
             <!-- Logo Image -->
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
@@ -33,7 +33,7 @@
       </AnchorPane>
 
       <!-- Sidebar Navigation -->
-      <VBox fx:id="sidebarVBox" layoutY="70.0" prefHeight="630.0" prefWidth="220.0" spacing="6.0" styleClass="dash-sidebar">
+      <VBox fx:id="sidebarVBox" layoutY="70.0" prefHeight="530.0" prefWidth="190.0" style="-fx-background-color: #2d5a8c; -fx-padding: 10px 0px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);">
          <children>
          <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboardClick" styleClass="sidebar-btn-active" text="Dashboard" />
          <Button fx:id="questionBankBtn" mnemonicParsing="false" onAction="#onQuestionBankClick" styleClass="sidebar-btn" text="Question Bank" />
@@ -47,59 +47,59 @@
       </VBox>
 
       <!-- Main Content Area -->
-      <!-- Card 1: Start Exam-->
-      <AnchorPane fx:id="cardStartExam" layoutX="240.0" layoutY="90.0" prefHeight="165.0" prefWidth="215.0" styleClass="dash-card">
+      <!-- Card 1: Dashboard -->
+      <AnchorPane layoutX="215.0" layoutY="90.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="12.0" layoutY="12.0" styleClass="dash-card-title" text="Start Exam" />
-            <Button layoutX="57.0" layoutY="115.0" onAction = "#onStartExamClick" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="dash-action-btn btn-accent-red" text="Start" />
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Start Exam" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: green; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="Start" />
          </children>
       </AnchorPane>
 
       <!-- Card 2: Question Bank -->
-      <AnchorPane fx:id="cardQuestionBank" layoutX="475.0" layoutY="90.0" prefHeight="165.0" prefWidth="215.0" styleClass="dash-card">
+      <AnchorPane layoutX="445.0" layoutY="90.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="12.0" layoutY="12.0" styleClass="dash-card-title" text="Question Bank" />
-            <Button layoutX="57.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="dash-action-btn btn-accent-blue" text="View" />
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Question Bank" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" onAction="#onQuestionBankClick" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #2d5a8c; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="View" />
          </children>
       </AnchorPane>
 
       <!-- Card 3: Speed test -->
-      <AnchorPane fx:id="cardSpeedTest" layoutX="710.0" layoutY="90.0" prefHeight="165.0" prefWidth="215.0" styleClass="dash-card">
+      <AnchorPane layoutX="675.0" layoutY="90.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="12.0" layoutY="12.0" styleClass="dash-card-title" text="Speed test" />
-            <Button layoutX="57.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="dash-action-btn btn-accent-red" text="Start" />
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Speed test" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #c44536; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="Start" />
          </children>
       </AnchorPane>
 
       <!-- Card 4: Leaderboard -->
-      <AnchorPane fx:id="cardLeaderboard" layoutX="240.0" layoutY="275.0" prefHeight="165.0" prefWidth="215.0" styleClass="dash-card">
+      <AnchorPane layoutX="215.0" layoutY="245.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="12.0" layoutY="12.0" styleClass="dash-card-title" text="Leaderboard" />
-            <Button layoutX="57.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="dash-action-btn btn-accent-gold" text="View" />
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Leaderboard" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #f59c1a; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="View" />
          </children>
       </AnchorPane>
 
       <!-- Card 5: Community -->
-      <AnchorPane fx:id="cardCommunity" layoutX="475.0" layoutY="275.0" prefHeight="165.0" prefWidth="215.0" styleClass="dash-card">
+      <AnchorPane layoutX="445.0" layoutY="245.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="12.0" layoutY="12.0" styleClass="dash-card-title" text="Community" />
-            <Button layoutX="57.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="dash-action-btn btn-accent-teal" text="Explore" />
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Community" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #33a86f; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="Explore" />
          </children>
       </AnchorPane>
 
       <!-- Card 6: QNA -->
-      <AnchorPane fx:id="cardQna" layoutX="710.0" layoutY="275.0" prefHeight="165.0" prefWidth="215.0" styleClass="dash-card">
+      <AnchorPane layoutX="675.0" layoutY="245.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="12.0" layoutY="12.0" styleClass="dash-card-title" text="Q&amp;A" />
-            <Button layoutX="57.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="dash-action-btn btn-accent-azure" text="Browse" />
+            <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Q&amp;A" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #9c27b0; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="Browse" />
          </children>
       </AnchorPane>
 
       <!-- Statistics Chart -->
-      <AnchorPane fx:id="performanceCard" layoutX="240.0" layoutY="460.0" prefHeight="190.0" prefWidth="685.0" styleClass="dash-card dash-performance-card">
+      <AnchorPane layoutX="215.0" layoutY="400.0" prefHeight="180.0" prefWidth="660.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
-         <Label layoutX="15.0" layoutY="12.0" styleClass="dash-card-title" text="Performance Overview" />
-            <AreaChart layoutX="15.0" layoutY="40.0" prefHeight="135.0" prefWidth="655.0" style="-fx-background-color: transparent;">
+            <Label layoutX="15.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 14; -fx-font-weight: bold;" text="Performance Overview" />
+            <AreaChart layoutX="15.0" layoutY="30.0" prefHeight="145.0" prefWidth="630.0" style="-fx-background-color: transparent;">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
