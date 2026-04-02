@@ -27,7 +27,7 @@
             </ImageView>
 
             <!-- Title Text beside Logo -->
-            <Label layoutX="75.0" layoutY="18.0" style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="ExamAce - Exam portal [Student DashBoard]" />
+            <Label layoutX="75.0" layoutY="18.0" styleClass="dash-title" text="ExamAce - Exam portal [Student DashBoard]" />
 
          </children>
       </AnchorPane>
@@ -35,14 +35,14 @@
       <!-- Sidebar Navigation -->
       <VBox fx:id="sidebarVBox" layoutY="70.0" prefHeight="530.0" prefWidth="190.0" style="-fx-background-color: #2d5a8c; -fx-padding: 10px 0px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);">
          <children>
-            <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboardClick" style="-fx-padding: 15px 20px; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-color: #1e3a5f; -fx-border-color: #1e3a5f; -fx-cursor: hand;" styleClass="sidebar-btn-active" text="Dashboard" />
-            <Button fx:id="questionBankBtn" mnemonicParsing="false" onAction="#onQuestionBankClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Question Bank" />
-            <Button fx:id="speedTestBtn" mnemonicParsing="false" onAction="#onSpeedTestClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Speed test" />
-            <Button fx:id="leaderboardBtn" mnemonicParsing="false" onAction="#onLeaderboardClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Leaderboard" />
-            <Button fx:id="communityBtn" mnemonicParsing="false" onAction="#onCommunityClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Community" />
-            <Button fx:id="qnaBtn" mnemonicParsing="false" onAction="#onQnaClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="QNA" />
-            <Button fx:id="aboutUsBtn" mnemonicParsing="false" onAction="#onAboutUsClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="About us" />
-            <Button id="logout" fx:id="logoutBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#logout" style="-fx-padding: 15px 20px; -fx-text-fill: red; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Log out" />
+         <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboardClick" styleClass="sidebar-btn-active" text="Dashboard" />
+         <Button fx:id="questionBankBtn" mnemonicParsing="false" onAction="#onQuestionBankClick" styleClass="sidebar-btn" text="Question Bank" />
+         <Button fx:id="speedTestBtn" mnemonicParsing="false" onAction="#onSpeedTestClick" styleClass="sidebar-btn" text="Speed test" />
+         <Button fx:id="leaderboardBtn" mnemonicParsing="false" onAction="#onLeaderboardClick" styleClass="sidebar-btn" text="Leaderboard" />
+         <Button fx:id="communityBtn" mnemonicParsing="false" onAction="#onCommunityClick" styleClass="sidebar-btn" text="Community" />
+         <Button fx:id="qnaBtn" mnemonicParsing="false" onAction="#onQnaClick" styleClass="sidebar-btn" text="QNA" />
+         <Button fx:id="aboutUsBtn" mnemonicParsing="false" onAction="#onAboutUsClick" styleClass="sidebar-btn" text="About us" />
+            <Button id="logout" fx:id="logoutBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#logout" styleClass="sidebar-btn sidebar-logout" text="Log out" />
          </children>
       </VBox>
 

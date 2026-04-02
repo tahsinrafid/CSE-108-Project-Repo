@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.examsystemproject.StartExamController"
+            prefHeight="700.0" prefWidth="1000.0"
+            style="-fx-background-color: #0f1b2d;">
+    <stylesheets>
+        <URL value="@Dashboard.css" />
+        <URL value="@startExam.css" />
+    </stylesheets>
+
+    <!-- ── TOP HEADER BAR ── -->
+    <AnchorPane prefHeight="70.0" prefWidth="1000.0"
+                style="-fx-background-color: #1e3a5f; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 3);">
+        <children>
+            <!-- Logo -->
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
+                <image><Image url="@../../../prlogo.png"/></image>
+            </ImageView>
+
+            <!-- App Title -->
+            <Label layoutX="75.0" layoutY="18.0"
+                   text="ExamAce - Exam Portal"
+                   style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+
+            <!-- Back to Dashboard button -->
+            <Button layoutX="850.0" layoutY="20.0"
+                    onAction="#onBackToDashboard"
+                    mnemonicParsing="false"
+                    text="← Dashboard"
+                    styleClass="back-btn"
+                    style="-fx-background-color: #2d5a8c; -fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 8 18 8 18;"/>
+        </children>
+    </AnchorPane>
+
+    <!-- ── PAGE CONTENT ── -->
+    <ScrollPane layoutY="70.0" prefHeight="630.0" prefWidth="1000.0"
+                fitToWidth="true" hbarPolicy="NEVER"
+                style="-fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent;">
+        <content>
+            <VBox spacing="30.0" style="-fx-background-color: #0f1b2d; -fx-padding: 30 40 40 40;">
+
+                <!-- ── SECTION HEADER ── -->
+                <Label text="📋  Exam Centre"
+                       style="-fx-text-fill: #e8f0fe; -fx-font-size: 24; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                <Label text="Choose to sit for a scheduled exam or sharpen your skills with practice tests."
+                       style="-fx-text-fill: #8aaed6; -fx-font-size: 13; -fx-font-family: 'Segoe UI';"/>
+
+                <!-- ═══════════════════════════════════════════
+                     DUE EXAMINATIONS SECTION
+                     ═══════════════════════════════════════════ -->
+                <VBox spacing="14.0" styleClass="section-box"
+                      style="-fx-background-color: #162844; -fx-background-radius: 12; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0, 0, 4);">
+                    <children>
+
+                        <!-- Section Title Row -->
+                        <HBox spacing="10.0" alignment="CENTER_LEFT">
+                            <Label text="🔴" style="-fx-font-size: 18;"/>
+                            <Label text="Due Examinations"
+                                   style="-fx-text-fill: #ff6b6b; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="dueExamCountLabel" text="3 pending"
+                                   style="-fx-text-fill: #ff9f9f; -fx-font-size: 12; -fx-background-color: rgba(255,107,107,0.18); -fx-padding: 4 10 4 10; -fx-background-radius: 20;"/>
+                        </HBox>
+
+                        <Label text="Scheduled exams assigned by your instructor. Complete before deadline."
+                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12; -fx-font-family: 'Segoe UI';"/>
+
+                        <!-- Divider -->
+                        <Region prefHeight="6.0"/>
+
+                        <!-- Due Exam Card 1 -->
+                        <HBox styleClass="exam-card due-card"
+                              style="-fx-background-color: #1e3a5f; -fx-background-radius: 10; -fx-padding: 18 22 18 22; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                              alignment="CENTER_LEFT" spacing="16.0">
+                            <children>
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Data Structures &amp; Algorithms – Mid Term"
+                                           style="-fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                    <HBox spacing="20.0">
+                                        <Label text="📅  Due: March 16, 2026  |  2:00 PM"
+                                               style="-fx-text-fill: #ff9f9f; -fx-font-size: 12;"/>
+                                        <Label text="⏱  Duration: 60 min"
+                                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12;"/>
+                                        <Label text="❓  40 Questions"
+                                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12;"/>
+                                    </HBox>
+                                    <Label text="Course: CSE 201  •  Instructor: Dr. Rahman"
+                                           style="-fx-text-fill: #607d9e; -fx-font-size: 11;"/>
+                                </VBox>
+                                <Label text="URGENT" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-size: 10; -fx-font-weight: bold; -fx-padding: 4 8 4 8; -fx-background-radius: 4;"/>
+                                <Button text="Sit for Exam"
+                                        onAction="#onSitForExam"
+                                        mnemonicParsing="false"
+                                        styleClass="exam-start-btn due-start-btn"
+                                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 10 22 10 22;"/>
+                            </children>
+                        </HBox>
+
+                        <!-- Due Exam Card 2 -->
+                        <HBox styleClass="exam-card due-card"
+                              style="-fx-background-color: #1e3a5f; -fx-background-radius: 10; -fx-padding: 18 22 18 22; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                              alignment="CENTER_LEFT" spacing="16.0">
+                            <children>
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Database Management – Quiz 3"
+                                           style="-fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                    <HBox spacing="20.0">
+                                        <Label text="📅  Due: March 18, 2026  |  11:59 PM"
+                                               style="-fx-text-fill: #ffa07a; -fx-font-size: 12;"/>
+                                        <Label text="⏱  Duration: 30 min"
+                                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12;"/>
+                                        <Label text="❓  20 Questions"
+                                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12;"/>
+                                    </HBox>
+                                    <Label text="Course: CSE 301  •  Instructor: Dr. Hossain"
+                                           style="-fx-text-fill: #607d9e; -fx-font-size: 11;"/>
+                                </VBox>
+                                <Label text="DUE SOON" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-size: 10; -fx-font-weight: bold; -fx-padding: 4 8 4 8; -fx-background-radius: 4;"/>
+                                <Button text="Sit for Exam"
+                                        onAction="#onSitForExam"
+                                        mnemonicParsing="false"
+                                        styleClass="exam-start-btn due-start-btn"
+                                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 10 22 10 22;"/>
+                            </children>
+                        </HBox>
+
+                        <!-- Due Exam Card 3 -->
+                        <HBox styleClass="exam-card due-card"
+                              style="-fx-background-color: #1e3a5f; -fx-background-radius: 10; -fx-padding: 18 22 18 22; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                              alignment="CENTER_LEFT" spacing="16.0">
+                            <children>
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Object Oriented Programming – Final"
+                                           style="-fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                    <HBox spacing="20.0">
+                                        <Label text="📅  Due: March 22, 2026  |  5:00 PM"
+                                               style="-fx-text-fill: #90ee90; -fx-font-size: 12;"/>
+                                        <Label text="⏱  Duration: 90 min"
+                                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12;"/>
+                                        <Label text="❓  60 Questions"
+                                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12;"/>
+                                    </HBox>
+                                    <Label text="Course: CSE 108  •  Instructor: Dr. Islam"
+                                           style="-fx-text-fill: #607d9e; -fx-font-size: 11;"/>
+                                </VBox>
+                                <Label text="UPCOMING" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 10; -fx-font-weight: bold; -fx-padding: 4 8 4 8; -fx-background-radius: 4;"/>
+                                <Button text="Sit for Exam"
+                                        onAction="#onSitForExam"
+                                        mnemonicParsing="false"
+                                        styleClass="exam-start-btn due-start-btn"
+                                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 10 22 10 22;"/>
+                            </children>
+                        </HBox>
+
+                    </children>
+                </VBox>
+
+                <!-- ═══════════════════════════════════════════
+                     PRACTICE EXAMINATIONS SECTION
+                     ═══════════════════════════════════════════ -->
+                <VBox spacing="14.0" styleClass="section-box"
+                      style="-fx-background-color: #162844; -fx-background-radius: 12; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0, 0, 4);">
+                    <children>
+
+                        <!-- Section Title Row -->
+                        <HBox spacing="10.0" alignment="CENTER_LEFT">
+                            <Label text="🟢" style="-fx-font-size: 18;"/>
+                            <Label text="Practice Examinations"
+                                   style="-fx-text-fill: #4ade80; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="Always Available"
+                                   style="-fx-text-fill: #86efac; -fx-font-size: 12; -fx-background-color: rgba(74,222,128,0.18); -fx-padding: 4 10 4 10; -fx-background-radius: 20;"/>
+                        </HBox>
+
+                        <Label text="Practice at your own pace — no deadline, no pressure. Improve your score anytime."
+                               style="-fx-text-fill: #8aaed6; -fx-font-size: 12; -fx-font-family: 'Segoe UI';"/>
+
+                        <Region prefHeight="6.0"/>
+
+                        <!-- Practice Cards Grid Row 1 -->
+                        <HBox spacing="16.0">
+
+                            <!-- Practice Card: Data Structures -->
+                            <VBox styleClass="practice-card"
+                                  style="-fx-background-color: #1a3352; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                                  spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Label text="🖥" style="-fx-font-size: 28;"/>
+                                <Label text="Data Structures"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                <Label text="Arrays, Trees, Graphs, Sorting &amp; more"
+                                       style="-fx-text-fill: #7a9abf; -fx-font-size: 11; -fx-wrap-text: true;"/>
+                                <HBox spacing="10.0">
+                                    <Label text="120 Q's" style="-fx-text-fill: #4ade80; -fx-font-size: 11; -fx-background-color: rgba(74,222,128,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                    <Label text="Mixed" style="-fx-text-fill: #60a5fa; -fx-font-size: 11; -fx-background-color: rgba(96,165,250,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                </HBox>
+                                <Button text="Practice Now →"
+                                        onAction="#onPracticeExam"
+                                        mnemonicParsing="false"
+                                        styleClass="practice-btn"
+                                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 9 16 9 16; -fx-max-width: Infinity;"
+                                        maxWidth="Infinity"/>
+                            </VBox>
+
+                            <!-- Practice Card: OOP -->
+                            <VBox styleClass="practice-card"
+                                  style="-fx-background-color: #1a3352; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                                  spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Label text="☕" style="-fx-font-size: 28;"/>
+                                <Label text="Object Oriented Programming"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                <Label text="Classes, Inheritance, Polymorphism &amp; Design"
+                                       style="-fx-text-fill: #7a9abf; -fx-font-size: 11; -fx-wrap-text: true;"/>
+                                <HBox spacing="10.0">
+                                    <Label text="90 Q's" style="-fx-text-fill: #4ade80; -fx-font-size: 11; -fx-background-color: rgba(74,222,128,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                    <Label text="MCQ" style="-fx-text-fill: #f59e0b; -fx-font-size: 11; -fx-background-color: rgba(245,158,11,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                </HBox>
+                                <Button text="Practice Now →"
+                                        onAction="#onPracticeExam"
+                                        mnemonicParsing="false"
+                                        styleClass="practice-btn"
+                                        style="-fx-background-color: #059669; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 9 16 9 16; -fx-max-width: Infinity;"
+                                        maxWidth="Infinity"/>
+                            </VBox>
+
+                            <!-- Practice Card: Database -->
+                            <VBox styleClass="practice-card"
+                                  style="-fx-background-color: #1a3352; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                                  spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Label text="🗄" style="-fx-font-size: 28;"/>
+                                <Label text="Database Management"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                <Label text="SQL, Normalization, ER Diagrams &amp; Queries"
+                                       style="-fx-text-fill: #7a9abf; -fx-font-size: 11; -fx-wrap-text: true;"/>
+                                <HBox spacing="10.0">
+                                    <Label text="80 Q's" style="-fx-text-fill: #4ade80; -fx-font-size: 11; -fx-background-color: rgba(74,222,128,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                    <Label text="MCQ" style="-fx-text-fill: #f59e0b; -fx-font-size: 11; -fx-background-color: rgba(245,158,11,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                </HBox>
+                                <Button text="Practice Now →"
+                                        onAction="#onPracticeExam"
+                                        mnemonicParsing="false"
+                                        styleClass="practice-btn"
+                                        style="-fx-background-color: #7c3aed; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 9 16 9 16; -fx-max-width: Infinity;"
+                                        maxWidth="Infinity"/>
+                            </VBox>
+
+                        </HBox>
+
+                        <!-- Practice Cards Grid Row 2 -->
+                        <HBox spacing="16.0">
+
+                            <!-- Practice Card: Networking -->
+                            <VBox styleClass="practice-card"
+                                  style="-fx-background-color: #1a3352; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                                  spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Label text="🌐" style="-fx-font-size: 28;"/>
+                                <Label text="Computer Networks"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                <Label text="TCP/IP, OSI, Routing &amp; Security"
+                                       style="-fx-text-fill: #7a9abf; -fx-font-size: 11; -fx-wrap-text: true;"/>
+                                <HBox spacing="10.0">
+                                    <Label text="70 Q's" style="-fx-text-fill: #4ade80; -fx-font-size: 11; -fx-background-color: rgba(74,222,128,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                    <Label text="Mixed" style="-fx-text-fill: #60a5fa; -fx-font-size: 11; -fx-background-color: rgba(96,165,250,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                </HBox>
+                                <Button text="Practice Now →"
+                                        onAction="#onPracticeExam"
+                                        mnemonicParsing="false"
+                                        styleClass="practice-btn"
+                                        style="-fx-background-color: #0891b2; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 9 16 9 16; -fx-max-width: Infinity;"
+                                        maxWidth="Infinity"/>
+                            </VBox>
+
+                            <!-- Practice Card: Algorithms -->
+                            <VBox styleClass="practice-card"
+                                  style="-fx-background-color: #1a3352; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                                  spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Label text="⚙️" style="-fx-font-size: 28;"/>
+                                <Label text="Algorithms"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                <Label text="Dynamic Programming, Greedy &amp; Complexity"
+                                       style="-fx-text-fill: #7a9abf; -fx-font-size: 11; -fx-wrap-text: true;"/>
+                                <HBox spacing="10.0">
+                                    <Label text="95 Q's" style="-fx-text-fill: #4ade80; -fx-font-size: 11; -fx-background-color: rgba(74,222,128,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                    <Label text="MCQ" style="-fx-text-fill: #f59e0b; -fx-font-size: 11; -fx-background-color: rgba(245,158,11,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                </HBox>
+                                <Button text="Practice Now →"
+                                        onAction="#onPracticeExam"
+                                        mnemonicParsing="false"
+                                        styleClass="practice-btn"
+                                        style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 9 16 9 16; -fx-max-width: Infinity;"
+                                        maxWidth="Infinity"/>
+                            </VBox>
+
+                            <!-- Practice Card: OS -->
+                            <VBox styleClass="practice-card"
+                                  style="-fx-background-color: #1a3352; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);"
+                                  spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Label text="💻" style="-fx-font-size: 28;"/>
+                                <Label text="Operating Systems"
+                                       style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"/>
+                                <Label text="Processes, Memory, File Systems &amp; Scheduling"
+                                       style="-fx-text-fill: #7a9abf; -fx-font-size: 11; -fx-wrap-text: true;"/>
+                                <HBox spacing="10.0">
+                                    <Label text="85 Q's" style="-fx-text-fill: #4ade80; -fx-font-size: 11; -fx-background-color: rgba(74,222,128,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                    <Label text="MCQ" style="-fx-text-fill: #f59e0b; -fx-font-size: 11; -fx-background-color: rgba(245,158,11,0.15); -fx-padding: 3 8 3 8; -fx-background-radius: 10;"/>
+                                </HBox>
+                                <Button text="Practice Now →"
+                                        onAction="#onPracticeExam"
+                                        mnemonicParsing="false"
+                                        styleClass="practice-btn"
+                                        style="-fx-background-color: #b45309; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 9 16 9 16; -fx-max-width: Infinity;"
+                                        maxWidth="Infinity"/>
+                            </VBox>
+
+                        </HBox>
+
+                    </children>
+                </VBox>
+
+                <!-- Bottom padding -->
+                <Region prefHeight="20.0"/>
+
+            </VBox>
+        </content>
+    </ScrollPane>
+
+</AnchorPane>
