@@ -47,7 +47,7 @@ public class ViewExamsController {
 
             if (exams.isEmpty()) {
                 Label emptyLabel = new Label("No exams created yet. Click 'Create Exam' to add one.");
-                emptyLabel.setStyle("-fx-text-fill: #666688; -fx-font-size: 14; -fx-padding: 20;");
+                emptyLabel.setStyle("-fx-text-fill: #6d6780; -fx-font-size: 14; -fx-padding: 20; -fx-font-family: 'Trebuchet MS';");
                 examsContainer.getChildren().add(emptyLabel);
                 return;
             }
@@ -58,15 +58,15 @@ public class ViewExamsController {
         } catch (IOException ex) {
             examsCountLabel.setText("Error");
             Label errLabel = new Label("Failed to load exams: " + ex.getMessage());
-            errLabel.setStyle("-fx-text-fill: #c44536; -fx-font-size: 13; -fx-padding: 20;");
+            errLabel.setStyle("-fx-text-fill: #b53a3a; -fx-font-size: 13; -fx-padding: 20; -fx-font-family: 'Trebuchet MS';");
             examsContainer.getChildren().add(errLabel);
         }
     }
 
     private VBox createExamCard(Exam exam, int displayIndex) {
         VBox card = new VBox(10);
-        card.setStyle("-fx-background-color: #0f1225; -fx-background-radius: 8; "
-                + "-fx-border-color: #1e2050; -fx-border-radius: 8; "
+        card.setStyle("-fx-background-color: #f7f6fb; -fx-background-radius: 8; "
+                + "-fx-border-color: #dedbea; -fx-border-radius: 8; "
                 + "-fx-border-width: 1; -fx-padding: 14 16;");
         card.setMaxWidth(Double.MAX_VALUE);
 
@@ -74,18 +74,18 @@ public class ViewExamsController {
         header.setAlignment(Pos.CENTER_LEFT);
 
         Label examNumber = new Label("Exam " + displayIndex);
-        examNumber.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 13; -fx-font-weight: bold;");
+        examNumber.setStyle("-fx-text-fill: #3d2b69; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Label examId = new Label(exam.getExamId());
-        examId.setStyle("-fx-text-fill: #8589a8; -fx-font-size: 12; -fx-font-weight: bold;");
+        examId.setStyle("-fx-text-fill: #7a758f; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
 
         header.getChildren().addAll(examNumber, spacer, examId);
 
         Label examTitle = new Label(exam.getExamName());
-        examTitle.setStyle("-fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold;");
+        examTitle.setStyle("-fx-text-fill: #2f2349; -fx-font-size: 16; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
         examTitle.setWrapText(true);
 
         GridPane details = new GridPane();
@@ -111,10 +111,10 @@ public class ViewExamsController {
 
     private void addDetailRow(GridPane grid, int row, String key, String value) {
         Label keyLabel = new Label(key + ":");
-        keyLabel.setStyle("-fx-text-fill: #a8acce; -fx-font-size: 12; -fx-font-weight: bold;");
+        keyLabel.setStyle("-fx-text-fill: #615b78; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
 
         Label valLabel = new Label(value == null || value.trim().isEmpty() ? "-" : value);
-        valLabel.setStyle("-fx-text-fill: #d8d9e2; -fx-font-size: 12;");
+        valLabel.setStyle("-fx-text-fill: #3f3a54; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
         valLabel.setWrapText(true);
 
         grid.add(keyLabel, 0, row);

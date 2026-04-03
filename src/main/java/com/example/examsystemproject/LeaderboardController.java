@@ -2,9 +2,9 @@ package com.example.examsystemproject;
 
 import java.io.IOException;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,16 +22,19 @@ public class LeaderboardController {
     @FXML
     private VBox leaderboardList;
 
+    @FXML
+    private TextField searchField;
+
     private User user;
 
     @FXML
     public void initialize() {
-        populateLeaderboard();
+        clearLeaderboard();
     }
 
     public void setUser(User user) {
         this.user = user;
-        populateLeaderboard();
+        clearLeaderboard();
     }
 
     @FXML
@@ -56,12 +59,29 @@ public class LeaderboardController {
         stage.show();
     }
 
-    private void populateLeaderboard() {
+    @FXML
+    public void onSearch() {
+        String examQuery = searchField == null ? "" : searchField.getText();
+        populateLeaderboard(examQuery);
+    }
+
+    private void clearLeaderboard() {
+        if (leaderboardList != null) {
+            leaderboardList.getChildren().clear();
+        }
+    }
+
+    private void populateLeaderboard(String examQuery) {
         if (leaderboardList == null) {
             return;
         }
 
         leaderboardList.getChildren().clear();
+
+        String normalizedQuery = examQuery == null ? "" : examQuery.trim();
+        if (normalizedQuery.isEmpty()) {
+            return;
+        }
 
         try {
             List<ExamResult> results = ExamResultFileManager.loadAllResults();
@@ -70,25 +90,26 @@ public class LeaderboardController {
                 return;
             }
 
-            // Keep the best score per student for fair ranking.
-            Map<String, ExamResult> bestByStudent = new HashMap<>();
-            for (ExamResult result : results) {
-                ExamResult existing = bestByStudent.get(result.getStudentUsername());
-                if (existing == null || compareResult(result, existing) > 0) {
-                    bestByStudent.put(result.getStudentUsername(), result);
-                }
-            }
+            Map<String, String> subjectByExamId = ExamFileManager.loadAllExams().stream()
+                    .collect(Collectors.toMap(Exam::getExamId, Exam::getSubject, (first, ignored) -> first));
 
-            List<ExamResult> ranked = bestByStudent.values().stream()
+            List<ExamResult> filtered = results.stream()
+                    .filter(result -> containsIgnoreCase(result.getExamName(), normalizedQuery))
                     .sorted(Comparator
-                            .comparingDouble(this::percentage)
+                            .comparingInt(ExamResult::getScore)
                             .reversed()
-                            .thenComparing(ExamResult::getStudentUsername))
+                            .thenComparing(ExamResult::getStudentUsername, String.CASE_INSENSITIVE_ORDER))
                     .toList();
 
+            if (filtered.isEmpty()) {
+                leaderboardList.getChildren().add(createNoMatchMessage(normalizedQuery));
+                return;
+            }
+
             int rank = 1;
-            for (ExamResult result : ranked) {
-                leaderboardList.getChildren().add(createLeaderboardRow(rank, result));
+            for (ExamResult result : filtered) {
+                String subject = subjectByExamId.getOrDefault(result.getExamId(), "-");
+                leaderboardList.getChildren().add(createLeaderboardRow(rank, result, subject));
                 rank++;
             }
         } catch (IOException ex) {
@@ -98,47 +119,49 @@ public class LeaderboardController {
         }
     }
 
-    private int compareResult(ExamResult a, ExamResult b) {
-        return Double.compare(percentage(a), percentage(b));
-    }
-
-    private double percentage(ExamResult result) {
-        if (result.getTotalMarks() <= 0) {
-            return 0;
+    private boolean containsIgnoreCase(String value, String query) {
+        if (value == null || query == null) {
+            return false;
         }
-        return (result.getScore() * 100.0) / result.getTotalMarks();
+        return value.toLowerCase().contains(query.toLowerCase());
     }
 
-    private HBox createLeaderboardRow(int rank, ExamResult result) {
-        HBox row = new HBox(14);
-        row.setPadding(new Insets(10, 14, 10, 14));
-        row.setStyle("-fx-background-color: rgba(34, 69, 101, 0.88); -fx-background-radius: 8;");
+    private HBox createLeaderboardRow(int rank, ExamResult result, String subject) {
+        HBox row = new HBox(8);
+        row.setPadding(new Insets(8, 10, 8, 10));
+        row.setStyle("-fx-background-color: #f4f4f7; -fx-border-color: #e7e5ee; -fx-border-width: 0 0 1 0;");
 
-        Label rankLabel = new Label("#" + rank);
-        rankLabel.setPrefWidth(45);
-        rankLabel.setStyle("-fx-text-fill: #f7d774; -fx-font-weight: bold; -fx-font-size: 14; -fx-font-family: 'Trebuchet MS';");
+        Label examLabel = createCell(result.getExamName(), 170, "#2d2940", false);
+        Label subjectLabel = createCell(subject, 115, "#4e4a60", false);
+        Label userLabel = createCell(result.getStudentUsername(), 185, "#2d2940", false);
+        Label totalLabel = createCell(String.valueOf(result.getTotalMarks()), 105, "#2d2940", true);
+        Label obtainedLabel = createCell(String.valueOf(result.getScore()), 120, "#2d2940", true);
+        Label rankLabel = createCell(String.valueOf(rank), 63, "#2d2940", true);
 
-        Label userLabel = new Label(result.getStudentUsername());
-        userLabel.setPrefWidth(180);
-        userLabel.setStyle("-fx-text-fill: #eef7ff; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-
-        Label examLabel = new Label(result.getExamName());
-        examLabel.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(examLabel, Priority.ALWAYS);
-        examLabel.setStyle("-fx-text-fill: #b7d3eb; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
-
-        int percent = (int) Math.round(percentage(result));
-        Label markLabel = new Label(result.getScore() + "/" + result.getTotalMarks() + " (" + percent + "%)");
-        markLabel.setStyle("-fx-text-fill: #8ff0a4; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-
-        row.getChildren().addAll(rankLabel, userLabel, examLabel, markLabel);
+        row.getChildren().addAll(examLabel, subjectLabel, userLabel, totalLabel, obtainedLabel, rankLabel);
         return row;
     }
 
+    private Label createCell(String text, double width, String color, boolean center) {
+        Label label = new Label(text == null ? "-" : text);
+        label.setPrefWidth(width);
+        label.setMinWidth(width);
+        label.setStyle("-fx-text-fill: " + color + "; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';"
+                + (center ? " -fx-alignment: center;" : ""));
+        return label;
+    }
+
     private Label createEmptyMessage() {
-        Label empty = new Label("No exam marks available yet. Once students take exams, rankings will appear here.");
+        Label empty = new Label("No exam marks available yet.");
         empty.setWrapText(true);
-        empty.setStyle("-fx-text-fill: #d5e7f6; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
+        empty.setStyle("-fx-text-fill: #6d6780; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
+        return empty;
+    }
+
+    private Label createNoMatchMessage(String examName) {
+        Label empty = new Label("No results found for exam: " + examName);
+        empty.setWrapText(true);
+        empty.setStyle("-fx-text-fill: #6d6780; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
         return empty;
     }
 }
