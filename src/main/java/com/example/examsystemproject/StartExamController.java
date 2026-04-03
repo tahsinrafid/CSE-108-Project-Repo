@@ -1,15 +1,23 @@
 package com.example.examsystemproject;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class StartExamController {
 
@@ -17,33 +25,168 @@ public class StartExamController {
     private Label dueExamCountLabel;
 
     @FXML
+    private VBox dueExamBox;
+
+    @FXML
+    private VBox completedExamBox;
+
+    private User user;
+
+    @FXML
     public void initialize() {
-        // TODO: load real due-exam count from backend
+        refreshPage();
         System.out.println("StartExam page loaded.");
     }
 
-    /** Called when user clicks "Sit for Exam" on any due exam card */
-    @FXML
-    public void onSitForExam(ActionEvent e) {
-        System.out.println("Sit for exam clicked");
-        // TODO: navigate to exam-taking screen with the selected exam's data
+    public void setUser(User user) {
+        this.user = user;
+        refreshPage();
     }
 
-    /** Called when user clicks "Practice Now" on any practice card */
+    @FXML
+    public void onSitForExam(ActionEvent e) {
+        Object source = e.getSource();
+        if (!(source instanceof Button button) || !(button.getUserData() instanceof Exam exam)) {
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamWindow.fxml"));
+            Parent root = loader.load();
+            ExamWindowController controller = loader.getController();
+            controller.setContext(exam, user);
+
+            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            throw new RuntimeException("Could not open exam window", ex);
+        }
+    }
+
     @FXML
     public void onPracticeExam(ActionEvent e) {
         System.out.println("Practice exam clicked");
-        // TODO: navigate to practice exam screen with the selected subject
     }
 
-    /** Navigate back to the Student Dashboard */
     @FXML
-    public void onBackToDashboard(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
+    public void onViewLeaderboard(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Leaderboard.fxml"));
         Parent root = loader.load();
+        LeaderboardController controller = loader.getController();
+        controller.setUser(user);
+
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    @FXML
+    public void onBackToDashboard(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
+        Parent root = loader.load();
+        DashBoardController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void refreshPage() {
+        if (dueExamBox == null || completedExamBox == null || dueExamCountLabel == null) {
+            return;
+        }
+
+        dueExamBox.getChildren().clear();
+        completedExamBox.getChildren().clear();
+
+        try {
+            List<Exam> exams = ExamFileManager.loadAllExams();
+            List<ExamResult> allResults = ExamResultFileManager.loadAllResults();
+            String username = user != null ? user.getUsername() : "student";
+
+            Set<String> attemptedExamIds = new HashSet<>();
+            for (ExamResult result : allResults) {
+                if (username.equalsIgnoreCase(result.getStudentUsername())) {
+                    attemptedExamIds.add(result.getExamId());
+                    completedExamBox.getChildren().add(createCompletedCard(result));
+                }
+            }
+
+            int pending = 0;
+            for (Exam exam : exams) {
+                if (!attemptedExamIds.contains(exam.getExamId())) {
+                    pending++;
+                    dueExamBox.getChildren().add(createDueCard(exam));
+                }
+            }
+
+            dueExamCountLabel.setText(pending + " pending");
+
+            if (pending == 0) {
+                dueExamBox.getChildren().add(createInfoLabel("No pending exam. You are all caught up."));
+            }
+            if (completedExamBox.getChildren().isEmpty()) {
+                completedExamBox.getChildren().add(createInfoLabel("No exam given yet. Your acquired marks will appear here."));
+            }
+        } catch (IOException ex) {
+            dueExamCountLabel.setText("0 pending");
+            dueExamBox.getChildren().add(createInfoLabel("Could not load exams: " + ex.getMessage()));
+        }
+    }
+
+    private HBox createDueCard(Exam exam) {
+        HBox card = new HBox(12);
+        card.setPadding(new Insets(12, 14, 12, 14));
+        card.setStyle("-fx-background-color: #1d4265; -fx-background-radius: 9;");
+
+        VBox infoBox = new VBox(4);
+        Label title = new Label(exam.getExamName());
+        title.setStyle("-fx-text-fill: #f6fbff; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
+        Label meta = new Label("Exam ID: " + exam.getExamId() + "   Subject: " + exam.getSubject() + "   Duration: " + exam.getDurationMinutes() + " min");
+        meta.setStyle("-fx-text-fill: #b7d3e8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
+        infoBox.getChildren().addAll(title, meta);
+        HBox.setHgrow(infoBox, Priority.ALWAYS);
+
+        Button startBtn = new Button("Start Exam");
+        startBtn.setUserData(exam);
+        startBtn.setOnAction(this::onSitForExam);
+        startBtn.setStyle("-fx-background-color: #e26f2b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS'; -fx-background-radius: 7; -fx-cursor: hand;");
+
+        card.getChildren().addAll(infoBox, startBtn);
+        return card;
+    }
+
+    private HBox createCompletedCard(ExamResult result) {
+        HBox card = new HBox(12);
+        card.setPadding(new Insets(12, 14, 12, 14));
+        card.setStyle("-fx-background-color: #1f5b47; -fx-background-radius: 9;");
+
+        VBox infoBox = new VBox(4);
+        Label title = new Label(result.getExamName());
+        title.setStyle("-fx-text-fill: #f3fff8; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
+        Label id = new Label("Exam ID: " + result.getExamId());
+        id.setStyle("-fx-text-fill: #c4ebd8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
+        infoBox.getChildren().addAll(title, id);
+        HBox.setHgrow(infoBox, Priority.ALWAYS);
+
+        int percentage = result.getTotalMarks() > 0
+                ? (int) Math.round((result.getScore() * 100.0) / result.getTotalMarks())
+                : 0;
+        Label mark = new Label("Acquired Mark: " + result.getScore() + "/" + result.getTotalMarks() + " (" + percentage + "%)");
+        mark.setStyle("-fx-text-fill: #d8ffe9; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
+
+        card.getChildren().addAll(infoBox, mark);
+        return card;
+    }
+
+    private Label createInfoLabel(String text) {
+        Label label = new Label(text);
+        label.setWrapText(true);
+        label.setStyle("-fx-text-fill: #d7e8f6; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
+        return label;
+    }
+
 }
 

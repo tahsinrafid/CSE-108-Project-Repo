@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -110,13 +111,27 @@ public class DashBoardController {
     }
 
     @FXML
-    public void onSpeedTestClick(ActionEvent e) {
-        System.out.println("Speed Test clicked");
+    public void onSpeedTestClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SpeedTest.fxml"));
+        Parent root = loader.load();
+        SpeedTestController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
-    public void onLeaderboardClick(ActionEvent e) {
-        System.out.println("Leaderboard clicked");
+    public void onLeaderboardClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Leaderboard.fxml"));
+        Parent root = loader.load();
+        LeaderboardController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -125,8 +140,15 @@ public class DashBoardController {
     }
 
     @FXML
-    public void onQnaClick(ActionEvent e) {
-        System.out.println("QNA clicked");
+    public void onQnaClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("QnaPage.fxml"));
+        Parent root = loader.load();
+        QnaController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -158,7 +180,7 @@ public class DashBoardController {
             System.out.println("Sidebar minimized");
         } else {
             // Expand sidebar
-            sidebarVBox.setPrefWidth(220.0);
+            sidebarVBox.setPrefWidth(190.0);
 
             // Show button text
             dashboardBtn.setText("Dashboard");
@@ -171,6 +193,26 @@ public class DashBoardController {
 
             sidebarExpanded = true;
             System.out.println("Sidebar expanded");
+        }
+    }
+
+    @FXML
+    public void onSidebarHoverEnter(MouseEvent event) {
+        if (!sidebarVBox.getStyleClass().contains("sidebar-hovered")) {
+            sidebarVBox.getStyleClass().add("sidebar-hovered");
+        }
+        if (minimizeBtn != null) {
+            minimizeBtn.setScaleX(1.08);
+            minimizeBtn.setScaleY(1.08);
+        }
+    }
+
+    @FXML
+    public void onSidebarHoverExit(MouseEvent event) {
+        sidebarVBox.getStyleClass().remove("sidebar-hovered");
+        if (minimizeBtn != null) {
+            minimizeBtn.setScaleX(1.0);
+            minimizeBtn.setScaleY(1.0);
         }
     }
 
@@ -190,8 +232,11 @@ public class DashBoardController {
     }
 
     public void onStartExamClick(ActionEvent f) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("startExam.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentStartExam.fxml"));
         Parent root = fxmlLoader.load();
+
+        StartExamController controller = fxmlLoader.getController();
+        controller.setUser(user);
 
         Stage stage = (Stage)((Node)f.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

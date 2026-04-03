@@ -15,7 +15,31 @@
     -fx-text-fill: #f4f8fb;
     -fx-font-size: 18;
     -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Trebuchet MS";
+}
+
+.menu-toggle-btn {
+    -fx-background-color: rgba(26, 75, 102, 0.85);
+    -fx-text-fill: #ecf7ff;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(181, 224, 240, 0.55);
+    -fx-cursor: hand;
+}
+
+.menu-toggle-btn:hover {
+    -fx-background-color: rgba(38, 109, 145, 0.95);
+    -fx-scale-x: 1.12;
+    -fx-scale-y: 1.12;
+    -fx-effect: dropshadow(gaussian, rgba(92, 172, 204, 0.55), 10, 0, 0, 3);
+}
+
+.menu-toggle-btn:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
 }
 
 .dash-sidebar {
@@ -31,6 +55,7 @@
     -fx-text-fill: #f8fcff;
     -fx-font-size: 14;
     -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
     -fx-background-color: rgba(39, 102, 130, 0.70);
     -fx-border-color: rgba(171, 216, 232, 0.45);
     -fx-border-width: 0 0 0 3;
@@ -47,9 +72,25 @@
     -fx-padding: 15px 20px;
     -fx-text-fill: #b9d4e0;
     -fx-font-size: 13;
+    -fx-font-family: "Trebuchet MS";
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-cursor: hand;
+}
+
+.dash-sidebar.sidebar-hovered {
+    -fx-background-color: rgba(12, 35, 55, 0.85);
+}
+
+.dash-sidebar.sidebar-hovered .sidebar-btn,
+.dash-sidebar.sidebar-hovered .sidebar-btn-active {
+    -fx-background-color: rgba(42, 104, 135, 0.72);
+    -fx-text-fill: #f5fbff;
+}
+
+.dash-sidebar.sidebar-hovered .sidebar-btn:hover,
+.dash-sidebar.sidebar-hovered .sidebar-btn-active:hover {
+    -fx-background-color: rgba(58, 134, 172, 0.90);
 }
 
 
@@ -157,6 +198,26 @@
 .btn-accent-teal:hover {
     -fx-background-color: #047857;
     -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.62), 12, 0, 0, 4);
+}
+
+/* TextArea styling for QNA */
+.text-area {
+    -fx-text-fill: white;
+    -fx-control-inner-background: #10162b;
+    -fx-font-size: 14px;
+    -fx-font-family: "Trebuchet MS";
+    -fx-padding: 10px;
+}
+
+.text-area .text {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.text-area:focused {
+    -fx-background-color: #1a2640;
+    -fx-border-color: rgba(92, 184, 221, 0.6);
+}
 }
 
 .btn-accent-azure {

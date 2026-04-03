@@ -1,5 +1,7 @@
 package com.example.examsystemproject;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class TeacherDashBoardController {
     private User user;
@@ -54,8 +54,15 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void onLeaderboardClick(ActionEvent e) {
-        System.out.println("Leaderboard clicked");
+    public void onLeaderboardClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Leaderboard.fxml"));
+        Parent root = loader.load();
+        LeaderboardController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -69,8 +76,15 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void OnMessegesClick(ActionEvent e) {
-        System.out.println("Messages clicked");
+    public void OnMessegesClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("QnaPage.fxml"));
+        Parent root = loader.load();
+        QnaController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
