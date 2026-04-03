@@ -49,8 +49,8 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void onViewExamsClick(ActionEvent e) {
-        System.out.println("View exams clicked");
+    public void onViewExamsClick(ActionEvent e) throws IOException {
+        navigateToViewExams(e);
     }
 
     @FXML
@@ -103,6 +103,17 @@ public class TeacherDashBoardController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateExam.fxml"));
         Parent root = loader.load();
         CreateExamController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void navigateToViewExams(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewExams.fxml"));
+        Parent root = loader.load();
+        ViewExamsController controller = loader.getController();
         controller.setUser(user);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

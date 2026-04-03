@@ -39,21 +39,30 @@ public class ExamFileManager {
                     continue;
                 }
 
-                String[] parts = line.split(",", 6);
-                if (parts.length != 6) {
+                String[] parts = line.split(",", -1);
+                if (parts.length != 6 && parts.length != 8) {
                     continue;
                 }
 
                 int duration;
                 try {
-                    duration = Integer.parseInt(parts[3]);
+                    duration = Integer.parseInt(parts.length == 8 ? parts[4] : parts[3]);
                 } catch (NumberFormatException ex) {
                     continue;
                 }
 
+                int marks = 0;
+                if (parts.length == 8) {
+                    try {
+                        marks = Integer.parseInt(parts[5]);
+                    } catch (NumberFormatException ex) {
+                    }
+                }
+
                 List<String> questionIds = new ArrayList<>();
-                if (!parts[4].isEmpty()) {
-                    String[] ids = parts[4].split("\\|");
+                String questionPart = parts.length == 8 ? parts[6] : parts[4];
+                if (!questionPart.isEmpty()) {
+                    String[] ids = questionPart.split("\\|");
                     for (String id : ids) {
                         String trimmedId = id.trim();
                         if (!trimmedId.isEmpty()) {
@@ -62,7 +71,11 @@ public class ExamFileManager {
                     }
                 }
 
-                exams.add(new Exam(parts[0], parts[1], parts[2], duration, questionIds, parts[5]));
+                if (parts.length == 8) {
+                    exams.add(new Exam(parts[0], parts[1], parts[2], parts[3], duration, marks, questionIds, parts[7]));
+                } else {
+                    exams.add(new Exam(parts[0], parts[1], parts[2], duration, questionIds, parts[5]));
+                }
             }
         }
 
@@ -88,7 +101,9 @@ public class ExamFileManager {
         return sanitize(exam.getExamId()) + ","
                 + sanitize(exam.getExamName()) + ","
                 + sanitize(exam.getSubject()) + ","
+                + sanitize(exam.getClassLevel()) + ","
                 + exam.getDurationMinutes() + ","
+                + exam.getMarks() + ","
                 + joinedIds + ","
                 + sanitize(exam.getCreatedBy());
     }
