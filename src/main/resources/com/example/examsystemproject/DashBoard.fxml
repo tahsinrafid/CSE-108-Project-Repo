@@ -11,29 +11,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.DashBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.DashBoardController">
     <stylesheets>
         <URL value="@Dashboard.css" />
     </stylesheets>
    <children>
       <!-- Header/Top Bar with Logo and Minimize Button -->
-      <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #1e3a5f; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 2);">
+      <AnchorPane prefHeight="70.0" prefWidth="900.0" styleClass="dash-top-bar">
          <children>
             <!-- Logo Image -->
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
                <image>
-                  <Image url="@../../../prlogo.png" />
+                  <Image url="@prlogo.png" />
                </image>
             </ImageView>
 
-            <!-- Title Text beside Logo -->
-            <Label layoutX="75.0" layoutY="18.0" styleClass="dash-title" text="ExamAce - Exam portal [Student DashBoard]" />
+            <!-- Center Logo replacing header title text -->
+            <ImageView fitHeight="42.0" fitWidth="180.0" layoutX="360.0" layoutY="14.0" preserveRatio="true">
+               <image>
+                  <Image url="@prlogo.png" />
+               </image>
+            </ImageView>
+
+            <!-- Hamburger button to collapse/expand sidebar -->
+            <Button fx:id="minimizeBtn" layoutX="845.0" layoutY="17.0" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="36.0" prefWidth="38.0" styleClass="menu-toggle-btn" text="|||" />
 
          </children>
       </AnchorPane>
 
       <!-- Sidebar Navigation -->
-      <VBox fx:id="sidebarVBox" layoutY="70.0" prefHeight="530.0" prefWidth="190.0" style="-fx-background-color: #2d5a8c; -fx-padding: 10px 0px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+      <VBox fx:id="sidebarVBox" layoutY="70.0" onMouseEntered="#onSidebarHoverEnter" onMouseExited="#onSidebarHoverExit" prefHeight="530.0" prefWidth="190.0" styleClass="dash-sidebar">
          <children>
          <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboardClick" styleClass="sidebar-btn-active" text="Dashboard" />
          <Button fx:id="questionBankBtn" mnemonicParsing="false" onAction="#onQuestionBankClick" styleClass="sidebar-btn" text="Question Bank" />
@@ -51,7 +58,7 @@
       <AnchorPane layoutX="215.0" layoutY="90.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
             <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Start Exam" />
-            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: green; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="Start" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" onAction="#onStartExamClick" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: green; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="Start" />
          </children>
       </AnchorPane>
 
@@ -75,7 +82,7 @@
       <AnchorPane layoutX="215.0" layoutY="245.0" prefHeight="140.0" prefWidth="200.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
          <children>
             <Label layoutX="12.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 13; -fx-font-weight: bold;" text="Leaderboard" />
-            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #f59c1a; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="View" />
+            <Button layoutX="50.0" layoutY="95.0" mnemonicParsing="false" onAction="#onLeaderboardClick" prefHeight="30.0" prefWidth="101.0" style="-fx-padding: 8px 20px; -fx-font-size: 11; -fx-font-weight: bold; -fx-background-color: #f59c1a; -fx-text-fill: white; -fx-background-radius: 3; -fx-cursor: hand;" text="View" />
          </children>
       </AnchorPane>
 
