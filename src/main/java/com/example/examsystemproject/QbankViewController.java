@@ -39,7 +39,7 @@ public class QbankViewController {
 
     @FXML
     public void initialize() {
-        // UI is configured when setUser() is called by the launching controller
+
     }
 
     public void setUser(User user) {

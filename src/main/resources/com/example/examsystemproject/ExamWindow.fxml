@@ -28,7 +28,7 @@
                 <Label fx:id="examTitleLabel" layoutX="78.0" layoutY="18.0" styleClass="dash-title" text="Exam" />
                 <Label fx:id="examMetaLabel" layoutX="78.0" layoutY="42.0" style="-fx-text-fill: #b8d3e8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Meta" />
                 <Label fx:id="timerLabel" layoutX="770.0" layoutY="22.0" style="-fx-background-color: rgba(226, 111, 43, 0.18); -fx-background-radius: 16; -fx-padding: 6 12; -fx-text-fill: #ffd7bd; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Time Left: 00:00" />
-                <Button layoutX="880.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="74.0" styleClass="menu-toggle-btn" text="Back" />
+                <Button fx:id="backButton" layoutX="880.0" layoutY="18.0" managed="false" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="74.0" styleClass="menu-toggle-btn" text="Back" visible="false" />
             </children>
         </AnchorPane>
 

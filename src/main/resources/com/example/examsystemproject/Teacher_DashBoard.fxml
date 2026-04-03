@@ -15,7 +15,7 @@
     </stylesheets>
     <children>
         <!-- Header/Top Bar -->
-        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #58eb34; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 2);">
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #3d2b69; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 2);">
             <children>
                 <!-- Logo Image -->
                 <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
@@ -24,7 +24,7 @@
                     </image>
                 </ImageView>
 
-                <Label layoutX="75.0" layoutY="18.0" style="-fx-text-fill: Black; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="ExamAce - Exam Portal [Teacher]" />
+                <Label layoutX="75.0" layoutY="18.0" style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="ExamAce - Exam Portal [Teacher]" textFill="WHITE" />
 
             </children>
         </AnchorPane>
@@ -34,7 +34,7 @@
             <children>
                 <AnchorPane layoutX="206.0" layoutY="14.0" prefHeight="150.0" prefWidth="680.0" style="-fx-background-color: #f4f6fb; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
                     <children>
-                        <Label layoutX="25.0" layoutY="24.0" style="-fx-text-fill: #1c1f2b; -fx-font-size: 31; -fx-font-weight: bold;" text="Hello Teacher" />
+                        <Label fx:id="helloLabel" layoutX="25.0" layoutY="24.0" style="-fx-text-fill: #1c1f2b; -fx-font-size: 31; -fx-font-weight: bold;" text="Hello Teacher" />
                         <Label layoutX="27.0" layoutY="71.0" style="-fx-text-fill: #6b7280; -fx-font-size: 16; -fx-font-weight: bold;" text="Welcome back to ExamAce" />
 
                         <AnchorPane layoutX="510.0" layoutY="20.0" prefHeight="110.0" prefWidth="150.0" style="-fx-background-color: #c8ccd6; -fx-background-radius: 12;">
@@ -43,7 +43,7 @@
                            <font>
                               <Font size="17.0" />
                            </font></Label>
-                                <Label layoutX="65.0" layoutY="45.0" style="-fx-text-fill: #2a2c31; -fx-font-size: 34; -fx-font-weight: bold;" text="3" />
+                                <Label fx:id="examLabel" layoutX="65.0" layoutY="45.0" style="-fx-text-fill: #2a2c31; -fx-font-size: 34; -fx-font-weight: bold;" />
                             </children>
                         </AnchorPane>
                   <AnchorPane layoutX="340.0" layoutY="20.0" prefHeight="110.0" prefWidth="150.0" style="-fx-background-color: #1c3286; -fx-background-radius: 12;">
@@ -53,7 +53,7 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="65.0" layoutY="45.0" style="-fx-text-fill: white; -fx-font-size: 34; -fx-font-weight: bold;" text="3" />
+                        <Label fx:id="studentLabel" layoutX="65.0" layoutY="45.0" style="-fx-text-fill: white; -fx-font-size: 34; -fx-font-weight: bold;" />
                      </children>
                   </AnchorPane>
                     </children>

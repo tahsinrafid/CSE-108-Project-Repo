@@ -44,6 +44,8 @@ public class ExamWindowController {
     private Label resultDetailLabel;
     @FXML
     private Button submitButton;
+    @FXML
+    private Button backButton;
 
     private final Map<String, ToggleGroup> answerGroups = new LinkedHashMap<>();
     private final Map<String, Map<String, RadioButton>> optionButtons = new HashMap<>();
@@ -57,11 +59,17 @@ public class ExamWindowController {
     @FXML
     public void initialize() {
         hideResultCard();
+        setBackButtonVisible(false);
     }
 
     public void setContext(Exam exam, User user) {
         this.exam = exam;
         this.user = user;
+        this.submitted = false;
+        if (submitButton != null) {
+            submitButton.setDisable(false);
+        }
+        setBackButtonVisible(false);
         loadQuestions();
         populateHeader();
         startTimer();
@@ -78,8 +86,10 @@ public class ExamWindowController {
             return;
         }
 
-        int totalMarks = examQuestions.size() * 2;
+        int totalMarks = exam.getMarks() > 0 ? exam.getMarks() : examQuestions.size();
+        double marksPerQuestion = examQuestions.size() > 0 ? (double) totalMarks / examQuestions.size() : 1;
         int score = 0;
+        Map<String, String> submittedAnswers = new LinkedHashMap<>();
         for (Question question : examQuestions) {
             ToggleGroup group = answerGroups.get(question.getQuesID());
             if (group == null || group.getSelectedToggle() == null) {
@@ -87,8 +97,11 @@ public class ExamWindowController {
             }
 
             RadioButton selected = (RadioButton) group.getSelectedToggle();
+            if (selected.getUserData() != null) {
+                submittedAnswers.put(question.getQuesID(), selected.getUserData().toString());
+            }
             if (selected.getUserData() != null && selected.getUserData().toString().equalsIgnoreCase(question.getCorrectAns())) {
-                score += 2;
+                score += (int) Math.round(marksPerQuestion);
             }
         }
 
@@ -99,12 +112,14 @@ public class ExamWindowController {
                     exam.getExamName(),
                     username,
                     score,
-                    totalMarks));
+                    totalMarks,
+                    submittedAnswers));
             submitted = true;
             submitButton.setDisable(true);
             stopTimer();
             highlightSubmittedAnswers();
             revealResult(score, totalMarks);
+            setBackButtonVisible(true);
         } catch (IOException ex) {
             showAlert("Save failed", "Could not store your marks: " + ex.getMessage());
         }
@@ -128,7 +143,7 @@ public class ExamWindowController {
             return;
         }
         examTitleLabel.setText(exam.getExamName());
-        examMetaLabel.setText("Exam ID: " + exam.getExamId() + "  |  Subject: " + exam.getSubject() + "  |  Duration: " + exam.getDurationMinutes() + " min");
+        examMetaLabel.setText("Subject: " + exam.getSubject() + "  |  Duration: " + exam.getDurationMinutes() + " min");
         remainingSeconds = Math.max(1, exam.getDurationMinutes()) * 60;
         updateTimerLabel();
     }
@@ -184,10 +199,7 @@ public class ExamWindowController {
             options.getChildren().add(option);
         }
 
-        Label answerKey = new Label("Correct Answer: " + question.getCorrectAns());
-        answerKey.setStyle("-fx-text-fill: #8ff0a4; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-
-        card.getChildren().addAll(title, options, answerKey);
+        card.getChildren().addAll(title, options);
         return card;
     }
 
@@ -295,6 +307,14 @@ public class ExamWindowController {
         }
         resultCard.setVisible(false);
         resultCard.setManaged(false);
+    }
+
+    private void setBackButtonVisible(boolean visible) {
+        if (backButton == null) {
+            return;
+        }
+        backButton.setVisible(visible);
+        backButton.setManaged(visible);
     }
 
     private Label infoLabel(String text) {

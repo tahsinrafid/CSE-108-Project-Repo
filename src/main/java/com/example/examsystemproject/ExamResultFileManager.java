@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExamResultFileManager {
     private static final String FILE_PATH = "exam_results";
@@ -38,8 +40,8 @@ public class ExamResultFileManager {
                     continue;
                 }
 
-                String[] parts = line.split(",", 5);
-                if (parts.length != 5) {
+                String[] parts = line.split(",", 6);
+                if (parts.length < 5) {
                     continue;
                 }
 
@@ -52,7 +54,11 @@ public class ExamResultFileManager {
                     continue;
                 }
 
-                results.add(new ExamResult(parts[0], parts[1], parts[2], score, total));
+                Map<String, String> submittedAnswers = parts.length >= 6
+                        ? parseSubmittedAnswers(parts[5])
+                        : new LinkedHashMap<>();
+
+                results.add(new ExamResult(parts[0], parts[1], parts[2], score, total, submittedAnswers));
             }
         }
 
@@ -64,7 +70,51 @@ public class ExamResultFileManager {
                 + sanitize(result.getExamName()) + ","
                 + sanitize(result.getStudentUsername()) + ","
                 + result.getScore() + ","
-                + result.getTotalMarks();
+                + result.getTotalMarks() + ","
+                + serializeSubmittedAnswers(result.getSubmittedAnswers());
+    }
+
+    private static String serializeSubmittedAnswers(Map<String, String> submittedAnswers) {
+        if (submittedAnswers == null || submittedAnswers.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<String, String> entry : submittedAnswers.entrySet()) {
+            String questionId = sanitize(entry.getKey());
+            String answer = sanitize(entry.getValue());
+            if (questionId.isEmpty() || answer.isEmpty()) {
+                continue;
+            }
+
+            if (builder.length() > 0) {
+                builder.append("|");
+            }
+            builder.append(questionId).append(":").append(answer);
+        }
+        return builder.toString();
+    }
+
+    private static Map<String, String> parseSubmittedAnswers(String value) {
+        Map<String, String> answers = new LinkedHashMap<>();
+        if (value == null || value.trim().isEmpty()) {
+            return answers;
+        }
+
+        String[] pairs = value.split("\\|");
+        for (String pair : pairs) {
+            String[] parts = pair.split(":", 2);
+            if (parts.length != 2) {
+                continue;
+            }
+
+            String questionId = parts[0].trim();
+            String answer = parts[1].trim().toUpperCase();
+            if (!questionId.isEmpty() && !answer.isEmpty()) {
+                answers.put(questionId, answer);
+            }
+        }
+        return answers;
     }
 
     private static String sanitize(String value) {

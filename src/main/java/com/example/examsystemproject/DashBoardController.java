@@ -2,101 +2,29 @@ package com.example.examsystemproject;
 
 import java.io.IOException;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class DashBoardController {
     private User user;
-    public Button logoutBtn;
-    @FXML
-    private Button dashboardBtn;
-    @FXML
-    private Button questionBankBtn;
-    @FXML
-    private Button speedTestBtn;
-    @FXML
-    private Button leaderboardBtn;
-    @FXML
-    private Button communityBtn;
-    @FXML
-    private Button qnaBtn;
-    @FXML
-    private Button aboutUsBtn;
-    @FXML
-    private Button minimizeBtn;
-    @FXML
-    private VBox sidebarVBox;
-    @FXML
-    private AnchorPane cardStartExam;
-    @FXML
-    private AnchorPane cardQuestionBank;
-    @FXML
-    private AnchorPane cardSpeedTest;
-    @FXML
-    private AnchorPane cardLeaderboard;
-    @FXML
-    private AnchorPane cardCommunity;
-    @FXML
-    private AnchorPane cardQna;
-    @FXML
-    private AnchorPane performanceCard;
 
-    private boolean sidebarExpanded = true;
+    @FXML
+    private Label helloLabel;
 
     @FXML
     public void initialize() {
-        animateEntrance(cardStartExam, 0);
-        animateEntrance(cardQuestionBank, 80);
-        animateEntrance(cardSpeedTest, 140);
-        animateEntrance(cardLeaderboard, 220);
-        animateEntrance(cardCommunity, 280);
-        animateEntrance(cardQna, 340);
-        animateEntrance(performanceCard, 420);
         System.out.println("Dashboard loaded successfully!");
-    }
-
-    private void animateEntrance(AnchorPane node, int delayMs) {
-        if (node == null) {
-            return;
-        }
-
-        node.setOpacity(0);
-        node.setTranslateY(18);
-
-        FadeTransition fade = new FadeTransition(Duration.millis(450), node);
-        fade.setFromValue(0);
-        fade.setToValue(1);
-        fade.setDelay(Duration.millis(delayMs));
-
-        TranslateTransition slide = new TranslateTransition(Duration.millis(450), node);
-        slide.setFromY(18);
-        slide.setToY(0);
-        slide.setDelay(Duration.millis(delayMs));
-
-        fade.play();
-        slide.play();
     }
 
     public void displayName(String username) {
         System.out.println("Welcome, " + username + "!");
     }
-
-//    @FXML
-//    public void onDashboardClick(ActionEvent e) {
-//        System.out.println("Dashboard clicked");
-//    }
 
     @FXML
     public void onQuestionBankClick(ActionEvent e) throws IOException {
@@ -110,11 +38,22 @@ public class DashBoardController {
         stage.show();
     }
 
+//    public void onSpeedTestClick(ActionEvent e) throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewResults.fxml"));
+//        Parent root = loader.load();
+//        ViewResultsController controller = loader.getController();
+//        controller.setUser(user);
+//
+//        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+//        stage.setScene(new Scene(root));
+//        stage.show();
+//    }
+
     @FXML
-    public void onSpeedTestClick(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SpeedTest.fxml"));
+    public void onViewResultsClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewResults.fxml"));
         Parent root = loader.load();
-        SpeedTestController controller = loader.getController();
+        ViewResultsController controller = loader.getController();
         controller.setUser(user);
 
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -163,57 +102,7 @@ public class DashBoardController {
 
     @FXML
     public void onDashboardClick(ActionEvent e) {
-        if (sidebarExpanded) {
-            // Collapse sidebar
-            sidebarVBox.setPrefWidth(50.0);
-
-            // Hide button text
-            dashboardBtn.setText("");
-            questionBankBtn.setText("");
-            speedTestBtn.setText("");
-            leaderboardBtn.setText("");
-            communityBtn.setText("");
-            qnaBtn.setText("");
-            aboutUsBtn.setText("");
-
-            sidebarExpanded = false;
-            System.out.println("Sidebar minimized");
-        } else {
-            // Expand sidebar
-            sidebarVBox.setPrefWidth(190.0);
-
-            // Show button text
-            dashboardBtn.setText("Dashboard");
-            questionBankBtn.setText("Question Bank");
-            speedTestBtn.setText("Speed test");
-            leaderboardBtn.setText("Leaderboard");
-            communityBtn.setText("Community");
-            qnaBtn.setText("QNA");
-            aboutUsBtn.setText("About us");
-
-            sidebarExpanded = true;
-            System.out.println("Sidebar expanded");
-        }
-    }
-
-    @FXML
-    public void onSidebarHoverEnter(MouseEvent event) {
-        if (!sidebarVBox.getStyleClass().contains("sidebar-hovered")) {
-            sidebarVBox.getStyleClass().add("sidebar-hovered");
-        }
-        if (minimizeBtn != null) {
-            minimizeBtn.setScaleX(1.08);
-            minimizeBtn.setScaleY(1.08);
-        }
-    }
-
-    @FXML
-    public void onSidebarHoverExit(MouseEvent event) {
-        sidebarVBox.getStyleClass().remove("sidebar-hovered");
-        if (minimizeBtn != null) {
-            minimizeBtn.setScaleX(1.0);
-            minimizeBtn.setScaleY(1.0);
-        }
+        System.out.println("Dashboard clicked");
     }
 
     @FXML
@@ -229,16 +118,19 @@ public class DashBoardController {
 
     public void setUser(User user) {
         this.user = user;
+        if (helloLabel != null && user != null) {
+            helloLabel.setText("Hello " + user.getUsername() + "!");
+        }
     }
 
-    public void onStartExamClick(ActionEvent f) throws IOException {
+    public void onStartExamClick(ActionEvent e) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentStartExam.fxml"));
         Parent root = fxmlLoader.load();
 
         StartExamController controller = fxmlLoader.getController();
         controller.setUser(user);
 
-        Stage stage = (Stage)((Node)f.getSource()).getScene().getWindow();
+        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

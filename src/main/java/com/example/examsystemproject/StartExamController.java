@@ -27,9 +27,6 @@ public class StartExamController {
     @FXML
     private VBox dueExamBox;
 
-    @FXML
-    private VBox completedExamBox;
-
     private User user;
 
     @FXML
@@ -94,12 +91,11 @@ public class StartExamController {
     }
 
     private void refreshPage() {
-        if (dueExamBox == null || completedExamBox == null || dueExamCountLabel == null) {
+        if (dueExamBox == null || dueExamCountLabel == null) {
             return;
         }
 
         dueExamBox.getChildren().clear();
-        completedExamBox.getChildren().clear();
 
         try {
             List<Exam> exams = ExamFileManager.loadAllExams();
@@ -110,7 +106,6 @@ public class StartExamController {
             for (ExamResult result : allResults) {
                 if (username.equalsIgnoreCase(result.getStudentUsername())) {
                     attemptedExamIds.add(result.getExamId());
-                    completedExamBox.getChildren().add(createCompletedCard(result));
                 }
             }
 
@@ -126,9 +121,6 @@ public class StartExamController {
 
             if (pending == 0) {
                 dueExamBox.getChildren().add(createInfoLabel("No pending exam. You are all caught up."));
-            }
-            if (completedExamBox.getChildren().isEmpty()) {
-                completedExamBox.getChildren().add(createInfoLabel("No exam given yet. Your acquired marks will appear here."));
             }
         } catch (IOException ex) {
             dueExamCountLabel.setText("0 pending");
@@ -155,29 +147,6 @@ public class StartExamController {
         startBtn.setStyle("-fx-background-color: #e26f2b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS'; -fx-background-radius: 7; -fx-cursor: hand;");
 
         card.getChildren().addAll(infoBox, startBtn);
-        return card;
-    }
-
-    private HBox createCompletedCard(ExamResult result) {
-        HBox card = new HBox(12);
-        card.setPadding(new Insets(12, 14, 12, 14));
-        card.setStyle("-fx-background-color: #1f5b47; -fx-background-radius: 9;");
-
-        VBox infoBox = new VBox(4);
-        Label title = new Label(result.getExamName());
-        title.setStyle("-fx-text-fill: #f3fff8; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-        Label id = new Label("Exam ID: " + result.getExamId());
-        id.setStyle("-fx-text-fill: #c4ebd8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
-        infoBox.getChildren().addAll(title, id);
-        HBox.setHgrow(infoBox, Priority.ALWAYS);
-
-        int percentage = result.getTotalMarks() > 0
-                ? (int) Math.round((result.getScore() * 100.0) / result.getTotalMarks())
-                : 0;
-        Label mark = new Label("Acquired Mark: " + result.getScore() + "/" + result.getTotalMarks() + " (" + percentage + "%)");
-        mark.setStyle("-fx-text-fill: #d8ffe9; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-
-        card.getChildren().addAll(infoBox, mark);
         return card;
     }
 

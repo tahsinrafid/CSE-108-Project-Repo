@@ -1,6 +1,6 @@
 package com.example.examsystemproject;
 
-import java.io.IOException;
+import java.io.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -32,10 +33,17 @@ public class TeacherDashBoardController {
     private Button aboutUsBtn;
     @FXML
     private Button LogOutBtn;
-
+    @FXML
+    private Label helloLabel;
+    @FXML
+    private Label studentLabel;
+    @FXML
+    private Label examLabel;
     @FXML
     public void initialize() {
         System.out.println("Teacher dashboard loaded successfully.");
+        showTotalStudents();
+        showTotalExams();
     }
 
     @FXML
@@ -147,5 +155,38 @@ public class TeacherDashBoardController {
 
     public void setUser(User user) {
         this.user = user;
+        if (helloLabel != null && user != null) {
+            helloLabel.setText("Hello " + user.getUsername() + "!");
+        }
+    }
+
+    public void showTotalStudents() {
+        int studentCount = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 4 && "student".equalsIgnoreCase(parts[3].trim())) {
+                    studentCount++;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Could not read users.txt: " + e.getMessage());
+        }
+        studentLabel.setText(Integer.toString(studentCount));
+    }
+    public void showTotalExams() {
+        int examCount = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("exams"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                examCount++;
+            }
+        } catch (IOException e) {
+            System.out.println("Could not read users.txt: " + e.getMessage());
+        }
+        examLabel.setText(Integer.toString(examCount));
     }
 }
