@@ -3,6 +3,7 @@ package com.example.examsystemproject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ComboBox;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,12 +26,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public class CreateExamController {
 
     @FXML
     private TextField examNameField;
     @FXML
-    private TextField subjectField;
+    private ComboBox<String> subjectComboBox;
+    @FXML
+    private ComboBox<String> classComboBox;
+    @FXML
+    private TextField marksField;
     @FXML
     private TextField durationField;
     @FXML
@@ -45,6 +52,12 @@ public class CreateExamController {
     @FXML
     public void initialize() {
         selectedCountLabel.setText("0 selected");
+        subjectComboBox.getItems().setAll("Physics", "Chemistry");
+        classComboBox.getItems().setAll("9", "10");
+        styleComboBox(subjectComboBox);
+        styleComboBox(classComboBox);
+        subjectComboBox.getSelectionModel().selectFirst();
+        classComboBox.getSelectionModel().selectFirst();
     }
 
     public void setUser(User user) {
@@ -91,7 +104,9 @@ public class CreateExamController {
 
         CheckBox includeBox = new CheckBox("Include");
         includeBox.setStyle("-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;");
-        includeBox.selectedProperty().addListener((obs, oldVal, isNowSelected) -> {
+        includeBox.setOnAction(e -> {
+            e.getSource();
+            boolean isNowSelected = includeBox.isSelected();
             if (isNowSelected) {
                 selectedQuestionIds.add(question.getQuesID());
             } else {
@@ -132,13 +147,28 @@ public class CreateExamController {
     }
 
     @FXML
-    public void saveExam(ActionEvent event) {
+    public void saveExam() {
         String examName = examNameField.getText().trim();
-        String subject = subjectField.getText().trim();
+        String subject = subjectComboBox.getValue();
+        String classLevel = classComboBox.getValue();
+        String marksText = marksField.getText().trim();
         String durationText = durationField.getText().trim();
 
-        if (examName.isEmpty() || subject.isEmpty() || durationText.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Missing fields", "Please fill exam name, subject and duration.");
+        if (examName.isEmpty() || subject == null || classLevel == null || marksText.isEmpty() || durationText.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Missing fields", "Please fill exam name, subject, class, marks and duration.");
+            return;
+        }
+
+        int marks;
+        try {
+            marks = Integer.parseInt(marksText);
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Invalid marks", "Marks must be a whole number.");
+            return;
+        }
+
+        if (marks <= 0 || marks > 1000) {
+            showAlert(Alert.AlertType.ERROR, "Invalid marks", "Marks must be greater than 0.");
             return;
         }
 
@@ -165,7 +195,7 @@ public class CreateExamController {
             List<String> selectedIds = new ArrayList<>(selectedQuestionIds);
             String createdBy = user != null ? user.getUsername() : "teacher";
 
-            Exam exam = new Exam(examId, examName, subject, durationMinutes, selectedIds, createdBy);
+            Exam exam = new Exam(examId, examName, subject, classLevel, durationMinutes, marks, selectedIds, createdBy);
             ExamFileManager.addExam(exam);
 
             showAlert(Alert.AlertType.INFORMATION, "Exam created", "Exam " + examId + " saved with " + selectedIds.size() + " questions.");
@@ -190,7 +220,9 @@ public class CreateExamController {
 
     private void clearForm() {
         examNameField.clear();
-        subjectField.clear();
+        subjectComboBox.getSelectionModel().selectFirst();
+        classComboBox.getSelectionModel().selectFirst();
+        marksField.clear();
         durationField.clear();
         loadQuestions();
     }
@@ -205,5 +237,28 @@ public class CreateExamController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void styleComboBox(ComboBox<String> comboBox) {
+        comboBox.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item);
+                setStyle(empty
+                        ? ""
+                        : "-fx-text-fill: white; -fx-background-color: transparent; -fx-font-size: 13; -fx-padding: 0 8; ");
+            }
+        });
+        comboBox.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item);
+                setStyle(empty
+                        ? ""
+                        : "-fx-text-fill: white; -fx-background-color: #1a1f3c; -fx-font-size: 13; -fx-padding: 6 8; ");
+            }
+        });
     }
 }
