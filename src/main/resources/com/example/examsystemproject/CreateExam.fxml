@@ -15,80 +15,80 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #080917;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.CreateExamController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #eef0f6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.CreateExamController">
     <stylesheets>
         <URL value="@Dashboard.css" />
     </stylesheets>
 
     <top>
-        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #58eb34; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 3);">
+        <AnchorPane prefHeight="78.0" prefWidth="900.0" style="-fx-background-color: #3d2b69; -fx-border-color: rgba(255,255,255,0.08); -fx-border-width: 0 0 1 0;">
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
                 <image>
                     <Image url="@../../../prlogo.png" />
                 </image>
             </ImageView>
-            <Label layoutX="75.0" layoutY="20.0" style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="ExamAce - Create Exam" />
-            <HBox spacing="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="19.0">
-                <Button mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-size: 13;" text="Back" />
+            <Label layoutX="75.0" layoutY="24.0" style="-fx-text-fill: #f5f3ff; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="ExamAce - Create Exam" />
+            <HBox spacing="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="23.0">
+                <Button mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #111111; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 16; -fx-cursor: hand; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Back" />
             </HBox>
         </AnchorPane>
     </top>
 
     <center>
-        <VBox spacing="12.0" style="-fx-background-color: #080917; -fx-padding: 14 20 16 20;">
-                <AnchorPane prefHeight="145.0" style="-fx-background-color: #0f1225; -fx-background-radius: 10; -fx-border-color: #1f2445; -fx-border-radius: 10; -fx-padding: 12;">
+        <VBox spacing="12.0" style="-fx-background-color: #eef0f6; -fx-padding: 14 18 16 18;">
+                <AnchorPane prefHeight="145.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #d8d7e2; -fx-border-radius: 10; -fx-padding: 12;">
                     <children>
                         <VBox layoutX="16.0" layoutY="12.0" prefWidth="848.0" spacing="10.0">
-                            <Label style="-fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold;" text="Exam Details" />
+                            <Label style="-fx-text-fill: #2f2349; -fx-font-size: 16; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Exam Details" />
 
                             <HBox spacing="10.0">
                                 <VBox HBox.hgrow="ALWAYS" spacing="4.0">
-                                    <Label style="-fx-text-fill: #b8bdd2; -fx-font-size: 12;" text="Exam Name" />
-                                    <TextField fx:id="examNameField" prefHeight="34.0" prefWidth="230.0" promptText="Midterm Test" style="-fx-background-color: #1a1f3c; -fx-text-fill: white; -fx-prompt-text-fill: #747b9a; -fx-border-color: #2a315c; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13;" />
+                                    <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Exam Name" />
+                                    <TextField fx:id="examNameField" prefHeight="34.0" prefWidth="230.0" promptText="Midterm Test" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <VBox spacing="4.0">
-                                    <Label style="-fx-text-fill: #b8bdd2; -fx-font-size: 12;" text="Subject" />
-                                    <ComboBox fx:id="subjectComboBox" prefHeight="34.0" prefWidth="140.0" style="-fx-background-color: #1a1f3c; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-color: #2a315c; -fx-border-radius: 6; -fx-font-size: 13;" />
+                                    <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Subject" />
+                                    <ComboBox fx:id="subjectComboBox" prefHeight="34.0" prefWidth="140.0" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-background-radius: 8; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <VBox spacing="4.0">
-                                    <Label style="-fx-text-fill: #b8bdd2; -fx-font-size: 12;" text="Class" />
-                                    <ComboBox fx:id="classComboBox" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #1a1f3c; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-color: #2a315c; -fx-border-radius: 6; -fx-font-size: 13;" />
+                                    <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Class" />
+                                    <ComboBox fx:id="classComboBox" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-background-radius: 8; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <VBox spacing="4.0">
-                                    <Label style="-fx-text-fill: #b8bdd2; -fx-font-size: 12;" text="Marks" />
-                                    <TextField fx:id="marksField" prefHeight="34.0" prefWidth="90.0" promptText="100" style="-fx-background-color: #1a1f3c; -fx-text-fill: white; -fx-prompt-text-fill: #747b9a; -fx-border-color: #2a315c; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13;" />
+                                    <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Marks" />
+                                    <TextField fx:id="marksField" prefHeight="34.0" prefWidth="90.0" promptText="100" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <VBox spacing="4.0">
-                                    <Label style="-fx-text-fill: #b8bdd2; -fx-font-size: 12;" text="Duration (minutes)" />
-                                    <TextField fx:id="durationField" prefHeight="34.0" prefWidth="100.0" promptText="60" style="-fx-background-color: #1a1f3c; -fx-text-fill: white; -fx-prompt-text-fill: #747b9a; -fx-border-color: #2a315c; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13;" />
+                                    <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Duration (minutes)" />
+                                    <TextField fx:id="durationField" prefHeight="34.0" prefWidth="100.0" promptText="60" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <Region HBox.hgrow="ALWAYS" />
                             </HBox>
 
                             <HBox alignment="CENTER_RIGHT" spacing="12.0">
-                                <Label fx:id="selectedCountLabel" style="-fx-text-fill: #58eb34; -fx-font-size: 13; -fx-font-weight: bold;" text="0 selected" />
-                                <Button fx:id="saveExamBtn" mnemonicParsing="false" onAction="#saveExam" prefHeight="34.0" prefWidth="110.0" styleClass="card-btn-success" text="Save Exam" />
+                                <Label fx:id="selectedCountLabel" style="-fx-text-fill: #3d2b69; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="0 selected" />
+                                <Button fx:id="saveExamBtn" mnemonicParsing="false" onAction="#saveExam" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #111111; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 16; -fx-cursor: hand; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Save Exam" />
                             </HBox>
                         </VBox>
                     </children>
                 </AnchorPane>
 
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" style="-fx-background-color: #0f1225; -fx-border-color: #1f2445; -fx-border-width: 1 0 1 0; -fx-padding: 0 12;">
-                <Label style="-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;" text="Question Bank" />
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d8d7e2; -fx-border-radius: 8; -fx-padding: 0 12;">
+                <Label style="-fx-text-fill: #2f2349; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Question Bank" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Label style="-fx-text-fill: #8188a8; -fx-font-size: 12;" text="Select questions to include" />
+                <Label style="-fx-text-fill: #7a758f; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Select questions to include" />
             </HBox>
 
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #d8d7e2; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
                 <content>
                     <VBox fx:id="questionsContainer" spacing="10.0">
                         <padding>
-                            <Insets bottom="14.0" top="8.0" />
+                            <Insets bottom="14.0" left="12.0" right="12.0" top="10.0" />
                         </padding>
                     </VBox>
                 </content>

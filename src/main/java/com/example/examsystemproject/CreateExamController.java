@@ -74,7 +74,7 @@ public class CreateExamController {
             List<Question> questions = QuesFileManager.loadAllQuestions();
             if (questions.isEmpty()) {
                 Label emptyLabel = new Label("No questions found in question bank.");
-                emptyLabel.setStyle("-fx-text-fill: #b5b8cf; -fx-font-size: 14; -fx-padding: 20;");
+                emptyLabel.setStyle("-fx-text-fill: #6d6780; -fx-font-size: 14; -fx-padding: 20; -fx-font-family: 'Trebuchet MS';");
                 questionsContainer.getChildren().add(emptyLabel);
                 saveExamBtn.setDisable(true);
                 return;
@@ -86,7 +86,7 @@ public class CreateExamController {
             }
         } catch (IOException ex) {
             Label errLabel = new Label("Failed to load questions: " + ex.getMessage());
-            errLabel.setStyle("-fx-text-fill: #ff7373; -fx-font-size: 13; -fx-padding: 20;");
+            errLabel.setStyle("-fx-text-fill: #b53a3a; -fx-font-size: 13; -fx-padding: 20; -fx-font-family: 'Trebuchet MS';");
             questionsContainer.getChildren().add(errLabel);
             saveExamBtn.setDisable(true);
         }
@@ -94,8 +94,8 @@ public class CreateExamController {
 
     private VBox createQuestionCard(Question question, int index) {
         VBox card = new VBox(10);
-        card.setStyle("-fx-background-color: #0f1225; -fx-background-radius: 8; "
-                + "-fx-border-color: #1f2445; -fx-border-radius: 8; "
+        card.setStyle("-fx-background-color: #f7f6fb; -fx-background-radius: 8; "
+                + "-fx-border-color: #dedbea; -fx-border-radius: 8; "
                 + "-fx-border-width: 1; -fx-padding: 12 14;");
         card.setMaxWidth(Double.MAX_VALUE);
 
@@ -103,7 +103,7 @@ public class CreateExamController {
         topRow.setAlignment(Pos.CENTER_LEFT);
 
         CheckBox includeBox = new CheckBox("Include");
-        includeBox.setStyle("-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;");
+        includeBox.setStyle("-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
         includeBox.setOnAction(e -> {
             e.getSource();
             boolean isNowSelected = includeBox.isSelected();
@@ -116,10 +116,10 @@ public class CreateExamController {
         });
 
         Label title = new Label("Q" + index);
-        title.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 13; -fx-font-weight: bold;");
+        title.setStyle("-fx-text-fill: #3d2b69; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
 
         Label qText = new Label(question.getQuesText());
-        qText.setStyle("-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;");
+        qText.setStyle("-fx-text-fill: #2f2349; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
         qText.setWrapText(true);
         HBox.setHgrow(qText, Priority.ALWAYS);
 
@@ -136,8 +136,8 @@ public class CreateExamController {
             Label option = new Label(letters[i] + ". " + options[i]);
             option.setWrapText(true);
             option.setMaxWidth(Double.MAX_VALUE);
-            option.setStyle("-fx-text-fill: #d8d9e2; -fx-background-color: rgba(255,255,255,0.05); "
-                    + "-fx-padding: 6 10; -fx-background-radius: 5; -fx-font-size: 12;");
+            option.setStyle("-fx-text-fill: #4e4a60; -fx-background-color: #efedf6; "
+                    + "-fx-padding: 6 10; -fx-background-radius: 5; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
             optionsGrid.add(option, i % 2, i / 2);
             GridPane.setHgrow(option, Priority.ALWAYS);
         }
@@ -247,7 +247,7 @@ public class CreateExamController {
                 setText(empty ? null : item);
                 setStyle(empty
                         ? ""
-                        : "-fx-text-fill: white; -fx-background-color: transparent; -fx-font-size: 13; -fx-padding: 0 8; ");
+                        : "-fx-text-fill: #2f2349; -fx-background-color: transparent; -fx-font-size: 13; -fx-padding: 0 8; -fx-font-family: 'Trebuchet MS';");
             }
         });
         comboBox.setCellFactory(listView -> new ListCell<>() {
@@ -257,7 +257,7 @@ public class CreateExamController {
                 setText(empty ? null : item);
                 setStyle(empty
                         ? ""
-                        : "-fx-text-fill: white; -fx-background-color: #1a1f3c; -fx-font-size: 13; -fx-padding: 6 8; ");
+                        : "-fx-text-fill: #2f2349; -fx-background-color: #f8f7fb; -fx-font-size: 13; -fx-padding: 6 8; -fx-font-family: 'Trebuchet MS';");
             }
         });
     }

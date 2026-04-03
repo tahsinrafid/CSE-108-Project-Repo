@@ -3,38 +3,54 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ScrollPane?>
 
-<AnchorPane prefHeight="620.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.LeaderboardController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.LeaderboardController">
     <stylesheets>
         <URL value="@Dashboard.css" />
     </stylesheets>
 
     <children>
-        <AnchorPane prefHeight="70.0" prefWidth="900.0" styleClass="dash-top-bar">
+        <AnchorPane prefHeight="78.0" prefWidth="900.0" style="-fx-background-color: #3d2b69; -fx-border-color: rgba(255,255,255,0.08); -fx-border-width: 0 0 1 0;">
             <children>
-                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
+                <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="18.0" layoutY="15.0" preserveRatio="true">
                     <image>
                         <Image url="@prlogo.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="82.0" layoutY="22.0" styleClass="dash-title" text="Leaderboard" />
-                <Button layoutX="792.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="90.0" styleClass="menu-toggle-btn" text="Back" />
+                <Label layoutX="334.0" layoutY="21.0" style="-fx-text-fill: #f5f3ff; -fx-font-size: 40; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Leaderboard" />
+                <Button layoutX="798.0" layoutY="21.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="84.0" styleClass="menu-toggle-btn" text="Back" />
             </children>
         </AnchorPane>
 
-        <AnchorPane layoutX="30.0" layoutY="92.0" prefHeight="500.0" prefWidth="840.0" style="-fx-background-color: rgba(14, 40, 61, 0.88); -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: rgba(166, 215, 236, 0.35);">
+        <AnchorPane layoutX="20.0" layoutY="94.0" prefHeight="486.0" prefWidth="860.0" style="-fx-background-color: rgba(255, 255, 255, 0.92); -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: rgba(47, 38, 70, 0.15);">
             <children>
-                <Label layoutX="24.0" layoutY="18.0" text="Top Scores (Highest to Lowest)" style="-fx-text-fill: #eff7ff; -fx-font-size: 19; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" />
-                <Label layoutX="24.0" layoutY="46.0" text="Visible to both teacher and student side" style="-fx-text-fill: #a9c6dc; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" />
+                <Label layoutX="26.0" layoutY="18.0" style="-fx-text-fill: #2f2349; -fx-font-size: 22; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Analyze Result" />
+                <Label layoutX="26.0" layoutY="48.0" style="-fx-text-fill: #6d6780; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Search by exam name to view ranking for that exam" />
 
-                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="18.0" layoutY="78.0" prefHeight="406.0" prefWidth="804.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+                <TextField fx:id="searchField" layoutX="268.0" layoutY="74.0" onAction="#onSearch" prefHeight="32.0" prefWidth="250.0" promptText="Enter exam name" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #d3cfdd; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" />
+                <Button layoutX="530.0" layoutY="74.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: #111111; -fx-text-fill: white; -fx-background-radius: 16; -fx-font-weight: bold; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Search" />
+
+                <HBox layoutX="22.0" layoutY="120.0" prefHeight="36.0" prefWidth="816.0" style="-fx-background-color: #3d2b69; -fx-background-radius: 8 8 0 0; -fx-padding: 0 12 0 12;" spacing="8.0">
+                    <children>
+                        <Label prefWidth="170.0" style="-fx-text-fill: #ffffff; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Exam Name" />
+                        <Label prefWidth="115.0" style="-fx-text-fill: #ffffff; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Subject" />
+                        <Label prefWidth="185.0" style="-fx-text-fill: #ffffff; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Student's Name" />
+                        <Label prefWidth="105.0" style="-fx-text-fill: #ffffff; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Total Marks" />
+                        <Label prefWidth="120.0" style="-fx-text-fill: #ffffff; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Obtained Marks" />
+                        <Label prefWidth="63.0" style="-fx-text-fill: #ffffff; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Rank" />
+                    </children>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="22.0" layoutY="156.0" prefHeight="312.0" prefWidth="816.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: #e1dce9; -fx-border-width: 0 1 1 1; -fx-border-radius: 0 0 8 8;">
                     <content>
-                        <VBox fx:id="leaderboardList" spacing="8.0" style="-fx-background-color: transparent; -fx-padding: 10;" />
+                        <VBox fx:id="leaderboardList" spacing="8.0" style="-fx-background-color: #f7f6fb; -fx-padding: 10;" />
                     </content>
                 </ScrollPane>
             </children>

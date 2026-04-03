@@ -62,7 +62,7 @@ public class QbankViewController {
                 Label emptyLabel = new Label(isTeacher
                         ? "No questions yet. Click '+ Add Question' to get started."
                         : "No questions available yet. Check back later.");
-                emptyLabel.setStyle("-fx-text-fill: #666688; -fx-font-size: 14; -fx-padding: 20;");
+                emptyLabel.setStyle("-fx-text-fill: #6d6780; -fx-font-size: 14; -fx-padding: 20; -fx-font-family: 'Trebuchet MS';");
                 quesContainer.getChildren().add(emptyLabel);
                 quesCountLabel.setText("0 Questions");
             } else {
@@ -74,7 +74,7 @@ public class QbankViewController {
             }
         } catch (IOException e) {
             Label errLabel = new Label("Failed to load questions: " + e.getMessage());
-            errLabel.setStyle("-fx-text-fill: #c44536; -fx-font-size: 13; -fx-padding: 20;");
+            errLabel.setStyle("-fx-text-fill: #b53a3a; -fx-font-size: 13; -fx-padding: 20; -fx-font-family: 'Trebuchet MS';");
             quesContainer.getChildren().add(errLabel);
             quesCountLabel.setText("Error");
         }
@@ -82,8 +82,8 @@ public class QbankViewController {
 
     private VBox createQuestionCard(Question q, int index) {
         VBox card = new VBox(10);
-        card.setStyle("-fx-background-color: #0f1225; -fx-background-radius: 8; "
-                + "-fx-border-color: #1e2050; -fx-border-radius: 8; "
+        card.setStyle("-fx-background-color: #f7f6fb; -fx-background-radius: 8; "
+                + "-fx-border-color: #dedbea; -fx-border-radius: 8; "
                 + "-fx-border-width: 1; -fx-padding: 14 16;");
         card.setMaxWidth(Double.MAX_VALUE);
 
@@ -91,11 +91,11 @@ public class QbankViewController {
         header.setAlignment(Pos.TOP_LEFT);
 
         Label qNum = new Label("Q" + index + ".");
-        qNum.setStyle("-fx-text-fill: #58eb34; -fx-font-weight: bold; -fx-font-size: 15;");
+        qNum.setStyle("-fx-text-fill: #3d2b69; -fx-font-weight: bold; -fx-font-size: 15; -fx-font-family: 'Trebuchet MS';");
         qNum.setMinWidth(36);
 
         Label qText = new Label(q.getQuesText());
-        qText.setStyle("-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;");
+        qText.setStyle("-fx-text-fill: #2f2349; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
         qText.setWrapText(true);
         HBox.setHgrow(qText, Priority.ALWAYS);
         qText.setMaxWidth(Double.MAX_VALUE);
@@ -104,13 +104,13 @@ public class QbankViewController {
 
         if (isTeacher) {
             Button editBtn = new Button("Edit");
-            editBtn.setStyle("-fx-background-color: #f59c1a; -fx-text-fill: white; -fx-font-weight: bold; "
-                    + "-fx-background-radius: 4; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12;");
+            editBtn.setStyle("-fx-background-color: #f3b53f; -fx-text-fill: #2f2349; -fx-font-weight: bold; "
+                    + "-fx-background-radius: 12; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12; -fx-font-family: 'Trebuchet MS';");
             editBtn.setOnAction(e -> openEditQuestion(q));
 
             Button deleteBtn = new Button("Delete");
-            deleteBtn.setStyle("-fx-background-color: #c44536; -fx-text-fill: white; -fx-font-weight: bold; "
-                    + "-fx-background-radius: 4; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12;");
+            deleteBtn.setStyle("-fx-background-color: #dc4b4b; -fx-text-fill: white; -fx-font-weight: bold; "
+                    + "-fx-background-radius: 12; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12; -fx-font-family: 'Trebuchet MS';");
             deleteBtn.setOnAction(e -> deleteQuestion(q));
 
             header.getChildren().addAll(editBtn, deleteBtn);
@@ -137,11 +137,11 @@ public class QbankViewController {
             optLabel.setMaxWidth(Double.MAX_VALUE);
 
             if (correct) {
-                optLabel.setStyle("-fx-text-fill: #58eb34; -fx-background-color: rgba(88,235,52,0.12); "
-                        + "-fx-padding: 6 12; -fx-background-radius: 5; -fx-font-size: 13; -fx-font-weight: bold;");
+                optLabel.setStyle("-fx-text-fill: #214f2a; -fx-background-color: #dff5e6; "
+                        + "-fx-padding: 6 12; -fx-background-radius: 5; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
             } else {
-                optLabel.setStyle("-fx-text-fill: #cccccc; -fx-background-color: rgba(255,255,255,0.04); "
-                        + "-fx-padding: 6 12; -fx-background-radius: 5; -fx-font-size: 13;");
+                optLabel.setStyle("-fx-text-fill: #4e4a60; -fx-background-color: #efedf6; "
+                        + "-fx-padding: 6 12; -fx-background-radius: 5; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
             }
             optGrid.add(optLabel, i % 2, i / 2);
         }
@@ -149,14 +149,14 @@ public class QbankViewController {
 
         if (isTeacher) {
             Label correctHint = new Label("✓  Correct Answer: " + q.getCorrectAns());
-            correctHint.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.75;");
+            correctHint.setStyle("-fx-text-fill: #2a6d36; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.85; -fx-font-family: 'Trebuchet MS';");
             card.getChildren().add(correctHint);
         } else {
             Label correctHint = new Label("Correct Answer: " + q.getCorrectAns());
-            correctHint.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.85;");
+            correctHint.setStyle("-fx-text-fill: #2a6d36; -fx-font-size: 11; -fx-font-weight: bold; -fx-opacity: 0.9; -fx-font-family: 'Trebuchet MS';");
 
             Button reportBtn = new Button("Report Doubt");
-            reportBtn.setStyle("-fx-background-color: #f59c1a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12;");
+            reportBtn.setStyle("-fx-background-color: #f3b53f; -fx-text-fill: #2f2349; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 12; -fx-font-family: 'Trebuchet MS';");
             reportBtn.setOnAction(event -> openReportDialog(q));
 
             HBox reportRow = new HBox(10, correctHint, reportBtn);
@@ -217,11 +217,11 @@ public class QbankViewController {
 
         VBox form = new VBox(10);
         form.setPadding(new Insets(24));
-        form.setStyle("-fx-background-color: #0f1225;");
+        form.setStyle("-fx-background-color: #f7f6fb;");
         form.setPrefWidth(520);
 
         Label titleLabel = new Label(isEdit ? "Edit Question" : "Add New Question");
-        titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 17; -fx-font-weight: bold;");
+        titleLabel.setStyle("-fx-text-fill: #2f2349; -fx-font-size: 17; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
 
         Label qLabel = sectionLabel("Question Text");
         TextField quesField = dialogField("Type the question here…");
@@ -256,7 +256,7 @@ public class QbankViewController {
         TextField[] fields = {opt1, opt2, opt3, opt4};
         for (int i = 0; i < 4; i++) {
             Label l = new Label(letLabels[i]);
-            l.setStyle("-fx-text-fill: #58eb34; -fx-font-weight: bold; -fx-font-size: 13;");
+            l.setStyle("-fx-text-fill: #3d2b69; -fx-font-weight: bold; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
             l.setMinWidth(22);
             fields[i].setPrefWidth(420);
             optGrid.add(l, 0, i);
@@ -278,7 +278,7 @@ public class QbankViewController {
         }
 
         Label errLabel = new Label("");
-        errLabel.setStyle("-fx-text-fill: #c44536; -fx-font-size: 12;");
+        errLabel.setStyle("-fx-text-fill: #b53a3a; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
         errLabel.setWrapText(true);
 
         HBox btnRow = new HBox(10);
@@ -286,13 +286,13 @@ public class QbankViewController {
         VBox.setMargin(btnRow, new Insets(6, 0, 0, 0));
 
         Button cancelBtn = new Button("Cancel");
-        cancelBtn.setStyle("-fx-background-color: #252540; -fx-text-fill: #aaaaaa; -fx-font-weight: bold; "
-                + "-fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 8 20; -fx-font-size: 13;");
+        cancelBtn.setStyle("-fx-background-color: #e7e4f0; -fx-text-fill: #43395f; -fx-font-weight: bold; "
+                + "-fx-background-radius: 14; -fx-cursor: hand; -fx-padding: 8 20; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
         cancelBtn.setOnAction(ev -> dialog.close());
 
         Button saveBtn = new Button(isEdit ? "Save Changes" : "Add Question");
-        saveBtn.setStyle("-fx-background-color: #244857; -fx-text-fill: white; -fx-font-weight: bold; "
-                + "-fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 8 20; -fx-font-size: 13;");
+        saveBtn.setStyle("-fx-background-color: #111111; -fx-text-fill: white; -fx-font-weight: bold; "
+                + "-fx-background-radius: 14; -fx-cursor: hand; -fx-padding: 8 20; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';");
         saveBtn.setOnAction(ev -> {
             String qText = quesField.getText().trim();
             String o1 = opt1.getText().trim();
@@ -390,15 +390,15 @@ public class QbankViewController {
     private TextField dialogField(String prompt) {
         TextField tf = new TextField();
         tf.setPromptText(prompt);
-        tf.setStyle("-fx-background-color: #1a1d3a; -fx-text-fill: white; "
-                + "-fx-prompt-text-fill: #444466; -fx-background-radius: 6; "
-                + "-fx-border-color: #2a2d50; -fx-border-radius: 6; -fx-border-width: 1; -fx-padding: 8;");
+        tf.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #2f2349; "
+                + "-fx-prompt-text-fill: #9d98ad; -fx-background-radius: 8; "
+                + "-fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-border-width: 1; -fx-padding: 8; -fx-font-family: 'Trebuchet MS';");
         return tf;
     }
 
     private Label sectionLabel(String text) {
         Label l = new Label(text);
-        l.setStyle("-fx-text-fill: #aaaaaa; -fx-font-size: 12; -fx-font-weight: bold;");
+        l.setStyle("-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
         VBox.setMargin(l, new Insets(4, 0, 0, 0));
         return l;
     }
