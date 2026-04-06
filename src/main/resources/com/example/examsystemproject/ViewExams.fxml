@@ -34,11 +34,10 @@
     </top>
 
     <center>
-        <VBox style="-fx-background-color: #eef0f6; -fx-padding: 14 18 16 18;" spacing="10.0">
+        <VBox spacing="10.0" style="-fx-background-color: #eef0f6; -fx-padding: 14 18 16 18;">
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" style="-fx-padding: 0 16; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #d8d7e2; -fx-border-radius: 10;">
                 <Label fx:id="examsCountLabel" style="-fx-text-fill: #4e4a60; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Loading exams..." />
                 <Region HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" onAction="#refreshExams" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #111111; -fx-text-fill: white; -fx-font-size: 12; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand; -fx-font-family: 'Trebuchet MS';" text="Refresh" />
             </HBox>
 
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #d8d7e2; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
@@ -53,4 +52,3 @@
         </VBox>
     </center>
 </BorderPane>
-

@@ -1,24 +1,22 @@
 package com.example.examsystemproject;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class QnaPost {
     private final String postId;
     private final String questionText;
     private final String authorUsername;
     private final String authorRole;
-    private final String visibility;
-    private final String assignedTeacherUsername;
-    private final String answerText;
-    private final String answeredBy;
+    private final List<QnaComment> comments;
 
-    public QnaPost(String postId, String questionText, String authorUsername, String authorRole, String visibility, String assignedTeacherUsername, String answerText, String answeredBy) {
+    public QnaPost(String postId, String questionText, String authorUsername, String authorRole, List<QnaComment> comments) {
         this.postId = postId;
         this.questionText = questionText;
         this.authorUsername = authorUsername;
         this.authorRole = authorRole;
-        this.visibility = visibility;
-        this.assignedTeacherUsername = assignedTeacherUsername;
-        this.answerText = answerText;
-        this.answeredBy = answeredBy;
+        this.comments = comments == null ? new ArrayList<>() : new ArrayList<>(comments);
     }
 
     public String getPostId() {
@@ -37,23 +35,27 @@ public class QnaPost {
         return authorRole;
     }
 
-    public String getVisibility() {
-        return visibility;
+    public List<QnaComment> getComments() {
+        return Collections.unmodifiableList(comments);
     }
 
-    public String getAssignedTeacherUsername() {
-        return assignedTeacherUsername;
+    public int getCommentCount() {
+        return comments.size();
     }
 
-    public String getAnswerText() {
-        return answerText;
+    public QnaPost withComment(QnaComment comment) {
+        List<QnaComment> next = new ArrayList<>(comments);
+        next.add(comment);
+        return new QnaPost(postId, questionText, authorUsername, authorRole, next);
     }
 
-    public String getAnsweredBy() {
-        return answeredBy;
-    }
+    public QnaPost withCommentRemovedAt(int commentIndex) {
+        if (commentIndex < 0 || commentIndex >= comments.size()) {
+            return this;
+        }
 
-    public boolean isAnswered() {
-        return answerText != null && !answerText.trim().isEmpty();
+        List<QnaComment> next = new ArrayList<>(comments);
+        next.remove(commentIndex);
+        return new QnaPost(postId, questionText, authorUsername, authorRole, next);
     }
 }

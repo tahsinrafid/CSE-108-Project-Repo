@@ -1,5 +1,3 @@
-E1,sampleTest,Physics,2,Q1|Q3,raf101
-E2,Term final,CSE101,30,Q1|Q3,raf101
-E3,HJ,HU,23,Q1|Q3,raf101
-
-E4,PhyFinal,Physics,10,4,6,Q1|Q3|Q2|Q4|Q5|Q7|Q8,raf101
+E1,Phy CT 1,Physics,9,2,5,Q3|Q2|Q6|Q8|Q5,raf101
+E2,Phy CT 2,Physics,9,1,3,Q1|Q4|Q5,raf101
+E3,Mock Test,Physics,9,2,5,Q3|Q5|Q6|Q10|Q8,raf101

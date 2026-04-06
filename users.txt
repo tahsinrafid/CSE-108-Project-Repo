@@ -3,3 +3,6 @@ Messi,goat01,goat567,student
 Auntor,auntor11,ABC,student
 teach,teach11,AAA,teacher
 Auntor,gg,ggg,student
+Ronaldo,ron7,777,student
+Rafsan,rrr,1,student
+S.Mahdi Al hasan,mahdi_king,12345678,teacher

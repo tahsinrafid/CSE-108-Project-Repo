@@ -35,16 +35,16 @@
     </top>
 
     <center>
-        <VBox spacing="12.0" style="-fx-background-color: #eef0f6; -fx-padding: 14 18 16 18;">
+        <VBox prefHeight="522.0" prefWidth="908.0" spacing="12.0" style="-fx-background-color: #eef0f6; -fx-padding: 14 18 16 18;">
                 <AnchorPane prefHeight="145.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #d8d7e2; -fx-border-radius: 10; -fx-padding: 12;">
                     <children>
                         <VBox layoutX="16.0" layoutY="12.0" prefWidth="848.0" spacing="10.0">
                             <Label style="-fx-text-fill: #2f2349; -fx-font-size: 16; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Exam Details" />
 
                             <HBox spacing="10.0">
-                                <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
                                     <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Exam Name" />
-                                    <TextField fx:id="examNameField" prefHeight="34.0" prefWidth="230.0" promptText="Midterm Test" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
+                                    <TextField fx:id="examNameField" prefHeight="34.0" prefWidth="230.0" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <VBox spacing="4.0">
@@ -59,12 +59,12 @@
 
                                 <VBox spacing="4.0">
                                     <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Marks" />
-                                    <TextField fx:id="marksField" prefHeight="34.0" prefWidth="90.0" promptText="100" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
+                                    <TextField fx:id="marksField" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <VBox spacing="4.0">
                                     <Label style="-fx-text-fill: #5f5a73; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Duration (minutes)" />
-                                    <TextField fx:id="durationField" prefHeight="34.0" prefWidth="100.0" promptText="60" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
+                                    <TextField fx:id="durationField" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #f8f7fb; -fx-text-fill: #2f2349; -fx-prompt-text-fill: #9d98ad; -fx-border-color: #d3cfdd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
                                 </VBox>
 
                                 <Region HBox.hgrow="ALWAYS" />

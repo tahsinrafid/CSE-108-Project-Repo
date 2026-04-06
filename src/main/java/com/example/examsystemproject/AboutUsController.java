@@ -34,6 +34,7 @@ public class AboutUsController {
 
     @FXML
     private Circle glowThree;
+    private User user;
 
     @FXML
     public void initialize() {
@@ -42,6 +43,10 @@ public class AboutUsController {
     }
 
     private void playEntranceAnimation() {
+        if (contentCard == null || valuesBox == null) {
+            return;
+        }
+
         contentCard.setOpacity(0);
         contentCard.setTranslateY(35);
 
@@ -82,6 +87,10 @@ public class AboutUsController {
     }
 
     private void animateGlow(Circle glow, double toX, double toY, int durationMs, double fromScale, double toScale) {
+        if (glow == null) {
+            return;
+        }
+
         TranslateTransition drift = new TranslateTransition(Duration.millis(durationMs), glow);
         drift.setFromX(0);
         drift.setFromY(0);
@@ -109,11 +118,24 @@ public class AboutUsController {
 
     @FXML
     public void onBackToDashboard(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
+        boolean isTeacher = user != null && "teacher".equalsIgnoreCase(user.getRole());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(isTeacher ? "Teacher_DashBoard.fxml" : "DashBoard.fxml"));
         Parent root = loader.load();
+
+        if (isTeacher) {
+            TeacherDashBoardController controller = loader.getController();
+            controller.setUser(user);
+        } else {
+            DashBoardController controller = loader.getController();
+            controller.setUser(user);
+        }
 
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

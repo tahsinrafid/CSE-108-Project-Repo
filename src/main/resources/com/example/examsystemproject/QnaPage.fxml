@@ -2,55 +2,44 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1020.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.QnaController">
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.QnaController">
     <stylesheets>
         <URL value="@Dashboard.css" />
     </stylesheets>
 
     <children>
-        <AnchorPane prefHeight="74.0" prefWidth="1020.0" styleClass="dash-top-bar">
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" styleClass="dash-top-bar">
             <children>
-                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="12.0" preserveRatio="true">
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
                     <image>
                         <Image url="@prlogo.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="80.0" layoutY="18.0" styleClass="dash-title" text="QNA Board" />
-                <Button layoutX="855.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="78.0" styleClass="menu-toggle-btn" text="Back" />
+                <Label layoutX="80.0" layoutY="18.0" styleClass="dash-title" text="Community" />
+                <Button layoutX="630.0" layoutY="18.0" mnemonicParsing="false" onAction="#onOpenQuestionModal" prefHeight="34.0" prefWidth="140.0" styleClass="qna-header-post-btn" text="Post Questions" />
+                <Button layoutX="782.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="90.0" styleClass="menu-toggle-btn" text="Back" />
             </children>
         </AnchorPane>
 
-        <VBox layoutX="24.0" layoutY="92.0" spacing="14.0" prefWidth="972.0">
-            <VBox spacing="10.0" style="-fx-background-color: rgba(15, 18, 37, 0.96); -fx-background-radius: 12; -fx-padding: 18;">
-                <Label text="Ask a question" style="-fx-text-fill: #f4fbff; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" />
-                <TextArea fx:id="questionInput" promptText="Type your question here..." prefRowCount="4" wrapText="true" style="-fx-background-color: #10162b; -fx-text-fill: white; -fx-control-inner-background: #10162b; -fx-prompt-text-fill: #55607a; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: rgba(154, 199, 221, 0.28); -fx-font-family: 'Trebuchet MS'; -fx-font-size: 14px; -fx-padding: 10px;" />
-                <HBox spacing="12.0">
-                    <ChoiceBox fx:id="audienceChoice" prefWidth="180.0" style="-fx-background-color: #10162b; -fx-text-fill: white; -fx-font-family: 'Trebuchet MS';" />
-                    <TextField fx:id="teacherTargetField" promptText="Dedicated teacher username" prefWidth="220.0" style="-fx-background-color: #10162b; -fx-text-fill: white; -fx-prompt-text-fill: #55607a; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: rgba(154, 199, 221, 0.28); -fx-font-family: 'Trebuchet MS';" />
-                    <Button mnemonicParsing="false" onAction="#onSubmitQuestion" prefHeight="36.0" prefWidth="160.0" style="-fx-background-color: #58eb34; -fx-text-fill: #0b1220; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-family: 'Trebuchet MS';" text="Submit Question" />
-                </HBox>
-                <Label text="Choose Everyone, Teachers, or Private teacher. Private questions are visible only to the student and the assigned teacher." style="-fx-text-fill: #9eb3cc; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" />
-            </VBox>
-
-            <VBox spacing="10.0" style="-fx-background-color: rgba(15, 18, 37, 0.96); -fx-background-radius: 12; -fx-padding: 18;">
+        <VBox layoutX="24.0" layoutY="86.0" prefWidth="852.0" spacing="10.0">
+            <VBox spacing="10.0" styleClass="qna-feed-card">
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Visible Questions" style="-fx-text-fill: #f4fbff; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" />
-                    <Label fx:id="postCountLabel" style="-fx-text-fill: #9eb3cc; -fx-font-size: 12; -fx-padding: 0 0 0 12;" text="0 posts" />
+                    <Label styleClass="qna-card-title" text="Public questions" />
+                    <Region prefWidth="1.0" HBox.hgrow="ALWAYS" />
+                    <Label fx:id="postCountLabel" styleClass="qna-count-label" text="0 questions" />
                 </HBox>
-                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="470.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="474.0" styleClass="qna-feed-scroll" vbarPolicy="AS_NEEDED">
                     <content>
-                        <VBox fx:id="postContainer" spacing="12.0" style="-fx-padding: 4 6 14 6;" />
+                        <VBox fx:id="postContainer" spacing="10.0" style="-fx-padding: 4 4 14 4;" />
                     </content>
                 </ScrollPane>
             </VBox>

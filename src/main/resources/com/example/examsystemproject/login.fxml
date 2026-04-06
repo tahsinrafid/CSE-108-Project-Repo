@@ -59,6 +59,11 @@
             <Insets top="15.0" />
          </VBox.margin>
       </Button>
+      <Button mnemonicParsing="false" onAction="#goBackToLanding" prefHeight="42.0" prefWidth="370.0" style="-fx-background-radius: 10; -fx-background-color: #6b7480; -fx-text-fill: white; -fx-cursor: hand; -fx-font-weight: bold; -fx-font-size: 15px;" text="Back">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
       <Label alignment="CENTER" prefWidth="370.0" text="Don't have an account?" textFill="#666666">
          <font>
             <Font size="14.0" />

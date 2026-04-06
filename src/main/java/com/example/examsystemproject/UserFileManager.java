@@ -49,7 +49,7 @@ public class UserFileManager {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 String[] parts = line.split(",");
-                if (parts[1].equals(username) && parts[2].equals(password)) {
+                if (parts[1].equals(username) && parts[2].equals(password) && parts.length >= 4) {
                     return new User(parts[0],parts[1],parts[2],parts[3]);
                 }
             }
