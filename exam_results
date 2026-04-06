@@ -1,1 +1,6 @@
 E1,Phy CT 1,auntor11,3,5,Q3:B|Q2:D|Q5:C|Q6:C|Q8:D
+E3,Mock Test,gg,3,5,Q3:B|Q5:B|Q6:D|Q8:B|Q10:B
+E1,Phy CT 1,gg,4,5,Q3:B|Q2:D|Q5:B|Q6:D|Q8:A
+E2,Phy CT 2,gg,3,3,Q1:A|Q4:A|Q5:B
+E2,Phy CT 2,auntor11,2,3,Q1:A|Q4:A|Q5:C
+E3,Mock Test,auntor11,3,5,Q3:B|Q5:B|Q6:C|Q8:B|Q10:A

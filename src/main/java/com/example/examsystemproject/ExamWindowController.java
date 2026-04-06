@@ -134,7 +134,7 @@ public class ExamWindowController {
         controller.setUser(user);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root, 900, 600));
         stage.show();
     }
 

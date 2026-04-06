@@ -54,7 +54,7 @@ public class StartExamController {
             controller.setContext(exam, user);
 
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root, 900, 600));
             stage.show();
         } catch (IOException ex) {
             throw new RuntimeException("Could not open exam window", ex);
@@ -136,7 +136,15 @@ public class StartExamController {
         VBox infoBox = new VBox(4);
         Label title = new Label(exam.getExamName());
         title.setStyle("-fx-text-fill: #f6fbff; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-        Label meta = new Label("Exam ID: " + exam.getExamId() + "   Subject: " + exam.getSubject() + "   Duration: " + exam.getDurationMinutes() + " min");
+        String classText = (exam.getClassLevel() == null || exam.getClassLevel().trim().isEmpty()) ? "-" : exam.getClassLevel();
+        int marks = exam.getMarks() > 0 ? exam.getMarks() : exam.getQuestionIds().size();
+        int totalQuestions = exam.getQuestionIds().size();
+        Label meta = new Label("Subject: " + exam.getSubject()
+                + "   Class: " + classText
+                + "   Marks: " + marks
+                + "   Total Questions: " + totalQuestions
+                + "   Duration: " + exam.getDurationMinutes() + " min");
+        meta.setWrapText(true);
         meta.setStyle("-fx-text-fill: #b7d3e8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
         infoBox.getChildren().addAll(title, meta);
         HBox.setHgrow(infoBox, Priority.ALWAYS);

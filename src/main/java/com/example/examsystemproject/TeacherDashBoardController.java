@@ -96,8 +96,14 @@ public class TeacherDashBoardController {
     }
 
     @FXML
-    public void onAboutUsClick(ActionEvent e) {
-        System.out.println("About us clicked");
+    public void onAboutUsClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("aboutUs.fxml"));
+        Parent root = loader.load();
+        AboutUsController controller = loader.getController();
+        controller.setUser(user);
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -174,7 +180,9 @@ public class TeacherDashBoardController {
         } catch (IOException e) {
             System.out.println("Could not read users.txt: " + e.getMessage());
         }
-        studentLabel.setText(Integer.toString(studentCount));
+        if(studentLabel != null){
+            studentLabel.setText(Integer.toString(studentCount));
+        }
     }
     public void showTotalExams() {
         int examCount = 0;
@@ -187,6 +195,8 @@ public class TeacherDashBoardController {
         } catch (IOException e) {
             System.out.println("Could not read users.txt: " + e.getMessage());
         }
-        examLabel.setText(Integer.toString(examCount));
+        if(examLabel != null) {
+            examLabel.setText(Integer.toString(examCount));
+        }
     }
 }

@@ -65,6 +65,25 @@ public class ExamResultFileManager {
         return results;
     }
 
+    public static List<ExamResult> loadResultsForStudent(String username) throws IOException {
+        List<ExamResult> studentResults = new ArrayList<>();
+        if (username == null || username.trim().isEmpty()) {
+            return studentResults;
+        }
+
+        String target = username.trim();
+        for (ExamResult result : loadAllResults()) {
+            if (result == null || result.getStudentUsername() == null) {
+                continue;
+            }
+
+            if (target.equalsIgnoreCase(result.getStudentUsername().trim())) {
+                studentResults.add(result);
+            }
+        }
+        return studentResults;
+    }
+
     private static String formatLine(ExamResult result) {
         return sanitize(result.getExamId()) + ","
                 + sanitize(result.getExamName()) + ","

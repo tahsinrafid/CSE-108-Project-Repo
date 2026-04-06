@@ -69,15 +69,15 @@ public class ViewResultsController {
                     classLevelMap.put(exam.getExamId(), exam.getClassLevel());
                     subjectMap.put(exam.getExamId(), exam.getSubject());
                 }
-            } catch (IOException ex) {
-                // Silently continue if exams can't be loaded
+            } catch (IOException e) {
+                // just continue if exams can't be loaded
             }
 
             for (ExamResult result : userResults) {
                 resultsList.getChildren().add(createResultRow(result, classLevelMap, subjectMap));
             }
-        } catch (IOException ex) {
-            Label errorLabel = new Label("Failed to load results: " + ex.getMessage());
+        } catch (IOException e) {
+            Label errorLabel = new Label("Failed to load results: " + e.getMessage());
             errorLabel.setStyle("-fx-text-fill: #b53a3a; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS'; -fx-padding: 20;");
             resultsList.getChildren().add(errorLabel);
         }

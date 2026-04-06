@@ -1,6 +1,7 @@
 package com.example.examsystemproject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -11,23 +12,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class QnaController {
-    @FXML
-    private TextArea questionInput;
-    @FXML
-    private ChoiceBox<String> audienceChoice;
-    @FXML
-    private TextField teacherTargetField;
     @FXML
     private VBox postContainer;
     @FXML
@@ -37,12 +34,7 @@ public class QnaController {
     private boolean teacherMode;
 
     @FXML
-    public void initialize() {
-        if (audienceChoice != null) {
-            audienceChoice.getItems().setAll("Everyone", "Teachers", "Private teacher");
-            audienceChoice.setValue("Everyone");
-        }
-    }
+    public void initialize() {}
 
     public void setUser(User user) {
         this.user = user;
@@ -51,35 +43,86 @@ public class QnaController {
     }
 
     @FXML
-    public void onSubmitQuestion() {
-        String text = questionInput.getText() == null ? "" : questionInput.getText().trim();
-        if (text.isEmpty()) {
-            showAlert("Question needed", "Write a question before submitting.");
-            return;
+    public void onOpenQuestionModal() {
+        Stage owner = (Stage) postContainer.getScene().getWindow();
+
+        TextArea questionEditor = new TextArea();
+        questionEditor.setPromptText("Post your doubt publicly. Teachers and students can comment.");
+        questionEditor.setPrefRowCount(6);
+        questionEditor.setWrapText(true);
+        questionEditor.getStyleClass().add("qna-question-input");
+
+        Button cancelButton = new Button("Cancel");
+        cancelButton.getStyleClass().add("qna-secondary-btn");
+
+        Button postButton = new Button("Post Question");
+        postButton.getStyleClass().add("qna-primary-btn");
+
+        HBox actions = new HBox(10, cancelButton, postButton);
+        actions.setAlignment(Pos.CENTER_RIGHT);
+
+        Label helper = new Label("All questions and comments are public in this board.");
+        helper.getStyleClass().add("qna-info-text");
+
+        VBox dialogRoot = new VBox(10,
+                createSectionTitle("Ask the community"),
+                questionEditor,
+                helper,
+                actions);
+        dialogRoot.getStyleClass().add("qna-compose-card");
+        dialogRoot.getStyleClass().add("qna-modal-card");
+        dialogRoot.setMaxWidth(560);
+
+        StackPane overlayRoot = new StackPane(dialogRoot);
+        overlayRoot.getStyleClass().add("qna-modal-overlay");
+
+        Scene scene = new Scene(overlayRoot, owner.getWidth(), owner.getHeight());
+        scene.setFill(Color.TRANSPARENT);
+        URL cssUrl = getClass().getResource("Dashboard.css");
+        if (cssUrl != null) {
+            scene.getStylesheets().add(cssUrl.toExternalForm());
         }
 
-        String audience = audienceChoice.getValue() == null ? "Everyone" : audienceChoice.getValue();
-        String assignedTeacher = teacherTargetField != null && teacherTargetField.getText() != null
-                ? teacherTargetField.getText().trim()
-                : "";
-        if ("Private teacher".equalsIgnoreCase(audience) && assignedTeacher.isEmpty()) {
-            showAlert("Teacher needed", "Enter the dedicated teacher username for a private message.");
-            return;
+        Stage modal = new Stage();
+        modal.initOwner(owner);
+        modal.initModality(Modality.WINDOW_MODAL);
+        modal.initStyle(StageStyle.TRANSPARENT);
+        modal.setResizable(false);
+        modal.setTitle("Post Questions");
+        modal.setScene(scene);
+        modal.setX(owner.getX());
+        modal.setY(owner.getY());
+
+        cancelButton.setOnAction(event -> modal.close());
+        postButton.setOnAction(event -> {
+            if (submitQuestionText(questionEditor.getText())) {
+                modal.close();
+            }
+        });
+        overlayRoot.setOnMouseClicked(event -> modal.close());
+        dialogRoot.setOnMouseClicked(event -> event.consume());
+
+        modal.showAndWait();
+    }
+
+    private boolean submitQuestionText(String questionText) {
+        String text = questionText == null ? "" : questionText.trim();
+        if (text.isEmpty()) {
+            showAlert("Question needed", "Write a question before submitting.");
+            return false;
         }
+
         String username = user != null ? user.getUsername() : "student";
         String role = user != null ? user.getRole() : "student";
 
         try {
             String id = QnaFileManager.nextSequentialPostId();
-            QnaFileManager.addPost(new QnaPost(id, text, username, role, audience, assignedTeacher, "", ""));
-            questionInput.clear();
-            audienceChoice.setValue("Everyone");
-            if (teacherTargetField != null) {
-                teacherTargetField.clear();
-            }
+            QnaFileManager.addPost(new QnaPost(id, text, username, role, null));
             loadPosts();
+            return true;
         } catch (IOException ex) {
             showAlert("Save failed", "Could not submit your question: " + ex.getMessage());
+            return false;
         }
     }
 
@@ -96,7 +139,7 @@ public class QnaController {
             DashBoardController controller = loader.getController();
             controller.setUser(user);
         }
-        Stage stage = (Stage) questionInput.getScene().getWindow();
+        Stage stage = (Stage) postContainer.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -109,21 +152,16 @@ public class QnaController {
         postContainer.getChildren().clear();
         try {
             List<QnaPost> posts = QnaFileManager.loadAllPosts();
-            String currentRole = user != null ? user.getRole() : "student";
-            String currentUsername = user != null ? user.getUsername() : "student";
-            int visibleCount = 0;
+            int postCount = 0;
 
-            for (QnaPost post : posts) {
-                if (!canSeePost(post, currentRole, currentUsername)) {
-                    continue;
-                }
-                postContainer.getChildren().add(createPostCard(post));
-                visibleCount++;
+            for (int i = posts.size() - 1; i >= 0; i--) {
+                postContainer.getChildren().add(createPostCard(posts.get(i)));
+                postCount++;
             }
 
-            postCountLabel.setText(visibleCount + " visible post" + (visibleCount != 1 ? "s" : ""));
-            if (visibleCount == 0) {
-                postContainer.getChildren().add(infoLabel("No QNA posts yet."));
+            postCountLabel.setText(postCount + " question" + (postCount != 1 ? "s" : ""));
+            if (postCount == 0) {
+                postContainer.getChildren().add(infoLabel("No community questions yet. Ask the first one."));
             }
         } catch (IOException ex) {
             postContainer.getChildren().add(infoLabel("Failed to load QNA posts: " + ex.getMessage()));
@@ -131,117 +169,170 @@ public class QnaController {
         }
     }
 
-    private boolean canSeePost(QnaPost post, String role, String username) {
-        String visibility = post.getVisibility();
-        if ("Private teacher".equalsIgnoreCase(visibility)) {
-            boolean isAuthor = username != null && username.equalsIgnoreCase(post.getAuthorUsername());
-            boolean isAssignedTeacher = "teacher".equalsIgnoreCase(role)
-                    && username != null
-                    && username.equalsIgnoreCase(post.getAssignedTeacherUsername());
-            return isAuthor || isAssignedTeacher;
-        }
-        return true;
-    }
-
     private VBox createPostCard(QnaPost post) {
         VBox card = new VBox(10);
         card.setPadding(new Insets(16));
-        card.setStyle("-fx-background-color: rgba(15, 18, 37, 0.96); -fx-background-radius: 10; -fx-border-color: rgba(88, 235, 52, 0.18); -fx-border-radius: 10;");
+        card.getStyleClass().add("qna-post-card");
 
-        HBox header = new HBox(10);
+        HBox header = new HBox(8);
         header.setAlignment(Pos.CENTER_LEFT);
 
         Label title = new Label(post.getQuestionText());
         title.setWrapText(true);
-        title.setStyle("-fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
+        title.getStyleClass().add("qna-post-title");
         HBox.setHgrow(title, Priority.ALWAYS);
 
-        Label scope = new Label(post.getVisibility());
-        scope.setStyle("-fx-text-fill: #9ed6ff; -fx-font-size: 11; -fx-background-color: rgba(45, 90, 140, 0.28); -fx-padding: 4 10; -fx-background-radius: 14;");
+        Label postTag = new Label("Public");
+        postTag.getStyleClass().add("qna-public-tag");
 
-        header.getChildren().addAll(title, scope);
+        header.getChildren().addAll(title, postTag);
 
-        Label meta = new Label("Asked by " + post.getAuthorUsername() + " (" + post.getAuthorRole() + ")");
-        meta.setStyle("-fx-text-fill: #8e9ab6; -fx-font-size: 11; -fx-font-family: 'Trebuchet MS';");
+        HBox askerRow = new HBox(8);
+        askerRow.setAlignment(Pos.CENTER_LEFT);
+        Label askedBy = new Label("Asked by " + post.getAuthorUsername());
+        askedBy.getStyleClass().add("qna-meta");
+        Label askerRole = createRoleChip(post.getAuthorRole());
+        askerRow.getChildren().addAll(askedBy, askerRole);
 
-        HBox detailRow = new HBox(10);
-        detailRow.setAlignment(Pos.CENTER_LEFT);
-        if ("Private teacher".equalsIgnoreCase(post.getVisibility())) {
-            Label privateTag = new Label("Private to: " + post.getAssignedTeacherUsername());
-            privateTag.setStyle("-fx-text-fill: #ffd7a8; -fx-font-size: 11; -fx-background-color: rgba(245, 156, 26, 0.16); -fx-padding: 4 10; -fx-background-radius: 14;");
-            detailRow.getChildren().add(privateTag);
+        VBox commentsBox = new VBox(8);
+        commentsBox.getChildren().add(createSectionTitle("Comments (" + post.getCommentCount() + ")"));
+        if (post.getComments().isEmpty()) {
+            Label empty = new Label("No comments yet. Be the first to help.");
+            empty.getStyleClass().add("qna-comment-empty");
+            commentsBox.getChildren().add(empty);
+        } else {
+            for (int i = 0; i < post.getComments().size(); i++) {
+                commentsBox.getChildren().add(createCommentCard(post, i, post.getComments().get(i)));
+            }
         }
 
-        VBox answerBox = new VBox(6);
-        Label answerTitle = new Label(post.isAnswered() ? "Answer" : "No answer yet");
-        answerTitle.setStyle("-fx-text-fill: #58eb34; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-        Label answerText = new Label(post.isAnswered() ? post.getAnswerText() : "Waiting for an answer.");
-        answerText.setWrapText(true);
-        answerText.setStyle("-fx-text-fill: #d6e5f3; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
-        answerBox.getChildren().addAll(answerTitle, answerText);
+        VBox composer = new VBox(6);
+        TextArea commentInput = new TextArea();
+        commentInput.setPromptText("Write a public comment...");
+        commentInput.setPrefRowCount(2);
+        commentInput.setWrapText(true);
+        commentInput.getStyleClass().add("qna-comment-input");
 
-        card.getChildren().addAll(header, meta, detailRow, answerBox);
+        HBox composerActions = new HBox();
+        composerActions.setAlignment(Pos.CENTER_RIGHT);
+        Button commentButton = new Button("Post Comment");
+        commentButton.getStyleClass().add("qna-comment-btn");
+        commentButton.setOnAction(event -> submitComment(post, commentInput));
+        composerActions.getChildren().add(commentButton);
+        composer.getChildren().addAll(commentInput, composerActions);
 
-        boolean canAnswer = canAnswerPost(post, user != null ? user.getRole() : "student", user != null ? user.getUsername() : "student");
-        if (canAnswer && !post.isAnswered()) {
-            Button answerBtn = new Button("Answer");
-            answerBtn.setStyle("-fx-background-color: #58eb34; -fx-text-fill: #0b1220; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 5 12;");
-            answerBtn.setOnAction(event -> openAnswerDialog(post));
-            card.getChildren().add(answerBtn);
-        } else if (!canAnswer) {
-            Label readOnly = new Label("Read only for your role.");
-            readOnly.setStyle("-fx-text-fill: #8e9ab6; -fx-font-size: 11; -fx-font-style: italic;");
-            card.getChildren().add(readOnly);
-        }
+        card.getChildren().addAll(header, askerRow, commentsBox, composer);
 
         return card;
     }
 
-    private boolean canAnswerPost(QnaPost post, String role, String username) {
-        if ("Private teacher".equalsIgnoreCase(post.getVisibility())) {
-            return "teacher".equalsIgnoreCase(role)
-                    && username != null
-                    && username.equalsIgnoreCase(post.getAssignedTeacherUsername());
+    private VBox createCommentCard(QnaPost post, int commentIndex, QnaComment comment) {
+        VBox commentCard = new VBox(5);
+        commentCard.getStyleClass().add("qna-comment-card");
+
+        HBox authorRow = new HBox(8);
+        authorRow.setAlignment(Pos.CENTER_LEFT);
+        Label author = new Label(comment.getAuthorUsername());
+        author.getStyleClass().add("qna-comment-author");
+        Label roleChip = createRoleChip(comment.getAuthorRole());
+        authorRow.getChildren().addAll(author, roleChip);
+
+        if (canDeleteComment(comment)) {
+            HBox.setHgrow(author, Priority.ALWAYS);
+            Button deleteButton = new Button("Delete");
+            deleteButton.getStyleClass().add("qna-delete-comment-btn");
+            deleteButton.setOnAction(event -> deleteComment(post, commentIndex));
+            authorRow.getChildren().add(deleteButton);
         }
-        if ("Teachers".equalsIgnoreCase(post.getVisibility())) {
-            return "teacher".equalsIgnoreCase(role);
-        }
-        return true;
+
+        Label text = new Label(comment.getCommentText());
+        text.setWrapText(true);
+        text.getStyleClass().add("qna-comment-text");
+
+        commentCard.getChildren().addAll(authorRow, text);
+        return commentCard;
     }
 
-    private void openAnswerDialog(QnaPost post) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Answer QNA");
-        dialog.setHeaderText(post.getQuestionText());
-        dialog.setContentText("Write the answer:");
+    private boolean canDeleteComment(QnaComment comment) {
+        if (comment == null || user == null || user.getUsername() == null) {
+            return false;
+        }
 
-        dialog.showAndWait().ifPresent(text -> {
-            String answer = text.trim();
-            if (answer.isEmpty()) {
+        if (teacherMode) {
+            return true;
+        }
+
+        return user.getUsername().equalsIgnoreCase(comment.getAuthorUsername());
+    }
+
+    private void deleteComment(QnaPost post, int commentIndex) {
+        if (post == null || commentIndex < 0) {
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Delete Comment");
+        confirm.setHeaderText("Remove this comment?");
+        confirm.setContentText("This action cannot be undone.");
+
+        if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+            return;
+        }
+
+        try {
+            boolean deleted = QnaFileManager.deleteComment(post.getPostId(), commentIndex);
+            if (!deleted) {
+                showAlert("Delete failed", "Could not delete the comment. Please refresh and try again.");
                 return;
             }
-            String answeredBy = user != null ? user.getUsername() : "teacher";
-            try {
-                QnaFileManager.updatePost(new QnaPost(
-                        post.getPostId(),
-                        post.getQuestionText(),
-                        post.getAuthorUsername(),
-                        post.getAuthorRole(),
-                        post.getVisibility(),
-                    post.getAssignedTeacherUsername(),
-                        answer,
-                        answeredBy));
-                loadPosts();
-            } catch (IOException ex) {
-                showAlert("Answer failed", "Could not save the answer: " + ex.getMessage());
-            }
-        });
+            loadPosts();
+        } catch (IOException ex) {
+            showAlert("Delete failed", "Could not delete the comment: " + ex.getMessage());
+        }
+    }
+
+    private Label createSectionTitle(String text) {
+        Label label = new Label(text);
+        label.getStyleClass().add("qna-section-title");
+        return label;
+    }
+
+    private Label createRoleChip(String role) {
+        String normalized = role == null ? "student" : role.trim().toLowerCase();
+        boolean teacher = "teacher".equals(normalized);
+
+        Label chip = new Label(teacher ? "Teacher" : "Student");
+        chip.getStyleClass().add("qna-role-chip");
+        chip.getStyleClass().add(teacher ? "qna-role-teacher" : "qna-role-student");
+        return chip;
+    }
+
+    private void submitComment(QnaPost post, TextArea commentInput) {
+        if (post == null || commentInput == null) {
+            return;
+        }
+
+        String text = commentInput.getText() == null ? "" : commentInput.getText().trim();
+        if (text.isEmpty()) {
+            showAlert("Comment needed", "Write a comment before posting.");
+            return;
+        }
+
+        String username = user != null ? user.getUsername() : "community_user";
+        String role = user != null ? user.getRole() : "student";
+
+        try {
+            QnaFileManager.addComment(post.getPostId(), new QnaComment(username, role, text));
+            loadPosts();
+        } catch (IOException ex) {
+            showAlert("Comment failed", "Could not save your comment: " + ex.getMessage());
+        }
     }
 
     private Label infoLabel(String text) {
         Label label = new Label(text);
         label.setWrapText(true);
-        label.setStyle("-fx-text-fill: #d7e8f6; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
+        label.getStyleClass().add("qna-info-text");
         return label;
     }
 

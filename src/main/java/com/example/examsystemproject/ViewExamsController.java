@@ -7,12 +7,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -76,13 +76,7 @@ public class ViewExamsController {
         Label examNumber = new Label("Exam " + displayIndex);
         examNumber.setStyle("-fx-text-fill: #3d2b69; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
 
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        Label examId = new Label(exam.getExamId());
-        examId.setStyle("-fx-text-fill: #7a758f; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
-
-        header.getChildren().addAll(examNumber, spacer, examId);
+        header.getChildren().add(examNumber);
 
         Label examTitle = new Label(exam.getExamName());
         examTitle.setStyle("-fx-text-fill: #2f2349; -fx-font-size: 16; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
@@ -105,8 +99,36 @@ public class ViewExamsController {
         addDetailRow(details, 4, "Questions", String.valueOf(exam.getQuestionIds().size()));
         addDetailRow(details, 5, "Created By", exam.getCreatedBy());
 
-        card.getChildren().addAll(header, examTitle, details);
+        HBox actions = new HBox();
+        actions.setAlignment(Pos.CENTER_RIGHT);
+
+        Button viewButton = new Button("View");
+        viewButton.setStyle("-fx-background-color: #111111; -fx-text-fill: white; -fx-font-weight: bold; "
+                + "-fx-background-radius: 12; -fx-cursor: hand; -fx-font-size: 11; -fx-padding: 4 16; -fx-font-family: 'Trebuchet MS';");
+        viewButton.setOnAction(event -> {
+            try {
+                openExamDetails(exam);
+            } catch (IOException ex) {
+                examsCountLabel.setText("Error");
+            }
+        });
+
+        actions.getChildren().add(viewButton);
+
+        card.getChildren().addAll(header, examTitle, details, actions);
         return card;
+    }
+
+    private void openExamDetails(Exam exam) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ExamDetails.fxml"));
+        Parent root = loader.load();
+
+        ExamDetailsController controller = loader.getController();
+        controller.setExamAndUser(exam, user);
+
+        Stage stage = (Stage) examsContainer.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private void addDetailRow(GridPane grid, int row, String key, String value) {

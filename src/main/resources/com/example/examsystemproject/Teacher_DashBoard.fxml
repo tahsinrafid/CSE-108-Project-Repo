@@ -14,10 +14,8 @@
         <URL value="@Dashboard.css" />
     </stylesheets>
     <children>
-        <!-- Header/Top Bar -->
         <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #3d2b69; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 2);">
             <children>
-                <!-- Logo Image -->
                 <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
                     <image>
                         <Image url="@../../../prlogo.png" />
@@ -29,7 +27,6 @@
             </children>
         </AnchorPane>
 
-        <!-- Main Content Area -->
         <AnchorPane layoutX="-5.0" layoutY="70.0" prefHeight="530.0" prefWidth="906.0" style="-fx-background-color: white;">
             <children>
                 <AnchorPane layoutX="206.0" layoutY="14.0" prefHeight="150.0" prefWidth="680.0" style="-fx-background-color: #f4f6fb; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
@@ -84,8 +81,7 @@
                         <Button layoutX="24.0" layoutY="90.0" mnemonicParsing="false" onAction="#onLeaderboardClick" prefHeight="34.0" prefWidth="146.0" styleClass="card-btn-info" text="Open Leaderboard" />
                     </children>
                 </AnchorPane>
-      
-                          <!-- Sidebar Navigation -->
+
               <VBox fx:id="sidebarVBox" prefHeight="532.0" prefWidth="187.0" style="-fx-background-color: #244857; -fx-padding: 10px 0px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1); -fx-background-radius: 20;">
                   <children>
                       <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboardClick" style="-fx-padding: 15px 20px; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-color: #1e3a5f; -fx-border-color: #1e3a5f; -fx-cursor: hand;" styleClass="sidebar-btn-active" text="Dashboard" />

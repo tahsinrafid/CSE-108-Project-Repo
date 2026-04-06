@@ -50,7 +50,6 @@ public class ResultDetailsController {
         }
 
         try {
-            // Load exam details
             List<Exam> allExams = ExamFileManager.loadAllExams();
             Exam exam = null;
             for (Exam e : allExams) {
@@ -67,7 +66,6 @@ public class ResultDetailsController {
                 return;
             }
 
-            // Update header and metadata
             examTitleLabel.setText(result.getExamName());
             examMetaLabel.setText("Subject: " + exam.getSubject() + "  |  Questions: " + exam.getQuestionIds().size());
 
@@ -79,7 +77,6 @@ public class ResultDetailsController {
             scoreLabel.setText(result.getScore() + " / " + result.getTotalMarks());
             percentageLabel.setText(percentage + "%");
 
-            // Load questions
             List<Question> allQuestions = QuesFileManager.loadAllQuestions();
             List<Question> examQuestions = new ArrayList<>();
             for (Question q : allQuestions) {
@@ -118,7 +115,8 @@ public class ResultDetailsController {
             String optionCode = optionCodes[i];
             String optionText = optionTexts[i];
             boolean isCorrect = optionCode.equalsIgnoreCase(question.getCorrectAns());
-            boolean isStudentAnswer = studentAnswer != null && optionCode.equalsIgnoreCase(studentAnswer);
+            boolean isStudentAnswer = optionCode.equalsIgnoreCase(studentAnswer);
+            boolean isStudentWrongPick = isStudentAnswer && !isCorrect;
 
             HBox optionBox = new HBox(8);
             optionBox.setPadding(new Insets(8, 10, 8, 10));
@@ -126,8 +124,8 @@ public class ResultDetailsController {
 
             if (isCorrect) {
                 optionBox.setStyle(optionBox.getStyle() + " -fx-background-color: #dff5e6; -fx-border-color: #a8dfc1; -fx-border-width: 1;");
-            } else if (isStudentAnswer) {
-                optionBox.setStyle(optionBox.getStyle() + " -fx-background-color: #e3edff; -fx-border-color: #9fb6e8; -fx-border-width: 1;");
+            } else if (isStudentWrongPick) {
+                optionBox.setStyle(optionBox.getStyle() + " -fx-background-color: #fde7e7; -fx-border-color: #e7aaaa; -fx-border-width: 1;");
             } else {
                 optionBox.setStyle(optionBox.getStyle() + " -fx-background-color: #efedf6; -fx-border-color: #d3cfdd; -fx-border-width: 1;");
             }
@@ -137,16 +135,16 @@ public class ResultDetailsController {
             optionLabel.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(optionLabel, Priority.ALWAYS);
 
-            String textColor = isCorrect ? "#2a6d36" : "#4e4a60";
+            String textColor = isCorrect ? "#2a6d36" : (isStudentWrongPick ? "#a32929" : "#4e4a60");
             optionLabel.setStyle("-fx-text-fill: " + textColor + "; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';");
 
             if (isCorrect) {
                 Label checkMark = new Label("✓");
                 checkMark.setStyle("-fx-text-fill: #2a6d36; -fx-font-size: 12; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
                 optionBox.getChildren().addAll(optionLabel, checkMark);
-            } else if (isStudentAnswer) {
+            } else if (isStudentWrongPick) {
                 Label yourPick = new Label("Your Pick");
-                yourPick.setStyle("-fx-text-fill: #2f4b8a; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
+                yourPick.setStyle("-fx-text-fill: #a32929; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';");
                 optionBox.getChildren().addAll(optionLabel, yourPick);
             } else {
                 optionBox.getChildren().add(optionLabel);
@@ -157,7 +155,10 @@ public class ResultDetailsController {
 
         String shownStudentAnswer = studentAnswer == null || studentAnswer.isBlank() ? "Not Available" : studentAnswer;
         Label studentAnswerLabel = new Label("Your Answer: " + shownStudentAnswer);
-        studentAnswerLabel.setStyle("-fx-text-fill: #2f4b8a; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS'; -fx-padding: 6 0 0 0;");
+        boolean hasStudentAnswer = studentAnswer != null && !studentAnswer.isBlank();
+        boolean isStudentCorrect = hasStudentAnswer && studentAnswer.equalsIgnoreCase(question.getCorrectAns());
+        String studentAnswerColor = !hasStudentAnswer ? "#2f4b8a" : (isStudentCorrect ? "#2a6d36" : "#a32929");
+        studentAnswerLabel.setStyle("-fx-text-fill: " + studentAnswerColor + "; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS'; -fx-padding: 6 0 0 0;");
 
         Label correctAnswer = new Label("Correct Answer: " + question.getCorrectAns());
         correctAnswer.setStyle("-fx-text-fill: #2a6d36; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS'; -fx-padding: 6 0 0 0;");

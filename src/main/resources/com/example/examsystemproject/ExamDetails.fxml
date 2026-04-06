@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #eef0f6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.ExamDetailsController">
+    <stylesheets>
+        <URL value="@Dashboard.css" />
+    </stylesheets>
+
+    <children>
+        <AnchorPane prefHeight="78.0" prefWidth="900.0" style="-fx-background-color: #3d2b69; -fx-border-color: rgba(255,255,255,0.08); -fx-border-width: 0 0 1 0;">
+            <children>
+                <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="18.0" layoutY="15.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../prlogo.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="examTitleLabel" layoutX="78.0" layoutY="18.0" style="-fx-text-fill: #f5f3ff; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Exam Details" />
+                <Button layoutX="798.0" layoutY="21.0" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="84.0" styleClass="menu-toggle-btn" text="Back" />
+            </children>
+        </AnchorPane>
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="78.0" prefHeight="522.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+            <content>
+                <VBox spacing="16.0" style="-fx-padding: 22; -fx-background-color: transparent;">
+                    <HBox spacing="20.0" style="-fx-padding: 16; -fx-background-color: #ffffff; -fx-background-radius: 12; -fx-border-color: #d8d7e2; -fx-border-radius: 12;">
+                        <VBox spacing="6.0">
+                            <Label style="-fx-text-fill: #7a758f; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Subject" />
+                            <Label fx:id="subjectLabel" style="-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="-" />
+                        </VBox>
+                        <VBox spacing="6.0">
+                            <Label style="-fx-text-fill: #7a758f; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Class" />
+                            <Label fx:id="classLabel" style="-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="-" />
+                        </VBox>
+                        <VBox spacing="6.0">
+                            <Label style="-fx-text-fill: #7a758f; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Marks" />
+                            <Label fx:id="marksLabel" style="-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="-" />
+                        </VBox>
+                        <VBox spacing="6.0">
+                            <Label style="-fx-text-fill: #7a758f; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Duration" />
+                            <Label fx:id="durationLabel" style="-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="-" />
+                        </VBox>
+                        <VBox spacing="6.0">
+                            <Label style="-fx-text-fill: #7a758f; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Created By" />
+                            <Label fx:id="createdByLabel" style="-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="-" />
+                        </VBox>
+                        <VBox spacing="6.0">
+                            <Label style="-fx-text-fill: #7a758f; -fx-font-size: 11; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Total Questions" />
+                            <Label fx:id="totalQuestionsLabel" style="-fx-text-fill: #2f2349; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="-" />
+                        </VBox>
+                    </HBox>
+
+                    <VBox fx:id="questionsContainer" spacing="12.0">
+                        <padding>
+                            <Insets bottom="10.0" />
+                        </padding>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
+

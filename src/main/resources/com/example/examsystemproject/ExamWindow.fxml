@@ -7,18 +7,17 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1000.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.ExamWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.ExamWindowController">
     <stylesheets>
         <URL value="@Dashboard.css" />
         <URL value="@startExam.css" />
     </stylesheets>
 
     <children>
-        <AnchorPane prefHeight="74.0" prefWidth="1000.0" styleClass="dash-top-bar">
+        <AnchorPane prefHeight="74.0" prefWidth="900.0" styleClass="dash-top-bar">
             <children>
                 <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="12.0" preserveRatio="true">
                     <image>
@@ -27,12 +26,12 @@
                 </ImageView>
                 <Label fx:id="examTitleLabel" layoutX="78.0" layoutY="18.0" styleClass="dash-title" text="Exam" />
                 <Label fx:id="examMetaLabel" layoutX="78.0" layoutY="42.0" style="-fx-text-fill: #b8d3e8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Meta" />
-                <Label fx:id="timerLabel" layoutX="770.0" layoutY="22.0" style="-fx-background-color: rgba(226, 111, 43, 0.18); -fx-background-radius: 16; -fx-padding: 6 12; -fx-text-fill: #ffd7bd; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Time Left: 00:00" />
-                <Button fx:id="backButton" layoutX="880.0" layoutY="18.0" managed="false" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="74.0" styleClass="menu-toggle-btn" text="Back" visible="false" />
+                <Label fx:id="timerLabel" layoutX="664.0" layoutY="22.0" style="-fx-background-color: rgba(226, 111, 43, 0.18); -fx-background-radius: 16; -fx-padding: 6 12; -fx-text-fill: #ffd7bd; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Time Left: 00:00" />
+                <Button fx:id="backButton" layoutX="806.0" layoutY="18.0" managed="false" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="74.0" styleClass="menu-toggle-btn" text="Back" visible="false" />
             </children>
         </AnchorPane>
 
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="74.0" prefHeight="646.0" prefWidth="1000.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="74.0" prefHeight="526.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
             <content>
                 <VBox spacing="16.0" style="-fx-padding: 22; -fx-background-color: transparent;">
                     <Label text="Take the exam, then submit to reveal your marks." style="-fx-text-fill: #d5e7f6; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />

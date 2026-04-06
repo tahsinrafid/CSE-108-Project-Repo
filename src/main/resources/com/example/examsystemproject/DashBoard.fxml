@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -35,7 +35,7 @@
                     <children>
                         <AnchorPane layoutX="9.0" layoutY="14.0" prefHeight="112.0" prefWidth="674.0" style="-fx-background-color: #f4f6fb; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
                             <children>
-                                <Label fx:id="helloLabel" layoutX="25.0" layoutY="22.0" style="-fx-text-fill: #1c1f2b; -fx-font-size: 31; -fx-font-weight: bold;" text="Hello Student" />
+                                <Label fx:id="helloLabel" layoutX="25.0" layoutY="22.0" style="-fx-text-fill: #1c1f2b; -fx-font-size: 31; -fx-font-weight: bold;" text="Hello " />
                                 <Label layoutX="27.0" layoutY="69.0" style="-fx-text-fill: #6b7280; -fx-font-size: 16; -fx-font-weight: bold;" text="Welcome back to ExamAce" />
                             </children>
                         </AnchorPane>
@@ -63,17 +63,17 @@
                             </children>
                         </AnchorPane>
 
-                        <AnchorPane layoutX="18.0" layoutY="300.0" prefHeight="206.0" prefWidth="674.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <AnchorPane layoutX="18.0" layoutY="288.0" prefHeight="226.0" prefWidth="674.0" styleClass="dash-performance-wrap" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2); -fx-border-radius: 5; -fx-background-radius: 5;">
                             <children>
-                                <Label layoutX="15.0" layoutY="12.0" style="-fx-text-fill: #1e3a5f; -fx-font-size: 14; -fx-font-weight: bold;" text="Performance Overview" />
-                                <AreaChart layoutX="15.0" layoutY="34.0" prefHeight="160.0" prefWidth="640.0" style="-fx-background-color: transparent;">
+                                <Label layoutX="15.0" layoutY="10.0" styleClass="dash-performance-title" style="-fx-text-fill: #1e3a5f; -fx-font-size: 14; -fx-font-weight: bold;" text="PERFORMANCE IN LAST 5 EXAMS" />
+                                <BarChart fx:id="performanceChart" animated="false" legendVisible="false" layoutX="12.0" layoutY="40.0" prefHeight="180.0" prefWidth="650.0" styleClass="dash-performance-chart" style="-fx-background-color: transparent;">
                                     <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
+                                        <CategoryAxis fx:id="performanceXAxis" side="BOTTOM" />
                                     </xAxis>
                                     <yAxis>
-                                        <NumberAxis side="LEFT" />
+                                        <NumberAxis fx:id="performanceYAxis" side="LEFT" />
                                     </yAxis>
-                                </AreaChart>
+                                </BarChart>
                             </children>
                         </AnchorPane>
                     </children>
@@ -84,7 +84,7 @@
                   <Button fx:id="questionBankBtn" mnemonicParsing="false" onAction="#onQuestionBankClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: Transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Question Bank" />
                   <Button fx:id="PastExamsBtn" mnemonicParsing="false" onAction="#onViewResultsClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Past Exams" />
                   <Button fx:id="leaderboardBtn" mnemonicParsing="false" onAction="#onLeaderboardClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Leaderboard" />
-                  <Button fx:id="QNABtn" mnemonicParsing="false" onAction="#onQnaClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="QNA" />
+                  <Button fx:id="QNABtn" mnemonicParsing="false" onAction="#onQnaClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Community" />
                   <Button fx:id="aboutUsBtn" mnemonicParsing="false" onAction="#onAboutUsClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="About us" />
                   <Button fx:id="LogOutBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#logout" style="-fx-padding: 15px 20px; -fx-text-fill: red; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Log out" />
                </children>
