@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="about-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.AboutUsController">
+    <stylesheets>
+        <URL value="@aboutUs.css" />
+    </stylesheets>
+
+    <children>
+
+        <Circle fx:id="glowOne" centerX="110.0" centerY="110.0" radius="110.0" styleClass="glow glow-a" />
+        <Circle fx:id="glowTwo" centerX="780.0" centerY="160.0" radius="110.0" styleClass="glow glow-b" />
+        <Circle fx:id="glowThree" centerX="640.0" centerY="470.0" radius="110.0" styleClass="glow glow-c" />
+
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" styleClass="top-bar">
+            <children>
+                <Label layoutX="33.0" layoutY="15.0" styleClass="brand" text="ExamAce" />
+                <Button layoutX="725.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBackToDashboard" styleClass="back-btn" text="Back to Dashboard" />
+            </children>
+        </AnchorPane>
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="30.0" layoutY="97.0" prefHeight="470.0" prefWidth="840.0" styleClass="about-scroll">
+            <content>
+                <VBox fx:id="contentCard" prefHeight="980.0" prefWidth="800.0" spacing="18.0" styleClass="content-card">
+                    <padding>
+                        <Insets bottom="34.0" left="36.0" right="36.0" top="34.0" />
+                    </padding>
+                    <children>
+                        <Label styleClass="hero-title" text="Built for Better Exams" />
+                        <Label styleClass="hero-sub" text="ExamAce helps students and teachers run smarter assessments with clarity, speed, and confidence." wrapText="true" />
+
+                        <HBox spacing="12.0" styleClass="chip-row">
+                            <children>
+                                <Label styleClass="chip" text="JavaFX" />
+                                <Label styleClass="chip" text="Fast Results" />
+                                <Label styleClass="chip" text="Teacher + Student" />
+                            </children>
+                        </HBox>
+
+                        <VBox spacing="8.0" styleClass="message-block">
+                            <children>
+                                <Label styleClass="value-title" text="Short Message" />
+                                <TextArea prefRowCount="3" promptText="Write a short About Us message here and update it anytime." styleClass="message-editor" text="We are building ExamAce to make exam experiences calm, fair, and easy for every student and teacher." wrapText="true" />
+                            </children>
+                        </VBox>
+
+                        <Rectangle height="1.0" styleClass="divider" width="726.0" />
+
+                        <VBox fx:id="valuesBox" spacing="14.0">
+                            <children>
+                                <Label styleClass="section-title" text="What We Care About" />
+
+                                <VBox spacing="10.0" styleClass="value-block">
+                                    <children>
+                                        <Label styleClass="value-title" text="1. Accuracy" />
+                                        <Label styleClass="value-text" text="Reliable login, exam data, and outcomes so users can trust the system every time." wrapText="true" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="10.0" styleClass="value-block">
+                                    <children>
+                                        <Label styleClass="value-title" text="2. Simplicity" />
+                                        <Label styleClass="value-text" text="Clean flows for taking tests, reviewing progress, and managing exam operations without confusion." wrapText="true" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="10.0" styleClass="value-block">
+                                    <children>
+                                        <Label styleClass="value-title" text="3. Momentum" />
+                                        <Label styleClass="value-text" text="A focused interface with smooth motion that feels alive but never distracting." wrapText="true" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="10.0" styleClass="value-block">
+                                    <children>
+                                        <Label styleClass="value-title" text="4. Future Vision" />
+                                        <Label styleClass="value-text" text="This section is intentionally left spacious so the team can add milestones, goals, and project story updates later." wrapText="true" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+
+                        <Region prefHeight="8.0" />
+                        <Label styleClass="footer-note" text="Version 1.0 | CSE-108 Project Team" />
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
