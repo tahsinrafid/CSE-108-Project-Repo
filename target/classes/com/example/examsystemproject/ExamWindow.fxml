@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.ExamWindowController">
+    <stylesheets>
+        <URL value="@Dashboard.css" />
+        <URL value="@startExam.css" />
+    </stylesheets>
+
+    <children>
+        <AnchorPane prefHeight="74.0" prefWidth="900.0" styleClass="dash-top-bar">
+            <children>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="12.0" preserveRatio="true">
+                    <image>
+                        <Image url="@prlogo.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="examTitleLabel" layoutX="78.0" layoutY="18.0" styleClass="dash-title" text="Exam" />
+                <Label fx:id="examMetaLabel" layoutX="78.0" layoutY="42.0" style="-fx-text-fill: #b8d3e8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" text="Meta" />
+                <Label fx:id="timerLabel" layoutX="664.0" layoutY="22.0" style="-fx-background-color: rgba(226, 111, 43, 0.18); -fx-background-radius: 16; -fx-padding: 6 12; -fx-text-fill: #ffd7bd; -fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" text="Time Left: 00:00" />
+                <Button fx:id="backButton" layoutX="806.0" layoutY="18.0" managed="false" mnemonicParsing="false" onAction="#onBack" prefHeight="34.0" prefWidth="74.0" styleClass="menu-toggle-btn" text="Back" visible="false" />
+            </children>
+        </AnchorPane>
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="74.0" prefHeight="526.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+            <content>
+                <VBox spacing="16.0" style="-fx-padding: 22; -fx-background-color: transparent;">
+                    <Label text="Take the exam, then submit to reveal your marks." style="-fx-text-fill: #d5e7f6; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
+
+                    <VBox fx:id="questionContainer" spacing="12.0" />
+
+                    <VBox fx:id="resultCard" spacing="8.0" style="-fx-background-color: rgba(31, 91, 71, 0.92); -fx-background-radius: 14; -fx-padding: 20; -fx-border-radius: 14; -fx-border-color: rgba(148, 230, 180, 0.35);">
+                        <Label text="Submission Result" style="-fx-text-fill: #f4fff8; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" />
+                        <Label fx:id="resultLabel" text="Marks Obtained" style="-fx-text-fill: #d8ffe9; -fx-font-size: 24; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" />
+                        <Label fx:id="resultDetailLabel" text="Score" style="-fx-text-fill: #c7f3db; -fx-font-size: 13; -fx-font-family: 'Trebuchet MS';" />
+                    </VBox>
+
+                    <HBox spacing="12.0" style="-fx-padding: 4 0 18 0;">
+                        <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onSubmitExam" prefHeight="38.0" prefWidth="160.0" style="-fx-background-color: #e26f2b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-family: 'Trebuchet MS';" text="Submit Exam" />
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

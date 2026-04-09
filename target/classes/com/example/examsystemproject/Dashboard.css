@@ -1,0 +1,495 @@
+.dashboard-root {
+    -fx-background-color: linear-gradient(to bottom right, #0d1f33 0%, #153a52 52%, #204e63 100%);
+}
+
+.dash-top-bar {
+    -fx-background-color: linear-gradient(to right, rgba(10, 24, 40, 0.90), rgba(19, 58, 78, 0.86));
+    -fx-border-color: rgba(185, 222, 236, 0.22);
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.38), 12, 0, 0, 4);
+}
+
+.dash-title {
+    -fx-text-fill: #f4f8fb;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+}
+
+.menu-toggle-btn {
+    -fx-background-color: rgba(26, 75, 102, 0.85);
+    -fx-text-fill: #ecf7ff;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(181, 224, 240, 0.55);
+    -fx-cursor: hand;
+}
+
+.menu-toggle-btn:hover {
+    -fx-background-color: rgba(38, 109, 145, 0.95);
+    -fx-scale-x: 1.12;
+    -fx-scale-y: 1.12;
+    -fx-effect: dropshadow(gaussian, rgba(92, 172, 204, 0.55), 10, 0, 0, 3);
+}
+
+.menu-toggle-btn:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+}
+
+.dash-sidebar {
+    -fx-background-color: rgba(8, 24, 39, 0.72);
+    -fx-padding: 10px 0px;
+    -fx-border-color: rgba(148, 201, 222, 0.28);
+    -fx-border-width: 0 1 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.28), 8, 0, 1, 0);
+}
+
+.sidebar-btn-active {
+    -fx-padding: 15px 20px;
+    -fx-text-fill: #f8fcff;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-color: rgba(39, 102, 130, 0.70);
+    -fx-border-color: rgba(171, 216, 232, 0.45);
+    -fx-border-width: 0 0 0 3;
+    -fx-cursor: hand;
+}
+
+.sidebar-btn-active:hover {
+    -fx-background-color: rgba(46, 121, 155, 0.82);
+    -fx-scale-x: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(92, 172, 204, 0.35), 8, 0, 0, 2);
+}
+
+.sidebar-btn {
+    -fx-padding: 15px 20px;
+    -fx-text-fill: #b9d4e0;
+    -fx-font-size: 13;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.dash-sidebar.sidebar-hovered {
+    -fx-background-color: rgba(12, 35, 55, 0.85);
+}
+
+.dash-sidebar.sidebar-hovered .sidebar-btn,
+.dash-sidebar.sidebar-hovered .sidebar-btn-active {
+    -fx-background-color: rgba(42, 104, 135, 0.72);
+    -fx-text-fill: #f5fbff;
+}
+
+.dash-sidebar.sidebar-hovered .sidebar-btn:hover,
+.dash-sidebar.sidebar-hovered .sidebar-btn-active:hover {
+    -fx-background-color: rgba(58, 134, 172, 0.90);
+}
+
+
+.sidebar-btn:hover {
+    -fx-text-fill: #f4fbff;
+    -fx-background-color: rgba(24, 66, 90, 0.84);
+    -fx-scale-x: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(92, 172, 204, 0.28), 8, 0, 0, 2);
+}
+
+
+.sidebar-btn:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.sidebar-logout {
+    -fx-text-fill: #ff8e8e;
+}
+
+.sidebar-logout:hover {
+    -fx-text-fill: #ffd2d2;
+    -fx-background-color: rgba(129, 44, 44, 0.50);
+}
+
+.dash-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(11, 35, 53, 0.88), rgba(21, 63, 88, 0.78));
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(161, 211, 230, 0.38);
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.40), 14, 0.12, 0, 4);
+}
+
+.dash-card:hover {
+    -fx-background-color: linear-gradient(to bottom right, rgba(19, 56, 79, 0.92), rgba(31, 84, 112, 0.82));
+    -fx-scale-x: 1.012;
+    -fx-scale-y: 1.012;
+    -fx-effect: dropshadow(gaussian, rgba(98, 184, 219, 0.45), 20, 0.12, 0, 5);
+}
+
+.dash-card-title {
+    -fx-text-fill: #ecf6fb;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.dash-performance-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(9, 30, 47, 0.92), rgba(18, 54, 76, 0.82));
+    -fx-border-color: rgba(173, 220, 237, 0.34);
+}
+
+.dash-performance-wrap {
+    -fx-background-color: #dcd9ea;
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(114, 126, 158, 0.28);
+    -fx-border-radius: 8;
+}
+
+.dash-performance-title {
+    -fx-text-fill: #333745;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.dash-performance-chart {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.dash-performance-chart .chart-title {
+    -fx-text-fill: #1e3a5f;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.dash-performance-chart .axis {
+    -fx-text-fill: #666;
+    -fx-font-size: 11;
+    -fx-tick-mark-visible: true;
+}
+
+.dash-performance-chart .axis-label {
+    -fx-text-fill: #333;
+}
+
+.dash-performance-chart .chart-bar {
+    -fx-bar-fill-radius: 2;
+    -fx-min-width: 8;
+    -fx-max-width: 12;
+    -fx-padding: 0;
+}
+
+.dash-performance-chart .default-color0.chart-bar {
+    -fx-bar-fill: #FF6B6B;
+}
+
+.dash-performance-chart .default-color1.chart-bar {
+    -fx-bar-fill: #4ECDC4;
+}
+
+.dash-performance-chart .default-color2.chart-bar {
+    -fx-bar-fill: #45B7D1;
+}
+
+.dash-performance-chart .default-color3.chart-bar {
+    -fx-bar-fill: #FFA07A;
+}
+
+.dash-performance-chart .default-color4.chart-bar {
+    -fx-bar-fill: #98D8C8;
+}
+
+.dash-performance-chart .default-color5.chart-bar {
+    -fx-bar-fill: #FFD93D;
+}
+
+.dash-performance-chart .default-color6.chart-bar {
+    -fx-bar-fill: #FF9FF3;
+}
+
+.dash-action-btn {
+    -fx-padding: 8px 20px;
+    -fx-font-size: 11;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.dash-action-btn:hover {
+    -fx-scale-x: 1.07;
+    -fx-scale-y: 1.07;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.18), 10, 0, 0, 3);
+}
+
+.dash-action-btn:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+}
+
+.btn-accent-red {
+    -fx-background-color: #e74c3c;
+}
+
+.btn-accent-red:hover {
+    -fx-background-color: #c0392b;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.70), 12, 0, 0, 4);
+}
+
+.btn-accent-blue {
+    -fx-background-color: #2563eb;
+}
+
+.btn-accent-blue:hover {
+    -fx-background-color: #1d4ed8;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.62), 12, 0, 0, 4);
+}
+
+.btn-accent-gold {
+    -fx-background-color: #f3b53f;
+    -fx-text-fill: #102236;
+}
+
+.btn-accent-gold:hover {
+    -fx-background-color: #ffd07a;
+    -fx-effect: dropshadow(gaussian, rgba(243, 181, 63, 0.70), 12, 0, 0, 4);
+}
+
+.btn-accent-teal {
+    -fx-background-color: #059669;
+}
+
+.btn-accent-teal:hover {
+    -fx-background-color: #047857;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.62), 12, 0, 0, 4);
+}
+
+/* TextArea styling for QNA */
+.text-area {
+    -fx-text-fill: white;
+    -fx-control-inner-background: #10162b;
+    -fx-font-size: 14px;
+    -fx-font-family: "Trebuchet MS";
+    -fx-padding: 10px;
+}
+
+.text-area .text {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.text-area:focused {
+    -fx-background-color: #1a2640;
+    -fx-border-color: rgba(92, 184, 221, 0.6);
+}
+
+.btn-accent-azure {
+    -fx-background-color: #0ea5b6;
+}
+
+.btn-accent-azure:hover {
+    -fx-background-color: #0891b2;
+    -fx-effect: dropshadow(gaussian, rgba(14, 165, 182, 0.62), 12, 0, 0, 4);
+}
+
+/* Community QNA */
+.qna-compose-card,
+.qna-feed-card {
+    -fx-background-color: rgba(15, 18, 37, 0.96);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(154, 199, 221, 0.26);
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+}
+
+.qna-card-title {
+    -fx-text-fill: #f4fbff;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+}
+
+.qna-count-label {
+    -fx-text-fill: #9eb3cc;
+    -fx-font-size: 12;
+    -fx-padding: 0 0 0 10;
+}
+
+.qna-question-input,
+.qna-comment-input {
+    -fx-background-color: #10162b;
+    -fx-text-fill: white;
+    -fx-control-inner-background: #10162b;
+    -fx-prompt-text-fill: #55607a;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(154, 199, 221, 0.28);
+    -fx-font-family: "Trebuchet MS";
+    -fx-font-size: 13px;
+}
+
+.qna-question-input .content,
+.qna-comment-input .content {
+    -fx-background-color: #10162b;
+    -fx-background-radius: 8;
+}
+
+.qna-primary-btn,
+.qna-comment-btn {
+    -fx-background-color: #58eb34;
+    -fx-text-fill: #0b1220;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.qna-secondary-btn {
+    -fx-background-color: rgba(50, 84, 112, 0.78);
+    -fx-text-fill: #e8f5ff;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(181, 224, 240, 0.42);
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.qna-secondary-btn:hover {
+    -fx-background-color: rgba(62, 106, 140, 0.90);
+}
+
+.qna-header-post-btn {
+    -fx-background-color: linear-gradient(to right, #45d53c, #6df25c);
+    -fx-text-fill: #072313;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.qna-header-post-btn:hover {
+    -fx-background-color: linear-gradient(to right, #54e74a, #87ff75);
+    -fx-effect: dropshadow(gaussian, rgba(109, 242, 92, 0.45), 10, 0.15, 0, 3);
+}
+
+.qna-modal-overlay {
+    -fx-background-color: rgba(3, 9, 18, 0.62);
+    -fx-padding: 24;
+}
+
+.qna-modal-card {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 24, 0.22, 0, 8);
+}
+
+.qna-primary-btn:hover,
+.qna-comment-btn:hover {
+    -fx-background-color: #6ffd4d;
+}
+
+.qna-feed-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.qna-feed-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.qna-post-card {
+    -fx-background-color: rgba(13, 26, 43, 0.96);
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(154, 199, 221, 0.24);
+    -fx-border-radius: 10;
+}
+
+.qna-post-title {
+    -fx-text-fill: #ecf8ff;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+}
+
+.qna-public-tag {
+    -fx-text-fill: #92d2ff;
+    -fx-font-size: 11;
+    -fx-background-color: rgba(45, 90, 140, 0.32);
+    -fx-padding: 4 10;
+    -fx-background-radius: 14;
+}
+
+.qna-meta,
+.qna-comment-author {
+    -fx-text-fill: #b8cbe0;
+    -fx-font-size: 12;
+    -fx-font-family: "Trebuchet MS";
+}
+
+.qna-section-title {
+    -fx-text-fill: #d2e8fb;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-font-family: "Trebuchet MS";
+}
+
+.qna-comment-card {
+    -fx-background-color: rgba(19, 35, 55, 0.88);
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(150, 191, 215, 0.22);
+    -fx-border-radius: 8;
+    -fx-padding: 8 10;
+}
+
+.qna-comment-text {
+    -fx-text-fill: #e4f1fb;
+    -fx-font-size: 12;
+    -fx-font-family: "Trebuchet MS";
+}
+
+.qna-role-chip {
+    -fx-font-size: 10;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8;
+    -fx-background-radius: 14;
+}
+
+.qna-role-teacher {
+    -fx-text-fill: #1f1a07;
+    -fx-background-color: #f3bf46;
+}
+
+.qna-role-student {
+    -fx-text-fill: #d6e8f6;
+    -fx-background-color: rgba(85, 120, 150, 0.45);
+}
+
+.qna-delete-comment-btn {
+    -fx-background-color: rgba(156, 44, 44, 0.26);
+    -fx-text-fill: #ffb8b8;
+    -fx-font-size: 11;
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-radius: 6;
+    -fx-border-color: rgba(255, 142, 142, 0.35);
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 3 9;
+}
+
+.qna-delete-comment-btn:hover {
+    -fx-background-color: rgba(196, 51, 51, 0.38);
+    -fx-text-fill: #ffe7e7;
+}
+
+.qna-comment-empty,
+.qna-info-text {
+    -fx-text-fill: #9eb3cc;
+    -fx-font-size: 12;
+    -fx-font-family: "Trebuchet MS";
+}

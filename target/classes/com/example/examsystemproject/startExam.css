@@ -1,0 +1,113 @@
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane > .scroll-bar:vertical {
+    -fx-background-color: #1e3a5f;
+}
+.scroll-pane > .scroll-bar:vertical .thumb {
+    -fx-background-color: #2d5a8c;
+    -fx-background-radius: 4;
+}
+
+/* ── BACK BUTTON ── */
+.back-btn {
+    -fx-transition: all 0.25s ease;
+}
+.back-btn:hover {
+    -fx-background-color: #1e3a5f !important;
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+    -fx-effect: dropshadow(gaussian, rgba(45,90,140,0.7), 10, 0, 0, 3);
+    -fx-transition: all 0.25s ease;
+}
+.back-btn:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+/* ── SECTION BOX ── */
+.section-box {
+    -fx-transition: all 0.3s ease;
+}
+.section-box:hover {
+    -fx-effect: dropshadow(gaussian, rgba(30,58,95,0.6), 18, 0, 0, 6);
+    -fx-scale-x: 1.002;
+    -fx-scale-y: 1.002;
+}
+
+/* ── DUE EXAM CARDS ── */
+.due-card {
+    -fx-cursor: default;
+    -fx-transition: all 0.25s ease;
+}
+.due-card:hover {
+    -fx-background-color: #243f6a !important;
+    -fx-scale-x: 1.012;
+    -fx-scale-y: 1.012;
+    -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.35), 14, 0, 0, 4) !important;
+    -fx-transition: all 0.25s ease;
+}
+
+/* ── DUE EXAM SIT BUTTON ── */
+.due-start-btn {
+    -fx-transition: all 0.25s ease;
+}
+.due-start-btn:hover {
+    -fx-background-color: #c0392b !important;
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+    -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.7), 12, 0, 0, 4);
+    -fx-transition: all 0.25s ease;
+}
+.due-start-btn:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+}
+
+/* ── PRACTICE CARDS ── */
+.practice-card {
+    -fx-cursor: default;
+    -fx-transition: all 0.3s ease;
+}
+.practice-card:hover {
+    -fx-background-color: #1f3d63 !important;
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.45), 16, 0, 0, 5) !important;
+    -fx-transition: all 0.3s ease;
+}
+
+/* ── PRACTICE NOW BUTTON ── */
+.practice-btn {
+    -fx-transition: all 0.25s ease;
+}
+.practice-btn:hover {
+    -fx-brightness: 1.25;
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.2), 10, 0, 0, 3);
+    -fx-transition: all 0.25s ease;
+}
+.practice-btn:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+}
+
+/* ── EXAM START BUTTON (generic) ── */
+.exam-start-btn {
+    -fx-transition: all 0.25s ease;
+}
+.exam-start-btn:hover {
+    -fx-scale-x: 1.07;
+    -fx-scale-y: 1.07;
+    -fx-transition: all 0.25s ease;
+}
+.exam-start-btn:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+}
+

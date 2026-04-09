@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #080917;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.TeacherDashBoardController">
+    <stylesheets>
+        <URL value="@Dashboard.css" />
+    </stylesheets>
+    <children>
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #3d2b69; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0, 0, 2);">
+            <children>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../prlogo.png" />
+                    </image>
+                </ImageView>
+
+                <Label layoutX="75.0" layoutY="18.0" style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="ExamAce - Exam Portal [Teacher]" textFill="WHITE" />
+
+            </children>
+        </AnchorPane>
+
+        <AnchorPane layoutX="-5.0" layoutY="70.0" prefHeight="530.0" prefWidth="906.0" style="-fx-background-color: white;">
+            <children>
+                <AnchorPane layoutX="206.0" layoutY="14.0" prefHeight="150.0" prefWidth="680.0" style="-fx-background-color: #f4f6fb; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
+                    <children>
+                        <Label fx:id="helloLabel" layoutX="25.0" layoutY="24.0" style="-fx-text-fill: #1c1f2b; -fx-font-size: 31; -fx-font-weight: bold;" text="Hello Teacher" />
+                        <Label layoutX="27.0" layoutY="71.0" style="-fx-text-fill: #6b7280; -fx-font-size: 16; -fx-font-weight: bold;" text="Welcome back to ExamAce" />
+
+                        <AnchorPane layoutX="510.0" layoutY="20.0" prefHeight="110.0" prefWidth="150.0" style="-fx-background-color: #c8ccd6; -fx-background-radius: 12;">
+                            <children>
+                                <Label layoutX="24.0" layoutY="14.0" prefHeight="27.0" prefWidth="102.0" style="-fx-text-fill: #4a4f58; -fx-font-size: 14; -fx-font-weight: bold;" text="Running exams">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                                <Label fx:id="examLabel" layoutX="65.0" layoutY="45.0" style="-fx-text-fill: #2a2c31; -fx-font-size: 34; -fx-font-weight: bold;" />
+                            </children>
+                        </AnchorPane>
+                  <AnchorPane layoutX="340.0" layoutY="20.0" prefHeight="110.0" prefWidth="150.0" style="-fx-background-color: #1c3286; -fx-background-radius: 12;">
+                     <children>
+                        <Label layoutX="28.0" layoutY="14.0" prefHeight="27.0" prefWidth="102.0" style="-fx-text-fill: WHite; -fx-font-size: 14; -fx-font-weight: bold;" text="Total Students">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="studentLabel" layoutX="65.0" layoutY="45.0" style="-fx-text-fill: white; -fx-font-size: 34; -fx-font-weight: bold;" />
+                     </children>
+                  </AnchorPane>
+                    </children>
+                </AnchorPane>
+
+                <Label layoutY="170.0" style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold;" text="Quick Actions" />
+
+                <AnchorPane layoutX="206.0" layoutY="197.0" prefHeight="290.0" prefWidth="290.0" style="-fx-background-color: #1f8794; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0, 0, 4);">
+                    <children>
+                        <Label layoutX="26.0" layoutY="25.0" style="-fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Create Exam" />
+                        <Label layoutX="26.0" layoutY="66.0" style="-fx-text-fill: #dcf7ff; -fx-font-size: 14; -fx-font-weight: bold;" text="Build tests from your question sets" />
+                        <Button layoutX="26.0" layoutY="116.0" mnemonicParsing="false" onAction="#onCreateExamClick" prefHeight="36.0" prefWidth="145.0" style="-fx-background-color: orange;" styleClass="card-btn-success" text="Open Builder" />
+                    </children>
+                </AnchorPane>
+
+                <AnchorPane layoutX="514.0" layoutY="197.0" prefHeight="136.0" prefWidth="372.0" style="-fx-background-color: #ddd2c9; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.14), 8, 0, 0, 3);">
+                    <children>
+                        <Label layoutX="24.0" layoutY="22.0" style="-fx-text-fill: #2b2f38; -fx-font-size: 24; -fx-font-weight: bold;" text="Question Bank" />
+                        <Label layoutX="24.0" layoutY="60.0" style="-fx-text-fill: #5f6672; -fx-font-size: 14; -fx-font-weight: bold;" text="Review, update and manage questions" />
+                        <Button layoutX="24.0" layoutY="90.0" mnemonicParsing="false" onAction="#onQuestionBankViewClick" prefHeight="34.0" prefWidth="120.0" styleClass="card-btn-secondary" text="Open Bank" />
+                    </children>
+                </AnchorPane>
+
+                <AnchorPane layoutX="514.0" layoutY="351.0" prefHeight="136.0" prefWidth="372.0" style="-fx-background-color: #8f9abe; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.14), 8, 0, 0, 3);">
+                    <children>
+                        <Label layoutX="24.0" layoutY="22.0" style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Leaderboard" />
+                        <Label layoutX="24.0" layoutY="60.0" style="-fx-text-fill: #eef2ff; -fx-font-size: 14; -fx-font-weight: bold;" text="Check leaderboard and analyze results " />
+                        <Button layoutX="24.0" layoutY="90.0" mnemonicParsing="false" onAction="#onLeaderboardClick" prefHeight="34.0" prefWidth="146.0" styleClass="card-btn-info" text="Open Leaderboard" />
+                    </children>
+                </AnchorPane>
+
+              <VBox fx:id="sidebarVBox" prefHeight="532.0" prefWidth="187.0" style="-fx-background-color: #244857; -fx-padding: 10px 0px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1); -fx-background-radius: 20;">
+                  <children>
+                      <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboardClick" style="-fx-padding: 15px 20px; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-color: #1e3a5f; -fx-border-color: #1e3a5f; -fx-cursor: hand;" styleClass="sidebar-btn-active" text="Dashboard" />
+                      <Button fx:id="questionBankBtn" mnemonicParsing="false" onAction="#onQuestionBankClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: Transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Question Bank" />
+                      <Button fx:id="speedTestBtn" mnemonicParsing="false" onAction="#onViewExamsClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="View Exams" />
+                      <Button fx:id="leaderboardBtn" mnemonicParsing="false" onAction="#onLeaderboardClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Leaderboard" />
+                      <Button fx:id="communityBtn" mnemonicParsing="false" onAction="#onTakeExamClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Create Exam" />
+                      <Button fx:id="qnaBtn" mnemonicParsing="false" onAction="#OnMessegesClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Community" />
+                      <Button fx:id="aboutUsBtn" mnemonicParsing="false" onAction="#onAboutUsClick" style="-fx-padding: 15px 20px; -fx-text-fill: #d0d0d0; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="About us" />
+                  <Button fx:id="LogOutBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#logout" style="-fx-padding: 15px 20px; -fx-text-fill: red; -fx-font-size: 13; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;" styleClass="sidebar-btn" text="Log out" />
+                  </children>
+              </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

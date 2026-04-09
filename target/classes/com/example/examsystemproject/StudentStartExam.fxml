@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examsystemproject.StartExamController">
+    <stylesheets>
+        <URL value="@Dashboard.css" />
+        <URL value="@startExam.css" />
+    </stylesheets>
+
+    <children>
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" styleClass="dash-top-bar">
+            <children>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="10.0" preserveRatio="true">
+                    <image><Image url="@prlogo.png" /></image>
+                </ImageView>
+                <Label layoutX="80.0" layoutY="22.0" text="Student Exam Center" styleClass="dash-title" />
+                <Button layoutX="680.0" layoutY="18.0" mnemonicParsing="false" onAction="#onViewLeaderboard" prefHeight="34.0" prefWidth="120.0" styleClass="menu-toggle-btn" text="Leaderboard" />
+                <Button layoutX="810.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBackToDashboard" prefHeight="34.0" prefWidth="74.0" styleClass="menu-toggle-btn" text="Back" />
+            </children>
+        </AnchorPane>
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="70.0" prefHeight="530.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+            <content>
+                <VBox spacing="18.0" style="-fx-padding: 18; -fx-background-color: transparent;">
+                    <VBox spacing="8.0" style="-fx-background-color: rgba(16, 47, 72, 0.86); -fx-background-radius: 12; -fx-padding: 18;">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label text="Upcoming Exams" style="-fx-text-fill: #eef7ff; -fx-font-size: 20; -fx-font-weight: bold; -fx-font-family: 'Trebuchet MS';" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="dueExamCountLabel" text="0 pending" style="-fx-text-fill: #ffd6b8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS'; -fx-background-color: rgba(224, 102, 51, 0.25); -fx-background-radius: 16; -fx-padding: 5 12;" />
+                        </HBox>
+                        <Label text="Choose an exam and click Start Exam to take it." style="-fx-text-fill: #b8d3e8; -fx-font-size: 12; -fx-font-family: 'Trebuchet MS';" />
+                        <VBox fx:id="dueExamBox" spacing="10.0" />
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
